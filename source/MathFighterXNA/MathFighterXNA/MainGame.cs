@@ -38,7 +38,7 @@ namespace MathFighterXNA
             kinectContext = new KinectContext(graphics.GraphicsDevice);
             kinectContext.Initialize();
 
-            skeletonRenderer = new SkeletonRenderer(kinectContext, this.viewPortRectangle.Width, this.viewPortRectangle.Height);
+            skeletonRenderer = new SkeletonRenderer(kinectContext);
 
             base.Initialize();
         }
@@ -72,8 +72,6 @@ namespace MathFighterXNA
             spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, this.viewPortRectangle.Width, this.viewPortRectangle.Height), Color.White);
             skeletonRenderer.Draw(spriteBatch);
 
-            //spriteBatch.Draw(skeletonRenderer.jointTexture, new Rectangle(0, 0, 16, 16), Color.Blue);
-            //kinectContext.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

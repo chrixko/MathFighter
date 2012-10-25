@@ -15,13 +15,6 @@ namespace MathFighterXNA
         public KinectContext Context { get; private set; }
 
         public Texture2D CurrentBitmap { get; private set; }
-
-        private float renderHeight { get; set; }
-        private float renderWidth { get; set; }
-
-        private const double JointThickness = 3;
-        private const double BodyCenterThickness = 10;
-        private const double ClipBoundsThickness = 10;
         
         private readonly Color centerPointBrush = Color.Blue;
         private readonly Color trackedJointBrush = Color.Yellow;
@@ -31,12 +24,9 @@ namespace MathFighterXNA
         public Texture2D jointTexture;
         private Texture2D boneTexture;
 
-        public SkeletonRenderer(KinectContext context, float renderWidth, float renderHeight)
+        public SkeletonRenderer(KinectContext context)
         {
             Context = context;            
-
-            this.renderWidth = renderWidth;
-            this.renderHeight = renderHeight;
         }
 
         public void LoadContent(ContentManager content)
