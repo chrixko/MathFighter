@@ -117,7 +117,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Screens\GameScreen.cs" />
-    <Compile Include="Screens\SinglePlayer.cs" />
+    <Compile Include="Screens\Playground.cs" />
     <Compile Include="SkeletonRenderer.cs" />
   </ItemGroup>
   <ItemGroup>

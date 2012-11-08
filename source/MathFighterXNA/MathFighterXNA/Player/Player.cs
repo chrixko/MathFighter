@@ -32,6 +32,14 @@ namespace MathFighterXNA
             }
         }
 
+        public bool IsReady
+        {
+            get
+            {
+                return Skeleton != null;
+            }
+        }
+
         public Rectangle LeftHandBounds
         {
             get

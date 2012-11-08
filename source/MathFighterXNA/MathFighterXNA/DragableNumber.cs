@@ -23,7 +23,7 @@ namespace MathFighterXNA
         {
             get
             {
-                return new Rectangle(Position.X, Position.Y, 64, 64);
+                return new Rectangle(Position.X, Position.Y, 32, 32);
             }
         }
 
@@ -44,9 +44,27 @@ namespace MathFighterXNA
 
         public void Update(GameTime gameTime)
         {
-            if (IsDragged)
+            if (Owner.IsReady)
             {
-                this.Position = Owner.GetHandBounds(DraggedBy).Center;
+                if (!IsDragged)
+                {
+                    if (this.BoundingBox.Intersects(Owner.LeftHandBounds))
+                    {
+                        IsDragged = true;
+                        DraggedBy = JointType.HandLeft;
+                    }
+
+                    if (this.BoundingBox.Intersects(Owner.RightHandBounds))
+                    {
+                        IsDragged = true;
+                        DraggedBy = JointType.HandRight;
+                    }
+                }
+
+                if (IsDragged)
+                {
+                    this.Position = Owner.GetHandBounds(DraggedBy).Location;
+                }
             }
         }
 

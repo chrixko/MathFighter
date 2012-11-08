@@ -42,8 +42,8 @@ namespace MathFighterXNA
                     Smoothing = 0.0f,
                     Correction = 0.0f,
                     Prediction = 0.0f,
-                    JitterRadius = 1.0f,
-                    MaxDeviationRadius = 0.5f
+                    JitterRadius = 0.0f,
+                    MaxDeviationRadius = 0.0f
                 };
                 
                 this.Sensor.SkeletonStream.Enable(parameters);
