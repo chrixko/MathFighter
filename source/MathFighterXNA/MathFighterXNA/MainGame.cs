@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Kinect;
 
+using MathFighterXNA.Screens;
+
 namespace MathFighterXNA
 {
     /// <summary>
@@ -23,9 +25,7 @@ namespace MathFighterXNA
         SkeletonRenderer skeletonRenderer;
         private readonly Rectangle viewPortRectangle;
 
-        public Player player;
-        public List<DragableNumber> Numbers = new List<DragableNumber>();
-
+        public GameScreen CurrentScreen;
 
         public MainGame()
         {
@@ -45,8 +45,7 @@ namespace MathFighterXNA
 
             skeletonRenderer = new SkeletonRenderer(kinectContext);
 
-            player = new Player(kinectContext, 0);
-            Numbers.Add(new DragableNumber(player, 10, 10, 5));
+            CurrentScreen = new SinglePlayer(kinectContext);
 
             base.Initialize();
         }
@@ -71,10 +70,7 @@ namespace MathFighterXNA
             
             kinectContext.Update(gameTime);
 
-            player.Update(gameTime);
-
-            foreach (var num in Numbers)
-                num.Update(gameTime);
+            CurrentScreen.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -88,10 +84,7 @@ namespace MathFighterXNA
             spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, this.viewPortRectangle.Width, this.viewPortRectangle.Height), Color.White);
             skeletonRenderer.Draw(spriteBatch);
 
-            player.Draw(spriteBatch);
-
-            foreach (var num in Numbers)
-                num.Draw(spriteBatch);
+            CurrentScreen.Draw(spriteBatch);
 
             spriteBatch.End();
 

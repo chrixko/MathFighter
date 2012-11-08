@@ -133,7 +133,30 @@ namespace MathFighterXNA
 
         public Skeleton GetFirstSkeleton()
         {
-            return Skeletons.First<Skeleton>();
+            if (Skeletons.Count > 0)
+                return Skeletons[0];
+
+            return null;
+        }
+
+        public Skeleton GetLeftSkeleton()
+        {
+            if (Skeletons.Count > 0)
+            {
+                return (from Skeleton s in Skeletons orderby s.Position.X ascending select s).First<Skeleton>();
+            }
+
+            return null;
+        }
+
+        public Skeleton GetRightSkeleton()
+        {
+            if (Skeletons.Count > 0)
+            {
+                return (from Skeleton s in Skeletons orderby s.Position.X descending select s).First<Skeleton>();
+            }
+
+            return null;
         }
 
         public void Update(GameTime gameTime)
