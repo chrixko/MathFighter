@@ -45,7 +45,7 @@ namespace MathFighterXNA
 
             skeletonRenderer = new SkeletonRenderer(kinectContext);
 
-            CurrentScreen = new SinglePlayer(kinectContext);
+            CurrentScreen = new Playground(kinectContext);
 
             base.Initialize();
         }
