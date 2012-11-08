@@ -39,7 +39,7 @@ namespace MathFighterXNA
             {
                 var parameters = new TransformSmoothParameters
                 {
-                    Smoothing = 0.1f,
+                    Smoothing = 0.0f,
                     Correction = 0.0f,
                     Prediction = 0.0f,
                     JitterRadius = 1.0f,
@@ -129,6 +129,11 @@ namespace MathFighterXNA
             }
 
             return null;
+        }
+
+        public Skeleton GetFirstSkeleton()
+        {
+            return Skeletons.First<Skeleton>();
         }
 
         public void Update(GameTime gameTime)

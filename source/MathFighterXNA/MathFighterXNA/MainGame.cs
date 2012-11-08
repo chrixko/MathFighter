@@ -22,6 +22,11 @@ namespace MathFighterXNA
         KinectContext kinectContext;
         SkeletonRenderer skeletonRenderer;
         private readonly Rectangle viewPortRectangle;
+
+        public Player player;
+        public List<DragableNumber> Numbers = new List<DragableNumber>();
+
+
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this); 
@@ -40,11 +45,16 @@ namespace MathFighterXNA
 
             skeletonRenderer = new SkeletonRenderer(kinectContext);
 
+            player = new Player(kinectContext, 0);
+            Numbers.Add(new DragableNumber(player, 10, 10, 5));
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            Assets.LoadContent(Content);
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             skeletonRenderer.LoadContent(Content);
         }
@@ -60,6 +70,12 @@ namespace MathFighterXNA
                 this.Exit();
             
             kinectContext.Update(gameTime);
+
+            player.Update(gameTime);
+
+            foreach (var num in Numbers)
+                num.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -71,6 +87,11 @@ namespace MathFighterXNA
 
             spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, this.viewPortRectangle.Width, this.viewPortRectangle.Height), Color.White);
             skeletonRenderer.Draw(spriteBatch);
+
+            player.Draw(spriteBatch);
+
+            foreach (var num in Numbers)
+                num.Draw(spriteBatch);
 
             spriteBatch.End();
 

@@ -21,8 +21,7 @@ namespace MathFighterXNA
         private readonly Color inferredJointBrush = Color.Black;
 
         private Vector2 jointOrigin;
-        public Texture2D jointTexture;
-        private Texture2D boneTexture;
+        public Texture2D JointSprite;
 
         public SkeletonRenderer(KinectContext context)
         {
@@ -31,9 +30,8 @@ namespace MathFighterXNA
 
         public void LoadContent(ContentManager content)
         {
-            jointTexture = content.Load<Texture2D>("Joint");
-            boneTexture = content.Load<Texture2D>("Bone");
-            this.jointOrigin = new Vector2(this.jointTexture.Width / 2, this.jointTexture.Height / 2);
+            JointSprite = Assets.JointSprite;            
+            this.jointOrigin = new Vector2(this.JointSprite.Width / 2, this.JointSprite.Height / 2);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -42,42 +40,13 @@ namespace MathFighterXNA
             {
                 if (skel.TrackingState == SkeletonTrackingState.Tracked)
                 {
-                    DrawBonesAndJoints(skel, spriteBatch);
+                    DrawJoints(skel, spriteBatch);
                 }
             }
         }
 
-        private void DrawBonesAndJoints(Skeleton skeleton, SpriteBatch spriteBatch)
+        private void DrawJoints(Skeleton skeleton, SpriteBatch spriteBatch)
         {                        
-            // Render Torso
-            this.DrawBone(skeleton, spriteBatch, JointType.Head, JointType.ShoulderCenter);
-            this.DrawBone(skeleton, spriteBatch, JointType.ShoulderCenter, JointType.ShoulderLeft);
-            this.DrawBone(skeleton, spriteBatch, JointType.ShoulderCenter, JointType.ShoulderRight);
-            this.DrawBone(skeleton, spriteBatch, JointType.ShoulderCenter, JointType.Spine);
-            this.DrawBone(skeleton, spriteBatch, JointType.Spine, JointType.HipCenter);
-            this.DrawBone(skeleton, spriteBatch, JointType.HipCenter, JointType.HipLeft);
-            this.DrawBone(skeleton, spriteBatch, JointType.HipCenter, JointType.HipRight);
-
-            // Left Arm
-            this.DrawBone(skeleton, spriteBatch, JointType.ShoulderLeft, JointType.ElbowLeft);
-            this.DrawBone(skeleton, spriteBatch, JointType.ElbowLeft, JointType.WristLeft);
-            this.DrawBone(skeleton, spriteBatch, JointType.WristLeft, JointType.HandLeft);
-
-            // Right Arm
-            this.DrawBone(skeleton, spriteBatch, JointType.ShoulderRight, JointType.ElbowRight);
-            this.DrawBone(skeleton, spriteBatch, JointType.ElbowRight, JointType.WristRight);
-            this.DrawBone(skeleton, spriteBatch, JointType.WristRight, JointType.HandRight);
-
-            // Left Leg
-            this.DrawBone(skeleton, spriteBatch, JointType.HipLeft, JointType.KneeLeft);
-            this.DrawBone(skeleton, spriteBatch, JointType.KneeLeft, JointType.AnkleLeft);
-            this.DrawBone(skeleton, spriteBatch, JointType.AnkleLeft, JointType.FootLeft);
-
-            // Right Leg
-            this.DrawBone(skeleton, spriteBatch, JointType.HipRight, JointType.KneeRight);
-            this.DrawBone(skeleton, spriteBatch, JointType.KneeRight, JointType.AnkleRight);
-            this.DrawBone(skeleton, spriteBatch, JointType.AnkleRight, JointType.FootRight);
-
             // Render Joints
             foreach (Joint j in skeleton.Joints)
             {
@@ -87,18 +56,13 @@ namespace MathFighterXNA
                     jointColor = Color.Yellow;
                 }
 
-                spriteBatch.Draw(this.jointTexture, this.Context.SkeletonPointToScreen(j.Position), null, jointColor, 0.0f, this.jointOrigin, 1.0f, SpriteEffects.None, 0.0f);
+                spriteBatch.Draw(this.JointSprite, this.Context.SkeletonPointToScreen(j.Position), null, jointColor, 0.0f, this.jointOrigin, 1.0f, SpriteEffects.None, 0.0f);
                 if (j.JointType == JointType.HandRight)
                 {
                     var p = this.Context.SkeletonPointToScreen(j.Position);
                     Debug.WriteLine("HandLeft: x=" + p.X + " y=" + p.Y);
                 }
             }
-        }
-
-        private void DrawBone(Skeleton skeleton, SpriteBatch spriteBatch, JointType jointType0, JointType jointType1)
-        {
-            //Braucht keiner
         }
     }
 }

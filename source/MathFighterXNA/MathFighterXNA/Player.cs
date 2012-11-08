@@ -12,27 +12,27 @@ namespace MathFighterXNA
     {
         public KinectContext Context { get; private set; }
 
-        public readonly Skeleton Skeleton
+        public Skeleton Skeleton
         {
             get
             {
-                return Context.GetSkeletonById(skeletonId);
+                return Context.GetFirstSkeleton();
             }
         }
 
-        public readonly Rectangle LeftHandBounds
+        public Rectangle LeftHandBounds
         {
             get
             {
-                return getHandBounds(Skeleton.Joints[JointType.HandLeft].Position);
+                return GetHandBounds(JointType.HandLeft);
             }
         }
 
-        public readonly Rectangle RightHandBounds
+        public Rectangle RightHandBounds
         {
             get
             {
-                return getHandBounds(Skeleton.Joints[JointType.HandRight].Position);
+                return GetHandBounds(JointType.HandRight);
             }
         }
 
@@ -54,12 +54,17 @@ namespace MathFighterXNA
             
         }
 
-        private Rectangle getHandBounds(SkeletonPoint point)
+        public Rectangle GetHandBounds(JointType jointType)
         {
-            return getHandBounds(this.Context.SkeletonPointToScreen(point));
+            return GetHandBounds(Skeleton.Joints[jointType].Position);                       
         }
 
-        private Rectangle getHandBounds(Vector2 position)
+        public Rectangle GetHandBounds(SkeletonPoint point)
+        {
+            return GetHandBounds(this.Context.SkeletonPointToScreen(point));
+        }
+
+        public Rectangle GetHandBounds(Vector2 position)
         {
             return new Rectangle((int)position.X - 20, (int)position.Y - 20, 40, 40);
         }
