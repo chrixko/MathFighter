@@ -10,7 +10,6 @@ namespace MathFighterXNA
 {
     public class Player
     {
-
         public SkeletonPlayerAssignment SkeletonAssignment { get; set; }
         public KinectContext Context { get; private set; }
 

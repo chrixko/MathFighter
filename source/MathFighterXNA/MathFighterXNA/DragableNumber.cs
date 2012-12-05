@@ -9,9 +9,8 @@ using Microsoft.Kinect;
 
 namespace MathFighterXNA
 {
-    public class DragableNumber
-    {
-        public Point Position { get; set; }        
+    public class DragableNumber : Entity
+    {        
         public Player Owner { get; set; }
 
         public bool IsDragged { get; private set; }
@@ -19,18 +18,11 @@ namespace MathFighterXNA
 
         public int Value { get; private set; }
 
-        public Rectangle BoundingBox
-        {
-            get
-            {
-                return new Rectangle(Position.X, Position.Y, 32, 32);
-            }
-        }
-
         public DragableNumber(Player owner, int posX, int posY, int value)
         {
             Owner = owner;
             Position = new Point(posX, posY);
+            Size = new Point(32, 32);
             IsDragged = false;
 
             Value = value;
@@ -42,7 +34,7 @@ namespace MathFighterXNA
             DraggedBy = hand;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (Owner.IsReady)
             {
@@ -68,7 +60,7 @@ namespace MathFighterXNA
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);            
         }

@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Assets.cs" />
     <Compile Include="DragableNumber.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="KinectContext.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Player\SkeletonPlayerAssignment.cs" />
