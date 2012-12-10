@@ -10,20 +10,24 @@ namespace MathFighterXNA.Screens
 {
     public abstract class GameScreen
     {
-        public KinectContext Context { get; private set; }        
+        public KinectContext Context { get; private set; }
+
+        public List<Entity> Entities = new List<Entity>();
 
         public GameScreen(KinectContext context)
         {
             Context = context;
         }
 
+        public void AddEntity(Entity entity)
+        {
+            Entities.Add(entity);
+            entity.Screen = this;
+        }
+
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
 
-        public void DrawMessage(SpriteBatch spriteBatch, string message)
-        {
-            spriteBatch.DrawString(Assets.DebugFont, message, new Vector2(0, 0), Color.Red);
-        }
         //public abstract bool AllPlayersReady();
     }
 }

@@ -14,7 +14,7 @@ namespace MathFighterXNA
         public Player Owner { get; set; }
 
         public bool IsDragged { get; private set; }
-        public JointType DraggedBy { get; private set; }
+        public Entity DraggedBy { get; private set; }
 
         public int Value { get; private set; }
 
@@ -28,7 +28,7 @@ namespace MathFighterXNA
             Value = value;
         }
 
-        public void Drag(JointType hand)
+        public void Drag(Entity hand)
         {
             IsDragged = true;
             DraggedBy = hand;
@@ -40,22 +40,22 @@ namespace MathFighterXNA
             {
                 if (!IsDragged)
                 {
-                    if (this.BoundingBox.Intersects(Owner.LeftHandBounds))
+                    if (this.BoundingBox.Intersects(Owner.LeftHand.BoundingBox))
                     {
                         IsDragged = true;
-                        DraggedBy = JointType.HandLeft;
+                        DraggedBy = Owner.LeftHand;
                     }
 
-                    if (this.BoundingBox.Intersects(Owner.RightHandBounds))
+                    if (this.BoundingBox.Intersects(Owner.RightHand.BoundingBox))
                     {
                         IsDragged = true;
-                        DraggedBy = JointType.HandRight;
+                        DraggedBy = Owner.RightHand;
                     }
                 }
 
                 if (IsDragged)
                 {
-                    this.Position = Owner.GetHandBounds(DraggedBy).Location;
+                    this.Position = DraggedBy.Position;
                 }
             }
         }
