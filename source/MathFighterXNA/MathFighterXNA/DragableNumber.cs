@@ -55,7 +55,7 @@ namespace MathFighterXNA
 
                 if (IsDragged)
                 {
-                    this.Position = DraggedBy.Position;
+                    this.Position = DraggedBy.BoundingBox.Location;
                 }
             }
         }

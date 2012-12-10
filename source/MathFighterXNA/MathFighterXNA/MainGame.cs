@@ -78,7 +78,11 @@ namespace MathFighterXNA
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, this.viewPortRectangle.Width, this.viewPortRectangle.Height), Color.White);
+            if (kinectContext.CurrentBitmap != null)
+            {
+                spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, this.viewPortRectangle.Width, this.viewPortRectangle.Height), Color.White);
+            }
+            
             skeletonRenderer.Draw(spriteBatch);
 
             CurrentScreen.Draw(spriteBatch);
