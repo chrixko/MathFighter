@@ -55,6 +55,8 @@ namespace MathFighterXNA
                 }
                 catch (System.IO.IOException ex)
                 {
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.StackTrace);
                     this.Sensor = null;
                 }
             }
@@ -115,9 +117,9 @@ namespace MathFighterXNA
         }
 
         public Vector2 SkeletonPointToScreen(SkeletonPoint skelpoint)
-        {
-            ColorImagePoint depthPoint = Sensor.MapSkeletonPointToColor(skelpoint, ColorImageFormat.RgbResolution640x480Fps30);
-            return new Vector2(depthPoint.X, depthPoint.Y);
+        {            
+            ColorImagePoint colorPoint = Sensor.CoordinateMapper.MapSkeletonPointToColorPoint(skelpoint, ColorImageFormat.RgbResolution640x480Fps30);
+            return new Vector2(colorPoint.X, colorPoint.Y);
         }
 
         public Skeleton GetSkeletonById(int id)
