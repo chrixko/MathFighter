@@ -12,12 +12,13 @@ namespace MathFighterXNA
     {
         public Point Position { get; set; }
         public Point Size { get; set; }
+        public Point Offset { get; set; }
 
         public Rectangle BoundingBox
         {
             get
             {
-                return new Rectangle(Position.X, Position.Y, Size.X, Size.Y);
+                return new Rectangle(Position.X + Offset.X, Position.Y + Offset.Y, Size.X, Size.Y);
             }
         }
 

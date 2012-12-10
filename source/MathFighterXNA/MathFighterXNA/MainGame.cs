@@ -14,9 +14,6 @@ using MathFighterXNA.Screens;
 
 namespace MathFighterXNA
 {
-    /// <summary>
-    /// Dies ist der Haupttyp für Ihr Spiel
-    /// </summary>
     public class MainGame : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;

@@ -56,12 +56,7 @@ namespace MathFighterXNA
                     jointColor = Color.Yellow;
                 }
 
-                spriteBatch.Draw(this.JointSprite, this.Context.SkeletonPointToScreen(j.Position), null, jointColor, 0.0f, this.jointOrigin, 1.0f, SpriteEffects.None, 0.0f);
-                if (j.JointType == JointType.HandRight)
-                {
-                    var p = this.Context.SkeletonPointToScreen(j.Position);
-                    Debug.WriteLine("HandLeft: x=" + p.X + " y=" + p.Y);
-                }
+                //spriteBatch.Draw(this.JointSprite, this.Context.SkeletonPointToScreen(j.Position), null, jointColor, 0.0f, this.jointOrigin, 1.0f, SpriteEffects.None, 0.0f);
             }
         }
     }

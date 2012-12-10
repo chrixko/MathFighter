@@ -8,10 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MathFighterXNA
 {
-    public class Player
+    public class Player : Entity
     {
         public SkeletonPlayerAssignment SkeletonAssignment { get; set; }
         public KinectContext Context { get; private set; }
+
+        public PlayerHand LeftHand { get; private set; }
+        public PlayerHand RightHand { get; private set; }
 
         public Skeleton Skeleton
         {
@@ -37,53 +40,37 @@ namespace MathFighterXNA
             {
                 return Skeleton != null;
             }
-        }
-
-        public Rectangle LeftHandBounds
-        {
-            get
-            {
-                return GetHandBounds(JointType.HandLeft);
-            }
-        }
-
-        public Rectangle RightHandBounds
-        {
-            get
-            {
-                return GetHandBounds(JointType.HandRight);
-            }
-        }       
+        }     
 
         public Player(KinectContext context, SkeletonPlayerAssignment assignment)
         {
             this.Context = context;
             this.SkeletonAssignment = assignment;
+
+            LeftHand = new PlayerHand(this, JointType.HandLeft);
+            RightHand = new PlayerHand(this, JointType.HandRight);
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-
+            if (IsReady)
+            {
+                LeftHand.Update(gameTime);
+                RightHand.Update(gameTime);
+            }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            
-        }
-
-        public Rectangle GetHandBounds(JointType jointType)
-        {
-            return GetHandBounds(Skeleton.Joints[jointType].Position);                       
-        }
-
-        public Rectangle GetHandBounds(SkeletonPoint point)
-        {
-            return GetHandBounds(this.Context.SkeletonPointToScreen(point));
-        }
-
-        public Rectangle GetHandBounds(Vector2 position)
-        {
-            return new Rectangle((int)position.X - 20, (int)position.Y - 20, 40, 40);
+            if (IsReady)
+            {
+                LeftHand.Draw(spriteBatch);
+                RightHand.Draw(spriteBatch);
+            }
+            else
+            {
+                spriteBatch.DrawString(Assets.DebugFont, "No Player-Skeleton found!", new Vector2(0, 0), Color.Red);
+            }
         }
     }
 }
