@@ -12,12 +12,9 @@ namespace MathFighterXNA.Screens
     {
         public Player Player { get; set; }
         
-        public List<Entity> Entities;
-
         public Playground(KinectContext context) : base(context)
         {
             Player = new Player(context, SkeletonPlayerAssignment.FirstSkeleton);
-            Entities = new List<Entity>();
             Entities.Add(Player);
 
             for (int i = 0; i < 5; i++)
