@@ -62,7 +62,8 @@ namespace MathFighterXNA
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);            
+            spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);
+            spriteBatch.DrawString(Assets.DebugFont, Value.ToString(), new Vector2(BoundingBox.Center.X, BoundingBox.Center.Y), Color.Black);
         }
     }
 }
