@@ -22,17 +22,20 @@ namespace MathFighterXNA
         SkeletonRenderer skeletonRenderer;
         private readonly Rectangle viewPortRectangle;
 
+        public static int Width = 640;
+        public static int Height = (Width / 4) * 3;
+
         public GameScreen CurrentScreen;
 
         public MainGame()
         {
             graphics = new GraphicsDeviceManager(this); 
             Content.RootDirectory = "Content";
-           
-            graphics.PreferredBackBufferWidth = 640;
-            graphics.PreferredBackBufferHeight = (640 / 4) * 3;
+
+            graphics.PreferredBackBufferWidth = Width;
+            graphics.PreferredBackBufferHeight = Height;
             this.graphics.SynchronizeWithVerticalRetrace = true;
-            this.viewPortRectangle = new Rectangle(0, 0, 640, (640 / 4) * 3);
+            this.viewPortRectangle = new Rectangle(0, 0, Width, Height);
         }
 
         protected override void Initialize()
@@ -80,7 +83,7 @@ namespace MathFighterXNA
 
             if (kinectContext.CurrentBitmap != null)
             {
-                spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, this.viewPortRectangle.Width, this.viewPortRectangle.Height), Color.White);
+                spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, Width, Height), Color.White);
             }
             
             skeletonRenderer.Draw(spriteBatch);
