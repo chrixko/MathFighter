@@ -8,7 +8,7 @@ using Microsoft.Kinect;
 
 namespace MathFighterXNA
 {
-    public class PlayerHand : Entity
+    public class PlayerHand : BaseEntity
     {
         public Player Player { get; private set; }
         public JointType Hand { get; private set; }

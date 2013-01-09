@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MathFighterXNA
 {
-    public class Player : Entity
+    public class Player : BaseEntity
     {
         public SkeletonPlayerAssignment SkeletonAssignment { get; set; }
         public KinectContext Context { get; private set; }

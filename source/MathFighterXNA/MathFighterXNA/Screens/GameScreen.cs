@@ -12,14 +12,14 @@ namespace MathFighterXNA.Screens
     {
         public KinectContext Context { get; private set; }
 
-        public List<Entity> Entities = new List<Entity>();
+        public List<BaseEntity> Entities = new List<BaseEntity>();
 
         public GameScreen(KinectContext context)
         {
             Context = context;
         }
 
-        public void AddEntity(Entity entity)
+        public void AddEntity(BaseEntity entity)
         {
             Entities.Add(entity);
             entity.Screen = this;

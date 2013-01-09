@@ -16,11 +16,8 @@ namespace MathFighterXNA.Screens
         {
             Player = new Player(context, SkeletonPlayerAssignment.FirstSkeleton);
             Entities.Add(Player);
-
-            for (int i = 0; i < 5; i++)
-            {
-                Entities.Add(new DragableNumber(Player, i * 80, 20, i + 1));
-            }
+            
+            Entities.Add(new DragableNumber(Player, 20, 20, 5));
         }
 
         public override void Update(GameTime gameTime)

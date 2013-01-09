@@ -8,9 +8,23 @@ using MathFighterXNA.Screens;
 
 namespace MathFighterXNA
 {
-    public abstract class Entity
+    public abstract class BaseEntity
     {
-        public Point Position { get; set; }
+        public Point Position 
+        {
+            get
+            {
+                return new Point(X, Y);
+            }
+            set
+            {
+                X = value.X;
+                Y = value.Y;
+            }
+        }
+        public int X { get; set; }
+        public int Y { get; set; }
+
         public Point Size { get; set; }
         public Point Offset { get; set; }
 
@@ -20,7 +34,7 @@ namespace MathFighterXNA
         {
             get
             {
-                return new Rectangle(Position.X + Offset.X, Position.Y + Offset.Y, Size.X, Size.Y);
+                return new Rectangle(X + Offset.X, Y + Offset.Y, Size.X, Size.Y);
             }
         }
 
