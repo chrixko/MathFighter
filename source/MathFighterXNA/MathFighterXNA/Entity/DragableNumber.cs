@@ -31,6 +31,8 @@ namespace MathFighterXNA
             tweener = new Tweener(posY, posY + 10, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
             tweener.Ended += delegate() { tweener.Reverse(); };
             Value = value;
+
+            CollisionType = "number";
         }
 
         public void Drag(BaseEntity hand)
@@ -41,31 +43,24 @@ namespace MathFighterXNA
 
         public override void Update(GameTime gameTime)
         {           
-            //if (Owner.IsReady)
-            //{
-                if (!IsDragged)
+            if (!IsDragged)
+            {
+                tweener.Update(gameTime);
+                Y = (int)tweener.Position;
+
+                PlayerHand hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
+
+                if (hand != null && hand.Player == Owner)
                 {
-                    tweener.Update(gameTime);
-                    Y = (int)tweener.Position;
-
-                    if (this.BoundingBox.Intersects(Owner.LeftHand.BoundingBox))
-                    {
-                        IsDragged = true;
-                        DraggedBy = Owner.LeftHand;
-                    }
-
-                    if (this.BoundingBox.Intersects(Owner.RightHand.BoundingBox))
-                    {
-                        IsDragged = true;
-                        DraggedBy = Owner.RightHand;
-                    }
+                    IsDragged = true;
+                    DraggedBy = hand;
                 }
+            }
 
-                if (IsDragged)
-                {
-                    this.Position = DraggedBy.BoundingBox.Location;
-                }
-            //}
+            if (IsDragged)
+            {
+                this.Position = DraggedBy.BoundingBox.Location;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

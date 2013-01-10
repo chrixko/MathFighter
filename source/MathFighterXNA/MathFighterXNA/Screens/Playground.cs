@@ -14,10 +14,14 @@ namespace MathFighterXNA.Screens
         
         public Playground(KinectContext context) : base(context)
         {
-            Player = new Player(context, SkeletonPlayerAssignment.FirstSkeleton);
-            Entities.Add(Player);
-            
-            Entities.Add(new DragableNumber(Player, 20, 20, 5));
+        }
+
+        public override void Init()
+        {
+            Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton, this);
+            AddEntity(Player);
+
+            AddEntity(new DragableNumber(Player, 20, 20, 5));
         }
 
         public override void Update(GameTime gameTime)

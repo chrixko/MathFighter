@@ -47,6 +47,8 @@ namespace MathFighterXNA
 
             CurrentScreen = new Playground(kinectContext);
 
+            CurrentScreen.Init();
+
             base.Initialize();
         }
 

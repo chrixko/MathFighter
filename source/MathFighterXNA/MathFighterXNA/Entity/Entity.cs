@@ -33,9 +33,14 @@ namespace MathFighterXNA
         public bool collidable = true;
         public string CollisionType { get; set; }
 
-        public IEnumerable<BaseEntity> CollisionCheck(int posX, int posY, string type)
+        public IEnumerable<BaseEntity> GetCollidingEntities(int posX, int posY, string type)
         {
-            return from ent in Screen.Entities where ent.CollisionType == type && ent.BoundingBox.Intersects(new Rectangle(posX, posY, Size.X, Size.Y)) select ent;
+            return from ent in Screen.Entities where ent.collidable && ent.CollisionType == type && ent.BoundingBox.Intersects(new Rectangle(posX, posY, Size.X, Size.Y)) select ent;
+        }
+
+        public BaseEntity GetFirstCollidingEntity(int posX, int posY, string type)
+        {
+            return GetCollidingEntities(posX, posY, type).FirstOrDefault();
         }
 
         public Rectangle BoundingBox

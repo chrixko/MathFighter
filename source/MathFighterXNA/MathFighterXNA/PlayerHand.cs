@@ -28,6 +28,8 @@ namespace MathFighterXNA
 
             Player = player;
             Hand = hand;
+
+            CollisionType = "hand";
         }
 
         public override void Update(GameTime gameTime)

@@ -42,32 +42,27 @@ namespace MathFighterXNA
             }
         }     
 
-        public Player(KinectContext context, SkeletonPlayerAssignment assignment)
+        public Player(KinectContext context, SkeletonPlayerAssignment assignment, Screens.GameScreen screen)
         {
             this.Context = context;
             this.SkeletonAssignment = assignment;
 
+            Screen = screen; // meeeeh :(
+
             LeftHand = new PlayerHand(this, JointType.HandLeft);
             RightHand = new PlayerHand(this, JointType.HandRight);
+
+            Screen.AddEntity(LeftHand);
+            Screen.AddEntity(RightHand);
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (IsReady)
-            {
-                LeftHand.Update(gameTime);
-                RightHand.Update(gameTime);
-            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (IsReady)
-            {
-                LeftHand.Draw(spriteBatch);
-                RightHand.Draw(spriteBatch);
-            }
-            else
+            if (!IsReady)
             {
                 spriteBatch.DrawString(Assets.DebugFont, "No Player-Skeleton found!", new Vector2(0, 0), Color.Red);
             }

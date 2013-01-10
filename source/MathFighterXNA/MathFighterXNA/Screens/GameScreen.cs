@@ -25,6 +25,7 @@ namespace MathFighterXNA.Screens
             entity.Screen = this;
         }
 
+        public abstract void Init();
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
 
