@@ -28,7 +28,7 @@ namespace MathFighterXNA
             Size = new Point(32, 32);
             IsDragged = false;
 
-            tweener = new Tweener(posY, posY + 20, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
+            tweener = new Tweener(posY, posY + 10, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
             tweener.Ended += delegate() { tweener.Reverse(); };
             Value = value;
         }

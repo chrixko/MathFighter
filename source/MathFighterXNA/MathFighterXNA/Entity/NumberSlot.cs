@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using MathFighterXNA.Tweening;
 
 
 namespace MathFighterXNA.Entity
@@ -12,16 +13,20 @@ namespace MathFighterXNA.Entity
         public Player UsableBy;
         public DragableNumber Number;
 
+        private Tweener tweener;
 
         public NumberSlot(int posX, int posY)            
         {
             Position = new Point(posX, posY);
             Size = new Point(32, 32);
+            tweener = new Tweener(posY, posY + 20, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
+            tweener.Ended += delegate() { tweener.Reverse(); };
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            
+            tweener.Update(gameTime);
+            Y = (int)tweener.Position;
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)

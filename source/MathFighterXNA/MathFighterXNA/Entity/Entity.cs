@@ -30,6 +30,14 @@ namespace MathFighterXNA
 
         public GameScreen Screen { get; set; }
 
+        public bool collidable = true;
+        public string CollisionType { get; set; }
+
+        public IEnumerable<BaseEntity> CollisionCheck(int posX, int posY, string type)
+        {
+            return from ent in Screen.Entities where ent.CollisionType == type && ent.BoundingBox.Intersects(new Rectangle(posX, posY, Size.X, Size.Y)) select ent;
+        }
+
         public Rectangle BoundingBox
         {
             get
