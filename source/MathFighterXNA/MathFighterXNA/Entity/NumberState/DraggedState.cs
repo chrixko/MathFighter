@@ -22,6 +22,7 @@ namespace MathFighterXNA.Entity.NumberState
         void INumberState.onSlotCollide(NumberSlot slot)
         {
             Owner.State = Owner.MoveToSlotState;
+            slot.Number = this.Owner;
             Owner.MoveToSlotState.Slot = slot;
         }
 

@@ -27,8 +27,15 @@ namespace MathFighterXNA.Entity
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            tweener.Update(gameTime);
-            Y = (int)tweener.Position;
+            if (Number != null && Number.State == Number.MoveToSlotState)
+            {
+
+            }
+            else
+            {
+                tweener.Update(gameTime);
+                Y = (int)tweener.Position;       
+            }
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)

@@ -117,7 +117,7 @@
     <Compile Include="Entity\NumberState\DraggedState.cs" />
     <Compile Include="Entity\NumberState\INumberState.cs" />
     <Compile Include="Entity\NumberState\MoveToSlotState.cs" />
-    <Compile Include="Entity\NumberState\SlotState.cs" />
+    <Compile Include="Entity\NumberState\InSlotState.cs" />
     <Compile Include="KinectContext.cs" />
     <Compile Include="PlayerHand.cs" />
     <Compile Include="Entity\Player.cs" />
