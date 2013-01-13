@@ -21,6 +21,8 @@ namespace MathFighterXNA.Entity
             Size = new Point(32, 32);
             tweener = new Tweener(posY, posY + 20, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
             tweener.Ended += delegate() { tweener.Reverse(); };
+
+            CollisionType = "slot";
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
@@ -31,7 +33,7 @@ namespace MathFighterXNA.Entity
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.Black);
+            spriteBatch.Draw(Assets.NumberSlotSprite, BoundingBox, Color.White);
         }
     }
 }

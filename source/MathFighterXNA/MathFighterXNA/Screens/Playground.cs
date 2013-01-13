@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-//using Microsoft.Kinect;
+using MathFighterXNA.Entity;
 
 namespace MathFighterXNA.Screens
 {
@@ -21,7 +21,8 @@ namespace MathFighterXNA.Screens
             Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton, this);
             AddEntity(Player);
 
-            AddEntity(new DragableNumber(Player, 20, 20, 5));
+            AddEntity(new NumberSlot(100, 100));
+            AddEntity(new DragableNumber(Player, 20, 20, 5));            
         }
 
         public override void Update(GameTime gameTime)

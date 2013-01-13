@@ -6,7 +6,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Kinect;
 using MathFighterXNA.Tweening;
-
+using MathFighterXNA.Entity;
+using MathFighterXNA.Entity.NumberState;
 
 namespace MathFighterXNA
 {
@@ -14,53 +15,104 @@ namespace MathFighterXNA
     {        
         public Player Owner { get; set; }
 
-        public bool IsDragged { get; private set; }
-        public BaseEntity DraggedBy { get; private set; }
-
         public int Value { get; private set; }
 
-        private Tweener tweener;
+        private Tweener snapToSlotTweenerX;
+        private Tweener snapToSlotTweenerY;
+
+        //States
+        public INumberState State;
+
+        public DefaultState DefaultState;
+        public DraggedState DraggedState;
+        public MoveToSlotState MoveToSlotState;
+        public InSlotState InSlotState;
 
         public DragableNumber(Player owner, int posX, int posY, int value)
         {
             Owner = owner;
             Position = new Point(posX, posY);
             Size = new Point(32, 32);
-            IsDragged = false;
-
-            tweener = new Tweener(posY, posY + 10, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
-            tweener.Ended += delegate() { tweener.Reverse(); };
+            
             Value = value;
 
             CollisionType = "number";
-        }
 
-        public void Drag(BaseEntity hand)
-        {
-            IsDragged = true;
-            DraggedBy = hand;
+            DefaultState = new DefaultState(this);
+            DraggedState = new DraggedState(this);
+            MoveToSlotState = new MoveToSlotState(this);
+            InSlotState = new InSlotState(this);
+
+            State = DefaultState;
         }
 
         public override void Update(GameTime gameTime)
-        {           
-            if (!IsDragged)
+        {
+            var hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
+            if (hand != null)
             {
-                tweener.Update(gameTime);
-                Y = (int)tweener.Position;
-
-                PlayerHand hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
-
-                if (hand != null && hand.Player == Owner)
-                {
-                    IsDragged = true;
-                    DraggedBy = hand;
-                }
+                State.onHandCollide(hand);
             }
 
-            if (IsDragged)
+            var slot = (NumberSlot)GetFirstCollidingEntity(X, Y, "slot");
+            if (slot != null)
             {
-                this.Position = DraggedBy.BoundingBox.Location;
+                State.onSlotCollide(slot);
             }
+
+            State.Update(gameTime);
+            //if (snapToSlotTweenerX != null && snapToSlotTweenerY != null)
+            //{
+            //    snapToSlotTweenerX.Update(gameTime);
+            //    snapToSlotTweenerY.Update(gameTime);
+
+            //    if (snapToSlotTweenerX != null && snapToSlotTweenerY != null)
+            //    {
+            //        X = (int)snapToSlotTweenerX.Position;
+            //        Y = (int)snapToSlotTweenerY.Position;
+            //    }
+
+            //    return;
+            //}
+
+            //if (!IsDragged)
+            //{
+            //    defaultMoveTweener.Update(gameTime);
+            //    Y = (int)defaultMoveTweener.Position;
+
+            //    PlayerHand hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
+
+            //    if (hand != null && hand.Player == Owner)
+            //    {
+            //        IsDragged = true;
+            //        DraggedBy = hand;
+            //    }
+            //}
+
+            //if (IsDragged)
+            //{
+            //    this.Position = DraggedBy.BoundingBox.Location;
+
+            //    NumberSlot slot = (NumberSlot)GetFirstCollidingEntity(X, Y, "slot");
+            //    if (slot != null && slot.Number == null)
+            //    {
+            //        IsDragged = false;
+            //        DraggedBy = null;
+
+            //        slot.Number = this;
+
+            //        setSnapTweenerTo(slot);
+            //    }
+            //}
+        }
+
+        private void setSnapTweenerTo(NumberSlot slot)
+        {
+            snapToSlotTweenerX = new Tweener(X, slot.X, 1, MathFighterXNA.Tweening.Elastic.EaseOut);
+            snapToSlotTweenerY = new Tweener(Y, slot.Y, 1, MathFighterXNA.Tweening.Elastic.EaseOut);
+
+            snapToSlotTweenerX.Ended += delegate() { snapToSlotTweenerX = null; };
+            snapToSlotTweenerY.Ended += delegate() { snapToSlotTweenerY = null; };
         }
 
         public override void Draw(SpriteBatch spriteBatch)
