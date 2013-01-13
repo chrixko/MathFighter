@@ -17,9 +17,6 @@ namespace MathFighterXNA
 
         public int Value { get; private set; }
 
-        private Tweener snapToSlotTweenerX;
-        private Tweener snapToSlotTweenerY;
-
         //States
         public INumberState State;
 
@@ -51,13 +48,13 @@ namespace MathFighterXNA
             var hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
             if (hand != null)
             {
-                State.onHandCollide(hand);
+                State.OnHandCollide(hand);
             }
 
             var slot = (NumberSlot)GetFirstCollidingEntity(X, Y, "slot");
             if (slot != null)
             {
-                State.onSlotCollide(slot);
+                State.OnSlotCollide(slot);
             }
 
             State.Update(gameTime);

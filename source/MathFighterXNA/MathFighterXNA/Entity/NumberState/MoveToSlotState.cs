@@ -40,11 +40,11 @@ namespace MathFighterXNA.Entity.NumberState
             Owner = owner;
         }        
 
-        void INumberState.onHandCollide(PlayerHand hand)
+        void INumberState.OnHandCollide(PlayerHand hand)
         {            
         }
 
-        void INumberState.onSlotCollide(NumberSlot slot)
+        void INumberState.OnSlotCollide(NumberSlot slot)
         {            
         }
 

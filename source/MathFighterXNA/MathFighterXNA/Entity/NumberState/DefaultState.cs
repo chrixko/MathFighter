@@ -20,7 +20,7 @@ namespace MathFighterXNA.Entity.NumberState
             defaultMoveTweener.Ended += delegate() { defaultMoveTweener.Reverse(); };
         }
 
-        void INumberState.onHandCollide(PlayerHand hand)
+        void INumberState.OnHandCollide(PlayerHand hand)
         {
             if (hand.Player == Owner.Owner)
             {
@@ -29,9 +29,8 @@ namespace MathFighterXNA.Entity.NumberState
             }
         }
 
-        void INumberState.onSlotCollide(NumberSlot slot)
+        void INumberState.OnSlotCollide(NumberSlot slot)
         {
-            //throw new NotImplementedException();
         }
 
         void INumberState.Update(Microsoft.Xna.Framework.GameTime gameTime)

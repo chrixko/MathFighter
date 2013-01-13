@@ -8,10 +8,8 @@ namespace MathFighterXNA.Entity.NumberState
 {
     public interface INumberState
     {
-        //void onPlayerDrag(Player player);
-        void onHandCollide(PlayerHand hand);
-        void onSlotCollide(NumberSlot slot);
-
+        void OnHandCollide(PlayerHand hand);
+        void OnSlotCollide(NumberSlot slot);
         void Update(GameTime gameTime);
     }
 }
