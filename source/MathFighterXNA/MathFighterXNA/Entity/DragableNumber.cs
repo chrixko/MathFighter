@@ -61,58 +61,6 @@ namespace MathFighterXNA
             }
 
             State.Update(gameTime);
-            //if (snapToSlotTweenerX != null && snapToSlotTweenerY != null)
-            //{
-            //    snapToSlotTweenerX.Update(gameTime);
-            //    snapToSlotTweenerY.Update(gameTime);
-
-            //    if (snapToSlotTweenerX != null && snapToSlotTweenerY != null)
-            //    {
-            //        X = (int)snapToSlotTweenerX.Position;
-            //        Y = (int)snapToSlotTweenerY.Position;
-            //    }
-
-            //    return;
-            //}
-
-            //if (!IsDragged)
-            //{
-            //    defaultMoveTweener.Update(gameTime);
-            //    Y = (int)defaultMoveTweener.Position;
-
-            //    PlayerHand hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
-
-            //    if (hand != null && hand.Player == Owner)
-            //    {
-            //        IsDragged = true;
-            //        DraggedBy = hand;
-            //    }
-            //}
-
-            //if (IsDragged)
-            //{
-            //    this.Position = DraggedBy.BoundingBox.Location;
-
-            //    NumberSlot slot = (NumberSlot)GetFirstCollidingEntity(X, Y, "slot");
-            //    if (slot != null && slot.Number == null)
-            //    {
-            //        IsDragged = false;
-            //        DraggedBy = null;
-
-            //        slot.Number = this;
-
-            //        setSnapTweenerTo(slot);
-            //    }
-            //}
-        }
-
-        private void setSnapTweenerTo(NumberSlot slot)
-        {
-            snapToSlotTweenerX = new Tweener(X, slot.X, 1, MathFighterXNA.Tweening.Elastic.EaseOut);
-            snapToSlotTweenerY = new Tweener(Y, slot.Y, 1, MathFighterXNA.Tweening.Elastic.EaseOut);
-
-            snapToSlotTweenerX.Ended += delegate() { snapToSlotTweenerX = null; };
-            snapToSlotTweenerY.Ended += delegate() { snapToSlotTweenerY = null; };
         }
 
         public override void Draw(SpriteBatch spriteBatch)
