@@ -27,8 +27,7 @@ namespace MathFighterXNA.Entity {
         }
 
         public static Equation CreateWithRandomProduct(Player solver, GameScreen screen) {
-            //Keine Primzahl generieren
-            return new Equation(Random.Next(1, 101), solver, screen);        
+            return new Equation(Random.Next(1, 10) * Random.Next(1, 10), solver, screen);        
         }
 
         public bool IsSolved() {

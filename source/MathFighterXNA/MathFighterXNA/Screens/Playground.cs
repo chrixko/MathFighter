@@ -6,25 +6,22 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MathFighterXNA.Entity;
 
-namespace MathFighterXNA.Screens
-{
-    public class Playground : GameScreen //Single Player Screen for playing / testing
-    {
+namespace MathFighterXNA.Screens {
+
+    public class Playground : GameScreen {
         public Player Player { get; set; }
         public Equation CurrentEquation { get; set; }
         
-        public Playground(KinectContext context) : base(context)
-        {
+        public Playground(KinectContext context) : base(context) {
         }
 
-        public override void Init()
-        {
+        public override void Init() {
             Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton, this);
             AddEntity(Player);
 
             AddEntity(Equation.CreateWithRandomProduct(Player, this));
             
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 9; i++) {
                 AddEntity(new DragableNumber(Player, (60 * i) - 30, 20, i));
             }                       
         }
