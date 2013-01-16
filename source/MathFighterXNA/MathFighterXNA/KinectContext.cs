@@ -75,24 +75,19 @@ namespace MathFighterXNA
             {
                 if (cif != null )
                 {
-                    Byte[] pixels = new Byte[cif.PixelDataLength];
-                    cif.CopyPixelDataTo(pixels);
-
-                    CurrentBitmap = new Texture2D(this.graphicsDevice, cif.Width, cif.Height, false, SurfaceFormat.Color);                   
-
-                    Color[] color = new Color[cif.Height * cif.Width];
-
-                    int index = 0;
-
-                    for (int y = 0; y < cif.Height; y++)
+                    Byte[] pixelData = new Byte[cif.PixelDataLength];
+                    cif.CopyPixelDataTo(pixelData);
+                    
+                    Byte[] bgraPixelData = new Byte[cif.PixelDataLength];
+                    for (int i = 0; i < pixelData.Length; i += 4)
                     {
-                        for (int x = 0; x < cif.Width; x++, index += 4)
-                        {
-                            color[y * cif.Width + x] = new Color(pixels[index + 2], pixels[index + 1], pixels[index + 0]);
-                        }
+                        bgraPixelData[i] = pixelData[i + 2];
+                        bgraPixelData[i + 1] = pixelData[i + 1];
+                        bgraPixelData[i + 2] = pixelData[i];
+                        bgraPixelData[i + 3] = (Byte)255;
                     }
-
-                    CurrentBitmap.SetData(color);
+                    CurrentBitmap = new Texture2D(this.graphicsDevice, cif.Width, cif.Height); 
+                    CurrentBitmap.SetData(bgraPixelData);
                 }
             }
         }
