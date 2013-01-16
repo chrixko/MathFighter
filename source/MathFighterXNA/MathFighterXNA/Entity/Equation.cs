@@ -44,11 +44,10 @@ namespace MathFighterXNA.Entity {
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
             if (!IsSolved()) {
-                spriteBatch.DrawString(Assets.DebugFont, "Product: " + Product.ToString(), new Vector2((MainGame.Width / 2) - 75, 50.0f), Color.Red);
+                spriteBatch.DrawString(Assets.DebugFont, "Product: " + Product.ToString(), new Vector2((MainGame.Width / 2) - 75, 100.0f), Color.Red);
             } else {
-                spriteBatch.DrawString(Assets.DebugFont, "Solved!", new Vector2((MainGame.Width / 2) - 75, 50.0f), Color.Red);
-            }
-            
+                spriteBatch.DrawString(Assets.DebugFont, "Solved!", new Vector2((MainGame.Width / 2) - 75, 100.0f), Color.Red);
+            }            
         }
 
         public override void Delete() {
