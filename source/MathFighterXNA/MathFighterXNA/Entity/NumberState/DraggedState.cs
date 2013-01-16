@@ -24,6 +24,7 @@ namespace MathFighterXNA.Entity.NumberState
             Owner.State = Owner.MoveToSlotState;
             slot.Number = this.Owner;
             Owner.MoveToSlotState.Slot = slot;
+            DraggedBy.IsDragging = false;
         }
 
         void INumberState.Update(Microsoft.Xna.Framework.GameTime gameTime)

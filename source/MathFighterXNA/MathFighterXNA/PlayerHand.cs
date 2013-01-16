@@ -12,6 +12,9 @@ namespace MathFighterXNA
     {
         public Player Player { get; private set; }
         public JointType Hand { get; private set; }
+        
+        public bool IsDragging { get; set; }
+
 
         public KinectContext Context
         {
@@ -29,6 +32,8 @@ namespace MathFighterXNA
             Player = player;
             Hand = hand;
 
+            IsDragging = false;
+
             CollisionType = "hand";
         }
 
@@ -42,7 +47,10 @@ namespace MathFighterXNA
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);
+            //spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);
+        }
+
+        public override void Delete() {
         }
     }
 }

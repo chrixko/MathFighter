@@ -67,5 +67,10 @@ namespace MathFighterXNA
                 spriteBatch.DrawString(Assets.DebugFont, "No Player-Skeleton found!", new Vector2(0, 0), Color.Red);
             }
         }
+
+        public override void Delete() {
+            Screen.RemoveEntity(LeftHand);
+            Screen.RemoveEntity(RightHand);
+        }
     }
 }

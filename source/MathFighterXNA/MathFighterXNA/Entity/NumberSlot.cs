@@ -42,5 +42,8 @@ namespace MathFighterXNA.Entity
         {
             spriteBatch.Draw(Assets.NumberSlotSprite, BoundingBox, Color.White);
         }
+
+        public override void Delete() {            
+        }
     }
 }

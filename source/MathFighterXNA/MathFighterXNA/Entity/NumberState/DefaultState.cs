@@ -22,10 +22,15 @@ namespace MathFighterXNA.Entity.NumberState
 
         void INumberState.OnHandCollide(PlayerHand hand)
         {
-            if (hand.Player == Owner.Owner)
+            if (hand.Player == Owner.Owner && !hand.IsDragging)
             {
-                Owner.State = Owner.DraggedState;
-                Owner.DraggedState.DraggedBy = hand;
+                var copy = new DragableNumber(hand.Player, Owner.X, Owner.Y, Owner.Value);
+                hand.Screen.AddEntity(copy);
+
+                copy.State = copy.DraggedState;
+                
+                copy.DraggedState.DraggedBy = hand;
+                hand.IsDragging = true;
             }
         }
 
