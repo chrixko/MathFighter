@@ -27,6 +27,7 @@ namespace MathFighterXNA.Entity {
         }
 
         public static Equation CreateWithRandomProduct(Player solver, GameScreen screen) {
+            //Keine Primzahl generieren
             return new Equation(Random.Next(1, 101), solver, screen);        
         }
 
@@ -44,9 +45,9 @@ namespace MathFighterXNA.Entity {
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
             if (!IsSolved()) {
-                spriteBatch.DrawString(Assets.DebugFont, "Product: " + Product.ToString(), new Vector2((MainGame.Width / 2) - 75, 100.0f), Color.Red);
+                spriteBatch.DrawString(Assets.DebugFont, "Product: " + Product.ToString(), new Vector2((MainGame.Width / 2) - 75, (MainGame.Height / 2) + 50), Color.Red);
             } else {
-                spriteBatch.DrawString(Assets.DebugFont, "Solved!", new Vector2((MainGame.Width / 2) - 75, 100.0f), Color.Red);
+                spriteBatch.DrawString(Assets.DebugFont, "Solved!", new Vector2((MainGame.Width / 2) - 75, (MainGame.Height / 2) + 50), Color.Red);
             }            
         }
 

@@ -22,7 +22,7 @@ namespace MathFighterXNA.Screens
             Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton, this);
             AddEntity(Player);
 
-            AddEntity(new Equation(25, Player, this));
+            AddEntity(Equation.CreateWithRandomProduct(Player, this));
             
             for (int i = 1; i <= 10; i++) {
                 AddEntity(new DragableNumber(Player, (60 * i) - 30, 20, i));
