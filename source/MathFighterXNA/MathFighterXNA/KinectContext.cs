@@ -6,6 +6,7 @@ using Microsoft.Kinect;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
+using System.Threading;
 
 namespace MathFighterXNA
 {
@@ -47,7 +48,7 @@ namespace MathFighterXNA
                 };
                 
                 this.Sensor.SkeletonStream.Enable(parameters);
-                this.Sensor.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
+                this.Sensor.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);                
 
                 try
                 {
@@ -158,7 +159,7 @@ namespace MathFighterXNA
             return null;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update()
         {
             ProcessColorFrame();
             ProcessSkeletonFrame();

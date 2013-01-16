@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Kinect;
-
+using System.Threading;
 using MathFighterXNA.Screens;
 
 namespace MathFighterXNA
@@ -19,13 +19,13 @@ namespace MathFighterXNA
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         KinectContext kinectContext;
-        SkeletonRenderer skeletonRenderer;
+
         private readonly Rectangle viewPortRectangle;
 
         public static int Width = 640;
         public static int Height = (Width / 4) * 3;
 
-        public GameScreen CurrentScreen;
+        public GameScreen CurrentScreen;             
 
         public MainGame()
         {
@@ -43,12 +43,10 @@ namespace MathFighterXNA
             kinectContext = new KinectContext(graphics.GraphicsDevice);
             kinectContext.Initialize();
 
-            skeletonRenderer = new SkeletonRenderer(kinectContext);
-
             CurrentScreen = new Playground(kinectContext);
 
             CurrentScreen.Init();
-
+           
             base.Initialize();
         }
 
@@ -56,13 +54,12 @@ namespace MathFighterXNA
         {
             Assets.LoadContent(Content);
 
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            skeletonRenderer.LoadContent(Content);
+            spriteBatch = new SpriteBatch(GraphicsDevice);            
         }
 
         protected override void UnloadContent()
         {
-            // Kinect hier stoppen?
+            kinectContext.Sensor.Stop();
         }
 
         protected override void Update(GameTime gameTime)
@@ -70,7 +67,7 @@ namespace MathFighterXNA
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             
-            kinectContext.Update(gameTime);
+            kinectContext.Update();
 
             CurrentScreen.Update(gameTime);
 
@@ -86,9 +83,7 @@ namespace MathFighterXNA
             if (kinectContext.CurrentBitmap != null)
             {
                 spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, Width, Height), Color.White);
-            }
-            
-            skeletonRenderer.Draw(spriteBatch);
+            }                       
 
             CurrentScreen.Draw(spriteBatch);
 
