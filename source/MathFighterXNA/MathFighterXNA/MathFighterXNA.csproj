@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets.cs" />
+    <Compile Include="DebugComponent.cs" />
     <Compile Include="Entity\DragableNumber.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\Equation.cs" />

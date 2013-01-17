@@ -20,6 +20,9 @@ namespace MathFighterXNA
         SpriteBatch spriteBatch;
         KinectContext kinectContext;
 
+        DebugComponent debugComponent;
+
+
         private readonly Rectangle viewPortRectangle;
 
         public static int Width = 640;
@@ -44,8 +47,9 @@ namespace MathFighterXNA
             kinectContext.Initialize();
 
             CurrentScreen = new Playground(kinectContext);
-
             CurrentScreen.Init();
+
+            debugComponent = new DebugComponent(this);
            
             base.Initialize();
         }
@@ -66,6 +70,8 @@ namespace MathFighterXNA
         {           
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+
+            debugComponent.Update(gameTime);
             
             kinectContext.Update();
 
@@ -78,7 +84,7 @@ namespace MathFighterXNA
         {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin();            
 
             if (kinectContext.CurrentBitmap != null)
             {
@@ -87,6 +93,8 @@ namespace MathFighterXNA
 
             CurrentScreen.Draw(spriteBatch);
 
+
+            debugComponent.Draw(spriteBatch, gameTime);
             spriteBatch.End();
 
             base.Draw(gameTime);
