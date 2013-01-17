@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Kinect;
-using MathFighterXNA.Tweening;
 using MathFighterXNA.Entity;
 using MathFighterXNA.Entity.NumberState;
 
-namespace MathFighterXNA
-{
-    public class DragableNumber : BaseEntity
-    {        
-        public Player Owner { get; set; }
+namespace MathFighterXNA {
 
+    public class DragableNumber : BaseEntity {        
+
+        public Player Owner { get; set; }
         public int Value { get; private set; }
 
         //States
@@ -25,12 +18,10 @@ namespace MathFighterXNA
         public MoveToSlotState MoveToSlotState;
         public InSlotState InSlotState;
 
-        public DragableNumber(Player owner, int posX, int posY, int value)
-        {
+        public DragableNumber(Player owner, int posX, int posY, int value) {
             Owner = owner;
             Position = new Point(posX, posY);
-            Size = new Point(32, 32);
-            
+            Size = new Point(32, 32);            
             Value = value;
 
             CollisionType = "number";
@@ -46,25 +37,21 @@ namespace MathFighterXNA
         public override void Init() {            
         }
 
-        public override void Update(GameTime gameTime)
-        {
+        public override void Update(GameTime gameTime) {
             var hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
-            if (hand != null)
-            {
+            if (hand != null) {
                 State.OnHandCollide(hand);
             }
 
             var slot = (NumberSlot)GetFirstCollidingEntity(X, Y, "slot");
-            if (slot != null)
-            {
+            if (slot != null) {
                 State.OnSlotCollide(slot);
             }
 
             State.Update(gameTime);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
+        public override void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);
             spriteBatch.DrawString(Assets.DebugFont, Value.ToString(), new Vector2(BoundingBox.Center.X -8, BoundingBox.Center.Y - 16), Color.Black);
         }

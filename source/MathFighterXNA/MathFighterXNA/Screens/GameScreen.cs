@@ -2,11 +2,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+namespace MathFighterXNA.Screens {
 
-namespace MathFighterXNA.Screens
-{
-    public abstract class GameScreen
-    {
+    public abstract class GameScreen {
+
         public KinectContext Context { get; private set; }
 
         public List<BaseEntity> Entities = new List<BaseEntity>();
