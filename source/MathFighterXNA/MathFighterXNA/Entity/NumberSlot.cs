@@ -39,7 +39,10 @@ namespace MathFighterXNA.Entity {
             spriteBatch.Draw(Assets.NumberSlotSprite, BoundingBox, Color.White);
         }
 
-        public override void Delete() {            
+        public override void Delete() {
+            if (Number != null) {
+                Screen.RemoveEntity(Number);            
+            }
         }
     }
 }

@@ -16,8 +16,9 @@ namespace MathFighterXNA.Screens {
             Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton);
             AddEntity(Player);
 
-            AddEntity(Equation.CreateWithRandomProduct(Player));
+            CurrentEquation = Equation.CreateWithRandomProduct(Player);
 
+            AddEntity(CurrentEquation);
             
             for (int i = 1; i <= 9; i++) {
                 AddEntity(new DragableNumber(Player, (60 * i) - 30, 20, i));
