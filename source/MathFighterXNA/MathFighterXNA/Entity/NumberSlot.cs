@@ -25,11 +25,14 @@ namespace MathFighterXNA.Entity
             CollisionType = "slot";
         }
 
+        public override void Init() {            
+        }
+
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             if (Number != null && Number.State == Number.MoveToSlotState)
             {
-
+                return;
             }
             else
             {

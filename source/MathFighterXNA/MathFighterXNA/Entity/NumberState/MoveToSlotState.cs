@@ -1,29 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MathFighterXNA.Tweening;
+﻿using MathFighterXNA.Tweening;
 
-namespace MathFighterXNA.Entity.NumberState
-{
-    public class MoveToSlotState : INumberState
-    {
+namespace MathFighterXNA.Entity.NumberState {
+
+    public class MoveToSlotState : INumberState {
+
         public DragableNumber Owner;
         
         private NumberSlot slot;
-        public NumberSlot Slot
-        {
-            get
-            {
+        public NumberSlot Slot {
+            get {
                 return slot;
             }
-            set
-            {
+            set {
                 slot = value;
 
                 snapToSlotTweenerX = new Tweener(Owner.X, value.X, 1f, Elastic.EaseOut);
                 snapToSlotTweenerY = new Tweener(Owner.Y, value.Y, 1f, Elastic.EaseOut);
-
+                
                 snapToSlotTweenerX.Ended += delegate() { tweenerXFinished = true; };
                 snapToSlotTweenerY.Ended += delegate() { tweenerYFinished = true; };
             }
@@ -35,36 +28,29 @@ namespace MathFighterXNA.Entity.NumberState
         private bool tweenerXFinished = false;
         private bool tweenerYFinished = false;
 
-        public MoveToSlotState(DragableNumber owner)
-        {
+        public MoveToSlotState(DragableNumber owner) {
             Owner = owner;
         }        
 
-        void INumberState.OnHandCollide(PlayerHand hand)
-        {            
+        void INumberState.OnHandCollide(PlayerHand hand) {            
         }
 
-        void INumberState.OnSlotCollide(NumberSlot slot)
-        {            
+        void INumberState.OnSlotCollide(NumberSlot slot) {            
         }
 
-        void INumberState.Update(Microsoft.Xna.Framework.GameTime gameTime)
-        {
-            if (Slot != null)
-            {
+        void INumberState.Update(Microsoft.Xna.Framework.GameTime gameTime) {
+            if (Slot != null) {
                 snapToSlotTweenerX.Update(gameTime);
                 snapToSlotTweenerY.Update(gameTime);
 
                 Owner.X = (int)snapToSlotTweenerX.Position;
                 Owner.Y = (int)snapToSlotTweenerY.Position;
 
-                if (tweenerXFinished && tweenerYFinished)
-                {
+                if (tweenerXFinished && tweenerYFinished) {
                     Owner.State = Owner.InSlotState;
                     Owner.InSlotState.Slot = this.Slot;
                 }
-            }
-            
+            }            
         }
     }
 }

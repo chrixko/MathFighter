@@ -18,6 +18,8 @@ namespace MathFighterXNA.Screens
         public void AddEntity(BaseEntity entity) {
             Entities.Add(entity);
             entity.Screen = this;
+
+            entity.Init();
         }
 
         public void RemoveEntity(BaseEntity entity) {

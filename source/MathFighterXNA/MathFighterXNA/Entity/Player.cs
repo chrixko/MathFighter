@@ -6,22 +6,18 @@ using Microsoft.Kinect;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MathFighterXNA
-{
-    public class Player : BaseEntity
-    {
+namespace MathFighterXNA {
+
+    public class Player : BaseEntity {
         public SkeletonPlayerAssignment SkeletonAssignment { get; set; }
         public KinectContext Context { get; private set; }
 
         public PlayerHand LeftHand { get; private set; }
         public PlayerHand RightHand { get; private set; }
 
-        public Skeleton Skeleton
-        {
-            get
-            {
-                switch (SkeletonAssignment)
-                {
+        public Skeleton Skeleton {
+            get {
+                switch (SkeletonAssignment) {
                     case SkeletonPlayerAssignment.FirstSkeleton:
                         return Context.GetFirstSkeleton();
                     case SkeletonPlayerAssignment.LeftSkeleton:
@@ -34,37 +30,38 @@ namespace MathFighterXNA
             }
         }
 
-        public bool IsReady
-        {
-            get
-            {
+        public bool IsReady {
+            get {
                 return Skeleton != null;
             }
         }     
 
-        public Player(KinectContext context, SkeletonPlayerAssignment assignment, Screens.GameScreen screen)
-        {
+        public Player(KinectContext context, SkeletonPlayerAssignment assignment) {
             this.Context = context;
-            this.SkeletonAssignment = assignment;
-
-            Screen = screen; // meeeeh :(
+            this.SkeletonAssignment = assignment;            
 
             LeftHand = new PlayerHand(this, JointType.HandLeft);
             RightHand = new PlayerHand(this, JointType.HandRight);
+        }
 
+        public override void Init() {
             Screen.AddEntity(LeftHand);
             Screen.AddEntity(RightHand);
         }
 
-        public override void Update(GameTime gameTime)
-        {
+        public override void Update(GameTime gameTime) {
+            if (IsReady) {
+                LeftHand.Update(gameTime);
+                RightHand.Update(gameTime);
+            }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if (!IsReady)
-            {
-                spriteBatch.DrawString(Assets.DebugFont, "No Player-Skeleton found!", new Vector2(0, 0), Color.Red);
+        public override void Draw(SpriteBatch spriteBatch) {
+            if (IsReady) {
+                LeftHand.Draw(spriteBatch);
+                RightHand.Draw(spriteBatch);
+            } else {
+                spriteBatch.DrawString(Assets.DebugFont, "No Player-Skeleton found!", new Vector2(0, 0), Color.Red);            
             }
         }
 

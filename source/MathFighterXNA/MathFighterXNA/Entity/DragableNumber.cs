@@ -43,6 +43,9 @@ namespace MathFighterXNA
             State = DefaultState;
         }
 
+        public override void Init() {            
+        }
+
         public override void Update(GameTime gameTime)
         {
             var hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");

@@ -13,21 +13,16 @@ namespace MathFighterXNA.Entity {
 
         public static Random Random = new Random();
 
-        public Equation(int product, Player solver, GameScreen screen) {
-            //TODO: Having to pass the GameScreen is horrible. After initialization entity object already nows which GameScreen it belongs to.. The same in Player.cs
-
+        public Equation(int product, Player solver) {
             Product = product;
             Solver = solver;
 
             FirstSlot = new NumberSlot((MainGame.Width / 2) - 64, (MainGame.Height / 2) + 100);
             SecondSlot = new NumberSlot((MainGame.Width / 2) + 32, (MainGame.Height / 2) + 100);
-
-            screen.AddEntity(FirstSlot);
-            screen.AddEntity(SecondSlot);
         }
 
-        public static Equation CreateWithRandomProduct(Player solver, GameScreen screen) {
-            return new Equation(Random.Next(1, 10) * Random.Next(1, 10), solver, screen);        
+        public static Equation CreateWithRandomProduct(Player solver) {
+            return new Equation(Random.Next(1, 10) * Random.Next(1, 10), solver);        
         }
 
         public bool IsSolved() {
@@ -38,8 +33,14 @@ namespace MathFighterXNA.Entity {
             return (FirstSlot.Number.Value * SecondSlot.Number.Value) == Product;
         }
 
+        public override void Init() {
+            Screen.AddEntity(FirstSlot);
+            Screen.AddEntity(SecondSlot);
+        }
+
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
-            
+            FirstSlot.Update(gameTime);
+            SecondSlot.Update(gameTime);
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
@@ -47,7 +48,10 @@ namespace MathFighterXNA.Entity {
                 spriteBatch.DrawString(Assets.DebugFont, "Product: " + Product.ToString(), new Vector2((MainGame.Width / 2) - 75, (MainGame.Height / 2) + 50), Color.Red);
             } else {
                 spriteBatch.DrawString(Assets.DebugFont, "Solved!", new Vector2((MainGame.Width / 2) - 75, (MainGame.Height / 2) + 50), Color.Red);
-            }            
+            }
+
+            FirstSlot.Draw(spriteBatch);
+            SecondSlot.Draw(spriteBatch);
         }
 
         public override void Delete() {
