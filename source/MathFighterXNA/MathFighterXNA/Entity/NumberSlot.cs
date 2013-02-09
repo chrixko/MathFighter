@@ -16,7 +16,7 @@ namespace MathFighterXNA.Entity {
 
         public NumberSlot(int posX, int posY) {
             Position = new Point(posX, posY);
-            Size = new Point(32, 32);
+            Size = new Point(32, 75);
             tweener = new Tweener(posY, posY + 20, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
             tweener.Ended += delegate() { tweener.Reverse(); };
 

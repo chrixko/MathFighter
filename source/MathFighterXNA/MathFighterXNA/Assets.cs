@@ -13,9 +13,9 @@ namespace MathFighterXNA {
         public static SpriteFont SmallDebugFont { get; set; }
 
         public static void LoadContent(ContentManager content) {
-            NumberBackgroundSprite = content.Load<Texture2D>("number_background");
+            NumberBackgroundSprite = content.Load<Texture2D>("balloon_red");
             JointSprite = content.Load<Texture2D>("Joint");
-            NumberSlotSprite = content.Load<Texture2D>("number_slot");
+            NumberSlotSprite = content.Load<Texture2D>("balloon_gray");
 
             DebugFont = content.Load<SpriteFont>("DebugFont");
             SmallDebugFont = content.Load<SpriteFont>("SmallDebugFont");            
