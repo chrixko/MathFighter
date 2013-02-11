@@ -20,7 +20,7 @@ namespace MathFighterXNA.Screens {
 
             AddEntity(CurrentEquation);
             
-            for (int i = 1; i <= 9; i++) {
+            for (int i = 1; i <= 10; i++) {
                 AddEntity(new DragableNumber(Player, (60 * i) - 30, 20, i));
             }                       
         }
