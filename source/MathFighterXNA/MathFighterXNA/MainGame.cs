@@ -42,11 +42,12 @@ namespace MathFighterXNA
         }
 
         protected override void Initialize()
-        {           
+        {
+            Assets.LoadContent(Content);
             kinectContext = new KinectContext(graphics.GraphicsDevice);
             kinectContext.Initialize();
 
-            CurrentScreen = new Playground(kinectContext);
+            CurrentScreen = new SinglePlayerScreen(kinectContext);
             CurrentScreen.Init();
 
             debugComponent = new DebugComponent(this);
@@ -56,7 +57,7 @@ namespace MathFighterXNA
 
         protected override void LoadContent()
         {
-            Assets.LoadContent(Content);
+            
 
             spriteBatch = new SpriteBatch(GraphicsDevice);            
         }

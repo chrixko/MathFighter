@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using MathFighterXNA.Entity;
 using MathFighterXNA.Screens;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MathFighterXNA.Entity {
     
@@ -38,12 +40,12 @@ namespace MathFighterXNA.Entity {
             Screen.AddEntity(SecondSlot);
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
+        public override void Update(GameTime gameTime) {
             FirstSlot.Update(gameTime);
             SecondSlot.Update(gameTime);
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
+        public override void Draw(SpriteBatch spriteBatch) {
             if (!IsSolved()) {
                 spriteBatch.DrawString(Assets.DebugFont, "Product: " + Product.ToString(), new Vector2((MainGame.Width / 2) - 75, (MainGame.Height / 2) + 50), Color.Red);
             } else {

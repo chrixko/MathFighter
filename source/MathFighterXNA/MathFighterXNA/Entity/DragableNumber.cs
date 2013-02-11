@@ -18,6 +18,9 @@ namespace MathFighterXNA {
         public MoveToSlotState MoveToSlotState;
         public InSlotState InSlotState;
 
+        public SpriteFont Font;
+        public Color Color;
+
         public DragableNumber(Player owner, int posX, int posY, int value) {
             Owner = owner;
             Position = new Point(posX, posY);
@@ -34,7 +37,9 @@ namespace MathFighterXNA {
             State = DefaultState;
         }
 
-        public override void Init() {            
+        public override void Init() {
+            Font = Assets.SmallDebugFont;
+            Color = Color.White;
         }
 
         public override void Update(GameTime gameTime) {
@@ -52,8 +57,8 @@ namespace MathFighterXNA {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);
-            spriteBatch.DrawString(Assets.DebugFont, Value.ToString(), new Vector2(BoundingBox.Center.X -8, BoundingBox.Center.Y - 32), Color.Black);
+            spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color);
+            spriteBatch.DrawString(Font, Value.ToString(), new Vector2(BoundingBox.Center.X -8, BoundingBox.Center.Y - 32), Color.Black);
         }
 
         public override void Delete() {
