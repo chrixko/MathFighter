@@ -52,5 +52,10 @@ namespace MathFighterXNA.Entity.NumberState {
                 }
             }            
         }
+
+
+        public void INumberState.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
+            
+        }
     }
 }

@@ -20,5 +20,9 @@
                 Owner.Position = Slot.Position;
             }
         }
+
+        void INumberState.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
+            
+        }
     }
 }

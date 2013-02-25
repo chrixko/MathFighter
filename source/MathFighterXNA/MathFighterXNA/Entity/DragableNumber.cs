@@ -59,6 +59,8 @@ namespace MathFighterXNA {
         public override void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color);
             spriteBatch.DrawString(Font, Value.ToString(), new Vector2(BoundingBox.Center.X -8, BoundingBox.Center.Y - 32), Color.Black);
+
+            State.Draw(spriteBatch);
         }
 
         public override void Delete() {

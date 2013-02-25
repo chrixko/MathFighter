@@ -31,5 +31,9 @@ namespace MathFighterXNA.Entity.NumberState {
                 throw new ArgumentException("DraggedState without Dragger!");
             }
         }
+
+        void INumberState.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
+            
+        }
     }
 }

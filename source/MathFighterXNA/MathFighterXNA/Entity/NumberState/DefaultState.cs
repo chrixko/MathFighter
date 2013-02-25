@@ -10,6 +10,9 @@ namespace MathFighterXNA.Entity.NumberState {
 
         double hoverTime = 0;
 
+        float fullDragTime = 2f;
+        float dragTime = 0f;
+
         public DefaultState(DragableNumber owner) {
             Owner = owner;
 
@@ -59,6 +62,10 @@ namespace MathFighterXNA.Entity.NumberState {
                 copy.DraggedState.DraggedBy = hand;
                 hand.IsDragging = true;
             }
+        }
+
+        void INumberState.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
+            
         }
     }
 }
