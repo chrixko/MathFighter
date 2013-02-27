@@ -51,7 +51,7 @@ namespace MathFighterXNA.Entity.NumberState {
 
         void INumberState.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
             if (hoverTime > 0 && hoverTime <= maxHoverTime) {
-                for (int i = 0; i <= 360; i++) {
+                for (int i = 0; i <= 360; i += 5) {
                     var destRect = new Rectangle(Owner.BoundingBox.Center.X - 2, Owner.BoundingBox.Center.Y + 6, 1, 14);
 
                     var asset = Assets.CirclePartFilled;
