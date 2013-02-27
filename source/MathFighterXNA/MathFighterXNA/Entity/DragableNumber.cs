@@ -19,7 +19,7 @@ namespace MathFighterXNA {
         public InSlotState InSlotState;
 
         public SpriteFont Font;
-        public Color Color;
+        public Color Color;        
 
         public DragableNumber(Player owner, int posX, int posY, int value) {
             Owner = owner;
@@ -38,7 +38,7 @@ namespace MathFighterXNA {
         }
 
         public override void Init() {
-            Font = Assets.SmallDebugFont;
+            Font = Assets.DebugFont;
             Color = Color.White;
         }
 
@@ -60,7 +60,7 @@ namespace MathFighterXNA {
             spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color);
             spriteBatch.DrawString(Font, Value.ToString(), new Vector2(BoundingBox.Center.X -8, BoundingBox.Center.Y - 32), Color.Black);
 
-            State.Draw(spriteBatch);
+            State.Draw(spriteBatch);            
         }
 
         public override void Delete() {

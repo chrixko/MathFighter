@@ -22,13 +22,12 @@ namespace MathFighterXNA
 
         DebugComponent debugComponent;
 
-
         private readonly Rectangle viewPortRectangle;
 
         public static int Width = 640;
         public static int Height = (Width / 4) * 3;
 
-        public GameScreen CurrentScreen;             
+        public GameScreen CurrentScreen;
 
         public MainGame()
         {
@@ -51,14 +50,12 @@ namespace MathFighterXNA
             CurrentScreen.Init();
 
             debugComponent = new DebugComponent(this);
-           
+
             base.Initialize();
         }
 
         protected override void LoadContent()
-        {
-            
-
+        {           
             spriteBatch = new SpriteBatch(GraphicsDevice);            
         }
 
@@ -84,13 +81,12 @@ namespace MathFighterXNA
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+            
+            spriteBatch.Begin();
 
-            spriteBatch.Begin();            
-
-            if (kinectContext.CurrentBitmap != null)
-            {
+            if (kinectContext.CurrentBitmap != null) {
                 spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, Width, Height), Color.White);
-            }                       
+            }
 
             CurrentScreen.Draw(spriteBatch);
 
