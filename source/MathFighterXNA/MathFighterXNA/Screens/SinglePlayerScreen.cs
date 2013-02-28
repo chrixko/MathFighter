@@ -2,6 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MathFighterXNA.Entity;
+using System.Collections.Generic;
+using System;
+
 
 namespace MathFighterXNA.Screens {
 
@@ -11,7 +14,7 @@ namespace MathFighterXNA.Screens {
 
         double Timer = 60;
 
-        public SinglePlayerScreen(KinectContext context) : base(context) {
+        public SinglePlayerScreen(KinectContext context) : base(context) {            
         }
 
         public override void Init() {
@@ -21,10 +24,28 @@ namespace MathFighterXNA.Screens {
             CurrentEquation = Equation.CreateWithRandomProduct(Player);
 
             AddEntity(CurrentEquation);
-            
-            for (int i = 1; i <= 10; i++) {
-                AddEntity(new DragableNumber(Player, (60 * i) - 30, 20, i));
+
+            for (int i = 1; i <= 10; i++)
+            {
+                //List<double> yList = new List<double>();
+                //for (int j = 1; j <= 10; j++)
+                //{   
+                //    double y = System.Math.Pow((60 * i - 30) - 300, 2) * 0.002 + 15;
+                //    yList.Add(y);
+                //}
+
+                //double pathLength = 0.0;
+                //for (int k = 0; k < 9; k++)
+                //{
+                //    double xDif = 10.0;
+                //    double yDif = yList[k] - yList[k + 1];
+                //    pathLength += Math.Sqrt(Math.Pow(xDif, 2) + Math.Pow(yDif, 2));
+                //}
+                //double segmentLength = pathLength / 10;
+                double dy = System.Math.Pow((60 * i - 30)-300, 2) * 0.002 +15;
+                AddEntity(new DragableNumber(Player, System.Convert.ToInt32((60 * i) - 30), System.Convert.ToInt32(dy), i));
             }                       
+
         }
 
         public override void Update(GameTime gameTime) {
