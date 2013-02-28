@@ -118,7 +118,7 @@ namespace MathFighterXNA {
 
         public Skeleton GetLeftSkeleton() {
             if (Skeletons.Count > 0) {
-                return (from Skeleton s in Skeletons orderby s.Position.X ascending select s).First<Skeleton>();
+                return (from Skeleton s in Skeletons orderby s.Position.X ascending select s).FirstOrDefault<Skeleton>();
             }
 
             return null;
@@ -126,7 +126,7 @@ namespace MathFighterXNA {
 
         public Skeleton GetRightSkeleton() {
             if (Skeletons.Count > 0) {
-                return (from Skeleton s in Skeletons orderby s.Position.X descending select s).First<Skeleton>();
+                return (from Skeleton s in Skeletons where s != GetLeftSkeleton() orderby s.Position.X descending select s).FirstOrDefault<Skeleton>();
             }
 
             return null;

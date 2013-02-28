@@ -46,7 +46,7 @@ namespace MathFighterXNA
             kinectContext = new KinectContext(graphics.GraphicsDevice);
             kinectContext.Initialize();
 
-            CurrentScreen = new SinglePlayerScreen(kinectContext);
+            CurrentScreen = new VersusPlayerScreen(kinectContext);
             CurrentScreen.Init();
 
             debugComponent = new DebugComponent(this);
