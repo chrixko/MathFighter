@@ -114,6 +114,7 @@
     <Compile Include="Entity\DragableNumber.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Entity\Equation.cs" />
+    <Compile Include="Entity\EquationInput.cs" />
     <Compile Include="Entity\NumberSlot.cs" />
     <Compile Include="Entity\NumberState\DefaultState.cs" />
     <Compile Include="Entity\NumberState\DraggedState.cs" />

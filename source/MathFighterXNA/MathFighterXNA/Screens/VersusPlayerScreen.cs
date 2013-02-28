@@ -13,6 +13,8 @@ namespace MathFighterXNA.Screens {
 
         double Timer = 60;
 
+
+
         public VersusPlayerScreen(KinectContext context) : base(context) {
         }
 
@@ -21,15 +23,7 @@ namespace MathFighterXNA.Screens {
             PlayerTwo = new Player(Context, SkeletonPlayerAssignment.RightSkeleton);
             
             AddEntity(PlayerOne);
-            AddEntity(PlayerTwo);
-
-            //CurrentEquation = Equation.CreateWithRandomProduct(Player);
-
-            //AddEntity(CurrentEquation);
-            
-            //for (int i = 1; i <= 10; i++) {
-            //    AddEntity(new DragableNumber(Player, (60 * i) - 30, 20, i));
-            //}                       
+            AddEntity(PlayerTwo);                                  
         }
 
         public override void Update(GameTime gameTime) {

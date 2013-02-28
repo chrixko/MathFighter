@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using MathFighterXNA.Entity;
 using MathFighterXNA.Screens;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace MathFighterXNA.Entity {
@@ -24,7 +23,7 @@ namespace MathFighterXNA.Entity {
         }
 
         public static Equation CreateWithRandomProduct(Player solver) {
-            return new Equation(Random.Next(1, 10) * Random.Next(1, 10), solver);        
+            return new Equation(Random.Next(1, 11) * Random.Next(1, 11), solver);        
         }
 
         public bool IsSolved() {

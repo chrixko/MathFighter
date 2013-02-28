@@ -9,7 +9,7 @@ namespace MathFighterXNA.Entity {
 
     public class NumberSlot : BaseEntity {
 
-        public Player UsableBy;
+        //public Player UsableBy;
         public DragableNumber Number;
 
         private Tweener tweener;
