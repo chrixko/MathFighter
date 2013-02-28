@@ -1,12 +1,11 @@
 ﻿using System;
 using MathFighterXNA.Screens;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace MathFighterXNA.Entity {
     public class EquationInput : BaseEntity {
-
-        public GameScreen Screen { get; private set; }
-
+       
         public Player Current { get; set; }
         public int Product;
 
@@ -24,18 +23,39 @@ namespace MathFighterXNA.Entity {
         public NumberSlot FirstProductSlot;
         public NumberSlot SecondProductSlot;
 
-        public EquationInput(GameScreen screen, int posX, int posY) {
-            Screen = screen;
+        public bool IsEquationSet {
+            get {
+                return (FirstEquationSlot.Number != null && SecondEquationSlot.Number != null);
+            }
+        }
+
+        public bool IsAnswerSet {
+            get {
+                return (FirstProductSlot.Number != null && SecondProductSlot.Number != null);
+            }
+        }
+
+        public bool IsAnswerCorrect {
+            get {
+                if(!IsEquationSet || !IsAnswerSet) return false;
+
+                return (FirstEquationSlot.Number.Value * SecondEquationSlot.Number.Value) == Convert.ToInt32(FirstProductSlot.Number.Value.ToString() + SecondProductSlot.Number.Value.ToString());
+            }
+        }
+
+        public EquationInput(int posX, int posY) {
             X = posX;
             Y = posY;
+
+            Slots = new List<NumberSlot>();
         }
 
         public override void Init() {
-            FirstEquationSlot = new NumberSlot(X, Y);
-            SecondEquationSlot = new NumberSlot(X + 30, Y);
+            FirstEquationSlot = new NumberSlot(X, Y, false);
+            SecondEquationSlot = new NumberSlot(X + 50, Y, false);
 
-            FirstProductSlot = new NumberSlot(X, Y + 30);
-            SecondProductSlot = new NumberSlot(X + 30, Y + 30);
+            FirstProductSlot = new NumberSlot(X, Y + 70, true);
+            SecondProductSlot = new NumberSlot(X + 50, Y + 70, true);
 
             Slots.Add(FirstEquationSlot);
             Slots.Add(SecondEquationSlot);
@@ -57,6 +77,10 @@ namespace MathFighterXNA.Entity {
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
             foreach (NumberSlot slot in Slots) {
                 slot.Draw(spriteBatch);
+            }
+
+            if (IsAnswerCorrect) {
+                spriteBatch.DrawString(Assets.DebugFont, "SOLVED!", new Vector2(this.X, this.Y - 30), Color.Red);
             }
         }
 

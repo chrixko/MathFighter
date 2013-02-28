@@ -9,11 +9,7 @@ namespace MathFighterXNA.Screens {
         public Player PlayerOne { get; set; }
         public Player PlayerTwo { get; set; }
 
-        public Equation CurrentEquation { get; set; }
-
-        double Timer = 60;
-
-
+        public EquationInput Input { get; set; }
 
         public VersusPlayerScreen(KinectContext context) : base(context) {
         }
@@ -21,9 +17,18 @@ namespace MathFighterXNA.Screens {
         public override void Init() {
             PlayerOne = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
             PlayerTwo = new Player(Context, SkeletonPlayerAssignment.RightSkeleton);
-            
+
+            Input = new EquationInput(300, 200);
+
             AddEntity(PlayerOne);
-            AddEntity(PlayerTwo);                                  
+            AddEntity(PlayerTwo);
+
+            AddEntity(Input);
+
+            for (int i = 1; i <= 10; i++) {
+                double dy = System.Math.Pow((60 * i - 30) - 300, 2) * 0.002 + 15;
+                AddEntity(new DragableNumber(PlayerOne, System.Convert.ToInt32((60 * i) - 30), System.Convert.ToInt32(dy), i));
+            }      
         }
 
         public override void Update(GameTime gameTime) {

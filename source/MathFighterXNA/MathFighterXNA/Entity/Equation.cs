@@ -18,8 +18,8 @@ namespace MathFighterXNA.Entity {
             Product = product;
             Solver = solver;
 
-            FirstSlot = new NumberSlot((MainGame.Width / 2) - 64, (MainGame.Height / 2) + 100);
-            SecondSlot = new NumberSlot((MainGame.Width / 2) + 32, (MainGame.Height / 2) + 100);
+            FirstSlot = new NumberSlot((MainGame.Width / 2) - 64, (MainGame.Height / 2) + 100, true);
+            SecondSlot = new NumberSlot((MainGame.Width / 2) + 32, (MainGame.Height / 2) + 100, true);
         }
 
         public static Equation CreateWithRandomProduct(Player solver) {

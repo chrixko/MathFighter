@@ -15,6 +15,8 @@ namespace MathFighterXNA.Entity.NumberState {
         }
 
         void INumberState.OnSlotCollide(NumberSlot slot) {
+            if (!slot.Reassignable && slot.Number != null) return;
+
             Owner.State = Owner.MoveToSlotState;
 
             if (slot.Number != null) Owner.Screen.RemoveEntity(slot.Number);

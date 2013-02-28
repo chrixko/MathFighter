@@ -10,15 +10,18 @@ namespace MathFighterXNA.Entity {
     public class NumberSlot : BaseEntity {
 
         //public Player UsableBy;
-        public DragableNumber Number;
+        public DragableNumber Number { get; set; }
+        public bool Reassignable { get; set; }
 
         private Tweener tweener;
 
-        public NumberSlot(int posX, int posY) {
+        public NumberSlot(int posX, int posY, bool reassignable) {
             Position = new Point(posX, posY);
             Size = new Point(32, 75);
             tweener = new Tweener(posY, posY + 20, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
             tweener.Ended += delegate() { tweener.Reverse(); };
+
+            Reassignable = reassignable;
 
             CollisionType = "slot";
         }
