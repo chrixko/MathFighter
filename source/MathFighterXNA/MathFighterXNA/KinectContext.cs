@@ -99,37 +99,19 @@ namespace MathFighterXNA {
         }
 
         public Skeleton GetSkeletonById(int id) {
-            foreach (var skel in Skeletons) {
-                if (skel.TrackingId == id) {
-                    return skel;
-                }                    
-            }
-
-            return null;
+            return (from Skeleton s in Skeletons where s.TrackingId == id select s).FirstOrDefault();
         }
 
         public Skeleton GetFirstSkeleton() {
-            if (Skeletons.Count > 0) {
-                return Skeletons[0];
-            }
-                
-            return null;
+            return Skeletons.FirstOrDefault<Skeleton>();
         }
 
-        public Skeleton GetLeftSkeleton() {
-            if (Skeletons.Count > 0) {
-                return (from Skeleton s in Skeletons orderby s.Position.X ascending select s).FirstOrDefault<Skeleton>();
-            }
-
-            return null;
+        public Skeleton GetLeftSkeleton() { 
+            return (from Skeleton s in Skeletons orderby s.Position.X ascending select s).FirstOrDefault();
         }
 
         public Skeleton GetRightSkeleton() {
-            if (Skeletons.Count > 0) {
-                return (from Skeleton s in Skeletons where s != GetLeftSkeleton() orderby s.Position.X descending select s).FirstOrDefault<Skeleton>();
-            }
-
-            return null;
+            return (from Skeleton s in Skeletons where s != GetLeftSkeleton() orderby s.Position.X descending select s).FirstOrDefault();            
         }
 
         public void Update() {
