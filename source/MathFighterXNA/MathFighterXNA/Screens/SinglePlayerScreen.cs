@@ -27,23 +27,9 @@ namespace MathFighterXNA.Screens {
 
             for (int i = 1; i <= 10; i++)
             {
-                //List<double> yList = new List<double>();
-                //for (int j = 1; j <= 10; j++)
-                //{   
-                //    double y = System.Math.Pow((60 * i - 30) - 300, 2) * 0.002 + 15;
-                //    yList.Add(y);
-                //}
 
-                //double pathLength = 0.0;
-                //for (int k = 0; k < 9; k++)
-                //{
-                //    double xDif = 10.0;
-                //    double yDif = yList[k] - yList[k + 1];
-                //    pathLength += Math.Sqrt(Math.Pow(xDif, 2) + Math.Pow(yDif, 2));
-                //}
-                //double segmentLength = pathLength / 10;
                 double dy = System.Math.Pow((60 * i - 30)-300, 2) * 0.002 +15;
-                AddEntity(new DragableNumber(Player, System.Convert.ToInt32((60 * i) - 30), System.Convert.ToInt32(dy), i));
+                AddEntity(new DragableNumber(Player, System.Convert.ToInt32((60 * i)-30), System.Convert.ToInt32(dy), i));
             }                       
 
         }
