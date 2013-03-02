@@ -47,8 +47,10 @@ namespace MathFighterXNA.Entity.NumberState {
                 Owner.Y = (int)snapToSlotTweenerY.Position;
 
                 if (tweenerXFinished && tweenerYFinished) {
-                    Owner.State = Owner.InSlotState;
+                    this.Slot.Number = this.Owner;
+                    Owner.State = Owner.InSlotState;                    
                     Owner.InSlotState.Slot = this.Slot;
+                    
                 }
             }            
         }

@@ -20,8 +20,7 @@ namespace MathFighterXNA.Entity.NumberState {
             Owner.State = Owner.MoveToSlotState;
 
             if (slot.Number != null) Owner.Screen.RemoveEntity(slot.Number);
-
-            slot.Number = this.Owner;
+            
             Owner.MoveToSlotState.Slot = slot;
             DraggedBy.IsDragging = false;
         }

@@ -13,13 +13,22 @@ namespace MathFighterXNA.Entity {
         public DragableNumber Number { get; set; }
         public bool Reassignable { get; set; }
 
-        private Tweener tweener;
+        //private Tweener tweener;
 
-        public NumberSlot(int posX, int posY, bool reassignable) {
-            Position = new Point(posX, posY);
+        public EquationInput Owner;
+
+        public int OffsetX { get; set; }
+        public int OffsetY { get; set; }
+
+        public NumberSlot(EquationInput owner, int offsetX, int offsetY, bool reassignable) {
+            Owner = owner;
+
+            OffsetX = offsetX;
+            OffsetY = offsetY;
+
             Size = new Point(32, 75);
-            tweener = new Tweener(posY, posY + 20, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
-            tweener.Ended += delegate() { tweener.Reverse(); };
+            //tweener = new Tweener(posY, posY + 20, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
+            //tweener.Ended += delegate() { tweener.Reverse(); };
 
             Reassignable = reassignable;
 
@@ -30,12 +39,14 @@ namespace MathFighterXNA.Entity {
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
-            if (Number != null && Number.State == Number.MoveToSlotState) {
-                return;
-            } else {
-                tweener.Update(gameTime);
-                Y = (int)tweener.Position;       
-            }
+            //if (Number != null && Number.State == Number.MoveToSlotState) 
+            //    return;
+            //} else {
+            //    tweener.Update(gameTime);
+            //    Y = (int)tweener.Position;       
+            //}
+            X = Owner.X + OffsetX;
+            Y = Owner.Y + OffsetY;            
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {

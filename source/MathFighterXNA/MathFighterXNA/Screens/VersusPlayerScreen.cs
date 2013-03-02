@@ -18,7 +18,7 @@ namespace MathFighterXNA.Screens {
             PlayerOne = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
             PlayerTwo = new Player(Context, SkeletonPlayerAssignment.RightSkeleton);
 
-            Input = new EquationInput(300, 200);
+            Input = new EquationInput(300, 400);
 
             AddEntity(PlayerOne);
             AddEntity(PlayerTwo);
@@ -28,13 +28,19 @@ namespace MathFighterXNA.Screens {
             for (int i = 1; i <= 10; i++) {
                 double dy = System.Math.Pow((60 * i - 30) - 300, 2) * 0.002 + 15;
                 AddEntity(new DragableNumber(PlayerOne, System.Convert.ToInt32((60 * i) - 30), System.Convert.ToInt32(dy), i));
-            }      
+            }
+
+            Input.MoveTo(100, 300, 1f);
         }
 
         public override void Update(GameTime gameTime) {
             //Dirty? Calling ToArray to make a copy of the entity collection preventing crashing when entities create other entities through an update call
             foreach (var ent in Entities.ToArray<BaseEntity>()) {
                 ent.Update(gameTime);
+            }
+
+            if (Input.IsEquationSet && !Input.Tweening) {
+                Input.MoveTo(400, 250, 1f);
             }
 
             //if (CurrentEquation.IsSolved()) {
