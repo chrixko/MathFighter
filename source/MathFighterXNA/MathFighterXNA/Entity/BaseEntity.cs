@@ -18,7 +18,7 @@ namespace MathFighterXNA {
             }
         }
 
-        public IAction Actions = new ActionList();
+        public ActionList Actions = new ActionList();
 
         public int X { get; set; }
         public int Y { get; set; }

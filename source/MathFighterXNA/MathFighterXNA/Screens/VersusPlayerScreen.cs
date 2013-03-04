@@ -32,18 +32,13 @@ namespace MathFighterXNA.Screens {
                 AddEntity(new DragableNumber(PlayerOne, System.Convert.ToInt32((60 * i) - 30), System.Convert.ToInt32(dy), i));
             }
 
-            ((ActionList)Input.Actions).AddAction(new TweenPositionTo(Input, new Vector2(100, 300), 1f, Tweening.Back.EaseOut), true);
-            
+          Input.Actions.AddAction(new TweenPositionTo(Input, new Vector2(100, 300), 1f, Tweening.Back.EaseOut), true);            
         }
 
         public override void Update(GameTime gameTime) {
             //Dirty? Calling ToArray to make a copy of the entity collection preventing crashing when entities create other entities through an update call
             foreach (var ent in Entities.ToArray<BaseEntity>()) {
                 ent.Update(gameTime);
-            }
-
-            if (Input.IsEquationSet && !Input.Tweening) {
-                //Input.MoveTo(400, 250, 1f);
             }
 
             //if (CurrentEquation.IsSolved()) {

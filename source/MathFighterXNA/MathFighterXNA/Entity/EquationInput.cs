@@ -38,19 +38,6 @@ namespace MathFighterXNA.Entity {
             }
         }
 
-        private Tweener moveTweenerX;
-        private Tweener moveTweenerY;
-
-        private bool moveTweenerXFinished = true;
-        private bool moveTweenerYFinished = true;
-
-        public bool Tweening {
-            get {
-                return !moveTweenerXFinished && !moveTweenerYFinished;
-            }
-        }
-
-
         public EquationInput(int posX, int posY) {
             X = posX;
             Y = posY;
@@ -82,17 +69,6 @@ namespace MathFighterXNA.Entity {
             foreach (NumberSlot slot in Slots) {
                 slot.Update(gameTime);
             }
-
-            //if (moveTweenerX != null) {
-            //    moveTweenerX.Update(gameTime);
-
-            //    X = (int)moveTweenerX.Position;
-            //}
-
-            //if (moveTweenerY != null) {
-            //    moveTweenerY.Update(gameTime);
-            //    Y = (int)moveTweenerY.Position;
-            //}
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
@@ -109,17 +85,6 @@ namespace MathFighterXNA.Entity {
             foreach (NumberSlot slot in Slots) {
                 Screen.RemoveEntity(slot);
             }
-        }
-
-        public void MoveTo(int posX, int posY, float duration) {
-            moveTweenerX = new Tweener(X, posX, duration, Back.EaseOut);
-            moveTweenerY = new Tweener(Y, posY, duration, Back.EaseOut);
-
-            moveTweenerXFinished = false;
-            moveTweenerYFinished = false;
-
-            moveTweenerX.Ended += delegate() { moveTweenerXFinished = true; };
-            moveTweenerY.Ended += delegate() { moveTweenerYFinished = true; };
         }
     }
 }

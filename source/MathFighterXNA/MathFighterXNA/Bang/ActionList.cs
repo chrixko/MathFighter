@@ -14,7 +14,7 @@ namespace MathFighterXNA.Bang {
             return isBlocking;
         }
 
-        bool IAction.IsComplete() {
+        public bool IsComplete() {
             return Actions.Count == 0;
         }
 
@@ -36,7 +36,7 @@ namespace MathFighterXNA.Bang {
             Actions.Add(action);
         }
 
-        void IAction.Update(GameTime gameTime) {
+        public void Update(GameTime gameTime) {
             foreach (IAction action in Actions.ToArray<IAction>()) {
                 action.Update(gameTime);
 
