@@ -76,21 +76,23 @@ namespace MathFighterXNA.Entity {
             }
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {                       
+        public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
+            base.Update(gameTime);
+           
             foreach (NumberSlot slot in Slots) {
                 slot.Update(gameTime);
             }
 
-            if (moveTweenerX != null) {
-                moveTweenerX.Update(gameTime);
+            //if (moveTweenerX != null) {
+            //    moveTweenerX.Update(gameTime);
 
-                X = (int)moveTweenerX.Position;
-            }
+            //    X = (int)moveTweenerX.Position;
+            //}
 
-            if (moveTweenerY != null) {
-                moveTweenerY.Update(gameTime);
-                Y = (int)moveTweenerY.Position;
-            }
+            //if (moveTweenerY != null) {
+            //    moveTweenerY.Update(gameTime);
+            //    Y = (int)moveTweenerY.Position;
+            //}
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {

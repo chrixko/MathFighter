@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MathFighterXNA.Entity;
+using MathFighterXNA.Bang;
+using MathFighterXNA.Bang.Actions;
 
 namespace MathFighterXNA.Screens {
 
@@ -30,7 +32,8 @@ namespace MathFighterXNA.Screens {
                 AddEntity(new DragableNumber(PlayerOne, System.Convert.ToInt32((60 * i) - 30), System.Convert.ToInt32(dy), i));
             }
 
-            Input.MoveTo(100, 300, 1f);
+            ((ActionList)Input.Actions).AddAction(new TweenPositionTo(Input, new Vector2(100, 300), 1f, Tweening.Back.EaseOut), true);
+            
         }
 
         public override void Update(GameTime gameTime) {
@@ -40,7 +43,7 @@ namespace MathFighterXNA.Screens {
             }
 
             if (Input.IsEquationSet && !Input.Tweening) {
-                Input.MoveTo(400, 250, 1f);
+                //Input.MoveTo(400, 250, 1f);
             }
 
             //if (CurrentEquation.IsSolved()) {

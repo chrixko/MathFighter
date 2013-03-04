@@ -45,6 +45,8 @@ namespace MathFighterXNA.Entity {
             //    tweener.Update(gameTime);
             //    Y = (int)tweener.Position;       
             //}
+            base.Update(gameTime);
+
             X = Owner.X + OffsetX;
             Y = Owner.Y + OffsetY;            
         }

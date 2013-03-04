@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MathFighterXNA.Screens;
+using MathFighterXNA.Bang;
 
 namespace MathFighterXNA {
 
@@ -16,6 +17,8 @@ namespace MathFighterXNA {
                 Y = value.Y;
             }
         }
+
+        public IAction Actions = new ActionList();
 
         public int X { get; set; }
         public int Y { get; set; }
@@ -43,7 +46,9 @@ namespace MathFighterXNA {
         }
 
         public abstract void Init();
-        public abstract void Update(GameTime gameTime);
+        public virtual void Update(GameTime gameTime) {
+            Actions.Update(gameTime);
+        }
         public abstract void Draw(SpriteBatch spriteBatch);
         public abstract void Delete();
     }

@@ -43,6 +43,8 @@ namespace MathFighterXNA {
         }
 
         public override void Update(GameTime gameTime) {
+            base.Update(gameTime);
+
             var hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
             if (hand != null) {
                 State.OnHandCollide(hand);
