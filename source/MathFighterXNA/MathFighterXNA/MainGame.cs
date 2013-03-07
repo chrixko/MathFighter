@@ -24,8 +24,8 @@ namespace MathFighterXNA
 
         private readonly Rectangle viewPortRectangle;
 
-        public static int Width = 640;
-        public static int Height = (Width / 4) * 3;
+        public static int Width = 800;
+        public static int Height = 600;
 
         public GameScreen CurrentScreen;
 
