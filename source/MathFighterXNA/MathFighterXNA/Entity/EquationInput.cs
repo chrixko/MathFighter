@@ -69,6 +69,8 @@ namespace MathFighterXNA.Entity {
             foreach (NumberSlot slot in Slots) {
                 slot.Update(gameTime);
             }
+
+            if (Actions.IsComplete()) Screen.RemoveEntity(this);
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {

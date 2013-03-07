@@ -16,18 +16,19 @@ namespace MathFighterXNA.Bang.Actions {
         private bool tweenerXFinished;
         private bool tweenerYFinished;
 
+        private Vector2 to { get; set; }
+        private float duration { get; set; }
+        private TweeningFunction tween { get; set; }
+
         private BaseEntity entity;
 
         public TweenPositionTo(BaseEntity entity, Vector2 to, float duration, TweeningFunction tween) {
             this.entity = entity;
-
-            tweenerX = new Tweener(entity.X, to.X, duration, tween);
-            tweenerY = new Tweener(entity.Y, to.Y, duration, tween);
+            this.to = to;
+            this.duration = duration;
+            this.tween = tween;
 
             isComplete = false;
-
-            tweenerX.Ended += delegate() { tweenerXFinished = true; };
-            tweenerY.Ended += delegate() { tweenerYFinished = true; };
         }
 
         bool IAction.IsBlocking() {
@@ -46,7 +47,19 @@ namespace MathFighterXNA.Bang.Actions {
             isBlocking = false;
         }
 
+        void initTweeners() {
+            tweenerX = new Tweener(entity.X, to.X, duration, tween);
+            tweenerY = new Tweener(entity.Y, to.Y, duration, tween);            
+
+            tweenerX.Ended += delegate() { tweenerXFinished = true; };
+            tweenerY.Ended += delegate() { tweenerYFinished = true; };
+        }
+
         void IAction.Update(GameTime gameTime) {
+            if (tweenerX == null || tweenerY == null) {
+                initTweeners();
+            }
+
             tweenerX.Update(gameTime);
             tweenerY.Update(gameTime);
 

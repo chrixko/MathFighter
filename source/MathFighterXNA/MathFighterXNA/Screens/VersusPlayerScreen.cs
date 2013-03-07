@@ -20,19 +20,28 @@ namespace MathFighterXNA.Screens {
             PlayerOne = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
             PlayerTwo = new Player(Context, SkeletonPlayerAssignment.RightSkeleton);
 
-            Input = new EquationInput(300, 400);
-
             AddEntity(PlayerOne);
             AddEntity(PlayerTwo);
 
-            AddEntity(Input);
 
             for (int i = 1; i <= 10; i++) {
                 double dy = System.Math.Pow((60 * i - 30) - 300, 2) * 0.002 + 15;
                 AddEntity(new DragableNumber(PlayerOne, System.Convert.ToInt32((60 * i) - 30), System.Convert.ToInt32(dy), i));
             }
+        }
 
-          Input.Actions.AddAction(new TweenPositionTo(Input, new Vector2(100, 300), 1f, Tweening.Back.EaseOut), true);            
+        private void AddInput() {
+            Input = new EquationInput(300, 400);
+
+            Input.Actions.AddAction(new TweenPositionTo(Input, new Vector2(100, 300), 1f, Tweening.Back.EaseOut), true);
+            Input.Actions.AddAction(new WaitForEquationInput(Input, EquationInputType.Equation), true);
+
+            Input.Actions.AddAction(new TweenPositionTo(Input, new Vector2(300, 200), 1f, Tweening.Back.EaseOut), true);
+            Input.Actions.AddAction(new WaitForEquationInput(Input, EquationInputType.Product), true);
+
+            Input.Actions.AddAction(new EndEquationInput(Input), true);
+
+            AddEntity(Input);
         }
 
         public override void Update(GameTime gameTime) {
@@ -40,6 +49,11 @@ namespace MathFighterXNA.Screens {
             foreach (var ent in Entities.ToArray<BaseEntity>()) {
                 ent.Update(gameTime);
             }
+
+            if (Entities.IndexOf(Input) == -1) {
+                AddInput();
+            }
+
 
             //if (CurrentEquation.IsSolved()) {
             //    RemoveEntity(CurrentEquation);

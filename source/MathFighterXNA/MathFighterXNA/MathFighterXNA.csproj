@@ -111,7 +111,9 @@
   <ItemGroup>
     <Compile Include="Assets.cs" />
     <Compile Include="Bang\ActionList.cs" />
+    <Compile Include="Bang\Actions\EndEquationInput.cs" />
     <Compile Include="Bang\Actions\TweenTo.cs" />
+    <Compile Include="Bang\Actions\WaitForEquationSet.cs" />
     <Compile Include="Bang\IAction.cs" />
     <Compile Include="DebugComponent.cs" />
     <Compile Include="Entity\DragableNumber.cs" />
