@@ -95,7 +95,7 @@ namespace MathFighterXNA {
 
         public Point SkeletonPointToScreen(SkeletonPoint skelpoint) {            
             ColorImagePoint colorPoint = Sensor.CoordinateMapper.MapSkeletonPointToColorPoint(skelpoint, ColorImageFormat.RgbResolution640x480Fps30);
-            return new Point(colorPoint.X, colorPoint.Y);
+            return new Point((int)(colorPoint.X / MainGame.KinectScaleX) + MainGame.KinectOffsetX, (int)(colorPoint.Y / MainGame.KinectScaleY) + MainGame.KinectOffsetY);
         }
 
         public Skeleton GetSkeletonById(int id) {

@@ -24,8 +24,17 @@ namespace MathFighterXNA
 
         private readonly Rectangle viewPortRectangle;
 
-        public static int Width = 800;
-        public static int Height = 600;
+        public static int Width = 1324;
+        public static int Height = 768;
+
+        public static int KinectWidth = Width - 300;
+        public static int KinectHeight = Height;
+
+        public static float KinectScaleX = 640f / KinectWidth;
+        public static float KinectScaleY = 480f / KinectHeight;
+
+        public static int KinectOffsetX = 150;
+        public static int KinectOffsetY = 0;
 
         public GameScreen CurrentScreen;
 
@@ -85,7 +94,7 @@ namespace MathFighterXNA
             spriteBatch.Begin();
 
             if (kinectContext.CurrentBitmap != null) {
-                spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(0, 0, Width, Height), Color.White);
+                spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(KinectOffsetX, KinectOffsetY, KinectWidth, KinectHeight), Color.White);
             }
 
             CurrentScreen.Draw(spriteBatch);
