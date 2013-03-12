@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -27,7 +28,12 @@ namespace MathFighterXNA.Screens {
         }
 
         public abstract void Init();
-        public abstract void Update(GameTime gameTime);
+        public virtual void Update(GameTime gameTime) {
+            //Dirty? Calling ToArray to make a copy of the entity collection preventing crashing when entities create other entities through an update call
+            foreach (var ent in Entities.ToArray()) {
+                ent.Update(gameTime);
+            }
+        }
         public abstract void Draw(SpriteBatch spriteBatch);        
     }
 }

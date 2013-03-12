@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MathFighterXNA.Entity;
+﻿using MathFighterXNA.Entity;
 using Microsoft.Xna.Framework;
 using MathFighterXNA.Tweening;
 
@@ -33,7 +29,7 @@ namespace MathFighterXNA.Bang.Actions {
 
         public void Update(GameTime gameTime) {
             if (Input.IsAnswerCorrect) {
-                Input.Actions.AddAction(new TweenPositionTo(Input, new Vector2(Input.X, -100), 2f, Back.EaseOut), true);
+                Input.Actions.AddAction(new TweenPositionTo(Input, new Vector2(Input.X, -300), 2f, Back.EaseOut), true);
             } else {
                 Input.Actions.AddAction(new TweenPositionTo(Input, new Vector2(Input.X, 800), 2f, Back.EaseOut), true);
             }

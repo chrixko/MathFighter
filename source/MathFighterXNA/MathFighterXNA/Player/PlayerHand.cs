@@ -38,7 +38,7 @@ namespace MathFighterXNA {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);
+            //spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);
         }
 
         public override void Delete() {

@@ -35,10 +35,7 @@ namespace MathFighterXNA.Screens {
         }
 
         public override void Update(GameTime gameTime) {
-            //Dirty? Calling ToArray to make a copy of the entity collection preventing crashing when entities create other entities through an update call
-            foreach (var ent in Entities.ToArray<BaseEntity>()) {
-                ent.Update(gameTime);
-            }
+            base.Update(gameTime);
 
             if (CurrentEquation.IsSolved()) {
                 RemoveEntity(CurrentEquation);

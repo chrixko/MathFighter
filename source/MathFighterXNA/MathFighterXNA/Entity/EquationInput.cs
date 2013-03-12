@@ -47,10 +47,10 @@ namespace MathFighterXNA.Entity {
 
         public override void Init() {
             FirstEquationSlot = new NumberSlot(this, 0, 0, false);
-            SecondEquationSlot = new NumberSlot(this, 50, 0, false);
+            SecondEquationSlot = new NumberSlot(this, 100, 0, false);
 
-            FirstProductSlot = new NumberSlot(this, 0, 70, true);
-            SecondProductSlot = new NumberSlot(this, 50, 70, true);
+            FirstProductSlot = new NumberSlot(this, 0, 140, true);
+            SecondProductSlot = new NumberSlot(this, 100, 140, true);
 
             Slots.Add(FirstEquationSlot);
             Slots.Add(SecondEquationSlot);
@@ -74,10 +74,6 @@ namespace MathFighterXNA.Entity {
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
             foreach (NumberSlot slot in Slots) {
                 slot.Draw(spriteBatch);
-            }
-
-            if (IsAnswerCorrect) {
-                spriteBatch.DrawString(Assets.DebugFont, "SOLVED!", new Vector2(this.X, this.Y - 30), Color.Red);
             }
         }
 

@@ -112,6 +112,7 @@
     <Compile Include="Assets.cs" />
     <Compile Include="Bang\ActionList.cs" />
     <Compile Include="Bang\Actions\EndEquationInput.cs" />
+    <Compile Include="Bang\Actions\CallFunction.cs" />
     <Compile Include="Bang\Actions\TweenTo.cs" />
     <Compile Include="Bang\Actions\WaitForEquationSet.cs" />
     <Compile Include="Bang\IAction.cs" />
@@ -152,6 +153,9 @@
     <Compile Include="Tweening\Tweener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BalloonArrangements\VersusPlayerScreen.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
