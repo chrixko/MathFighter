@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace MathFighterXNA.Bang {
     public class ActionList : IAction {
 
-        public List<IAction> Actions = new List<IAction>();
+        private List<IAction> Actions = new List<IAction>();
 
         private bool isBlocking { get; set; }
 
@@ -26,14 +26,22 @@ namespace MathFighterXNA.Bang {
             isBlocking = false;
         }
 
-        public void AddAction(IAction action, bool blocking) {
+        public void Insert(int position, IAction action, bool blocking) {
             if (blocking) {
                 action.Block();
             } else {
                 action.Unblock();
             }
 
-            Actions.Add(action);
+            Actions.Insert(position, action);
+        } 
+        
+        public void AddAction(IAction action, bool blocking) {
+            Insert(Actions.Count, action, blocking);            
+        }
+
+        public void InsertAfter(IAction after, IAction action, bool blocking) {
+            Insert(Actions.IndexOf(after) + 1, action, blocking);
         }
 
         public void Update(GameTime gameTime) {

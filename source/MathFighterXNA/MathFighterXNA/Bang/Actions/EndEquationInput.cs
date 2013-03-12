@@ -29,9 +29,9 @@ namespace MathFighterXNA.Bang.Actions {
 
         public void Update(GameTime gameTime) {
             if (Input.IsAnswerCorrect) {
-                Input.Actions.AddAction(new TweenPositionTo(Input, new Vector2(Input.X, -300), 2f, Back.EaseOut), true);
+                Input.Actions.InsertAfter(this, new TweenPositionTo(Input, new Vector2(Input.X, -300), 2f, Back.EaseOut), true);
             } else {
-                Input.Actions.AddAction(new TweenPositionTo(Input, new Vector2(Input.X, 800), 2f, Back.EaseOut), true);
+                Input.Actions.InsertAfter(this, new TweenPositionTo(Input, new Vector2(Input.X, 800), 2f, Back.EaseOut), true);
             }
 
             Complete();
