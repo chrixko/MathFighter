@@ -50,7 +50,7 @@ namespace MathFighterXNA.Entity.NumberState {
                     this.Slot.Number = this.Owner;
                     Owner.State = Owner.InSlotState;                    
                     Owner.InSlotState.Slot = this.Slot;
-                    
+                    Assets.BalloonDrop.Play();  
                 }
             }            
         }
