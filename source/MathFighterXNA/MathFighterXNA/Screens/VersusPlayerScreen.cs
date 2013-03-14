@@ -24,6 +24,8 @@ namespace MathFighterXNA.Screens {
         }
 
         public override void Init() {
+            base.Init();
+
             PlayerOne = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
             PlayerTwo = new Player(Context, SkeletonPlayerAssignment.RightSkeleton);
 
@@ -108,10 +110,6 @@ namespace MathFighterXNA.Screens {
         }        
 
         public override void Draw(SpriteBatch spriteBatch) {
-            foreach (var ent in Entities) {
-                ent.Draw(spriteBatch);
-            }
-
             base.Draw(spriteBatch);
         }
     }

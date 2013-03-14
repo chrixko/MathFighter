@@ -55,7 +55,7 @@ namespace MathFighterXNA {
                 throw new Exception("Keine Kinect verfügbar!");
             }
 
-            this.CurrentBitmap = Assets.NumberBackgroundSprite;
+            this.CurrentBitmap = Assets.CirclePartFilled;
         }
 
         void ProcessColorFrame() {

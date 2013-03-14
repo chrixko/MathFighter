@@ -14,8 +14,8 @@ namespace MathFighterXNA.Entity.NumberState {
             set {
                 slot = value;
 
-                snapToSlotTweenerX = new Tweener(Owner.X, value.X, 1f, Elastic.EaseOut);
-                snapToSlotTweenerY = new Tweener(Owner.Y, value.Y, 1f, Elastic.EaseOut);
+                snapToSlotTweenerX = new Tweener(Owner.X, value.X, .4f, Back.EaseOut);
+                snapToSlotTweenerY = new Tweener(Owner.Y, value.Y, .4f, Back.EaseOut);
                 
                 snapToSlotTweenerX.Ended += delegate() { tweenerXFinished = true; };
                 snapToSlotTweenerY.Ended += delegate() { tweenerYFinished = true; };

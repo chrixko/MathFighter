@@ -111,13 +111,14 @@
   <ItemGroup>
     <Compile Include="Assets.cs" />
     <Compile Include="Bang\Coroutines.cs" />
+    <Compile Include="Entity\SimpleGraphic.cs" />
     <Compile Include="PhysicsBalloon\Balloon.cs" />
     <Compile Include="PhysicsBalloon\VerletPoint.cs" />
     <Compile Include="PhysicsBalloon\VerletStick.cs" />
     <Compile Include="Bang\ActionList.cs" />
     <Compile Include="Bang\Actions\EndEquationInput.cs" />
     <Compile Include="Bang\Actions\CallFunction.cs" />
-    <Compile Include="Bang\Actions\TweenTo.cs" />
+    <Compile Include="Bang\Actions\TweenPositionTo.cs" />
     <Compile Include="Bang\Actions\WaitForEquationSet.cs" />
     <Compile Include="Bang\IAction.cs" />
     <Compile Include="DebugComponent.cs" />

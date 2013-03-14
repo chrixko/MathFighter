@@ -18,6 +18,8 @@ namespace MathFighterXNA.Screens {
         }
 
         public override void Init() {
+            base.Init();
+
             Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton);
             AddEntity(Player);
 
@@ -50,9 +52,7 @@ namespace MathFighterXNA.Screens {
         }        
 
         public override void Draw(SpriteBatch spriteBatch) {
-            foreach (var ent in Entities) {
-                ent.Draw(spriteBatch);
-            }
+            base.Draw(spriteBatch);
 
             spriteBatch.DrawString(Assets.DebugFont, string.Concat(((int)Timer).ToString(), "s"), new Vector2(MainGame.Width / 2 - 20, 100), Color.Orange);
         }

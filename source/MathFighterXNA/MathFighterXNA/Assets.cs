@@ -10,10 +10,12 @@ namespace MathFighterXNA {
         public static Texture2D JointSprite { get; set; }        
         public static Texture2D NumberSlotSprite { get; set; }
         public static Texture2D BalloonSpritesheet { get; set; }
+        public static Texture2D CactusSprite { get; set; }
 
         public static Texture2D CurtainTopLeft { get; set; }
         public static Texture2D CurtainTopRight { get; set; }
-
+        public static Texture2D CurtainBottomLeft { get; set; }
+        public static Texture2D CurtainBottomRight { get; set; }
 
         public static Texture2D CirclePartEmpty { get; set; }
         public static Texture2D CirclePartFilled { get; set; }
@@ -39,6 +41,8 @@ namespace MathFighterXNA {
 
             CurtainTopLeft = content.Load<Texture2D>("curtain_top_left");
             CurtainTopRight = content.Load<Texture2D>("curtain_top_right");
+            CurtainBottomLeft = content.Load<Texture2D>("curtain_bot_left");
+            CurtainBottomRight = content.Load<Texture2D>("curtain_bot_right");
 
             CirclePartEmpty = content.Load<Texture2D>("circle_part_empty");
             CirclePartFilled = content.Load<Texture2D>("circle_part_filled");

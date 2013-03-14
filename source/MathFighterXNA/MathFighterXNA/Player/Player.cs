@@ -55,9 +55,7 @@ namespace MathFighterXNA {
         public override void Draw(SpriteBatch spriteBatch) {
             if (IsReady) {
                 LeftHand.Draw(spriteBatch);
-                RightHand.Draw(spriteBatch);
-            } else {
-                spriteBatch.DrawString(Assets.DebugFont, "No Player-Skeleton found!", new Vector2(0, 0), Color.Red);            
+                RightHand.Draw(spriteBatch);          
             }
         }
 
