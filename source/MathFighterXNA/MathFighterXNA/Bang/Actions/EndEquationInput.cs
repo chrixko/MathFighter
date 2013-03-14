@@ -30,8 +30,10 @@ namespace MathFighterXNA.Bang.Actions {
         public void Update(GameTime gameTime) {
             if (Input.IsAnswerCorrect) {
                 Input.Actions.InsertAfter(this, new TweenPositionTo(Input, new Vector2(Input.X, -300), 2f, Back.EaseOut), true);
+                Assets.AnswerCorrect.Play();
             } else {
                 Input.Actions.InsertAfter(this, new TweenPositionTo(Input, new Vector2(Input.X, 800), 2f, Back.EaseOut), true);
+                Assets.AnswerWrong.Play();
             }
 
             Complete();

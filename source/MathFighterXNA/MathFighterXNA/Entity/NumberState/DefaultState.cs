@@ -46,6 +46,7 @@ namespace MathFighterXNA.Entity.NumberState {
 
                 copy.DraggedState.DraggedBy = hand;
                 hand.IsDragging = true;
+                Assets.BalloonGrab.Play();
             }
         }
 
