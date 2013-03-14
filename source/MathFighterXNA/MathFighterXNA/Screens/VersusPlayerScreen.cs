@@ -5,6 +5,7 @@ using MathFighterXNA.Bang.Actions;
 using MathFighterXNA.Tweening;
 using System.IO;
 using System.Collections.Generic;
+using MathFighterXNA.PhysicsBalloon;
 
 namespace MathFighterXNA.Screens {
 
@@ -17,7 +18,7 @@ namespace MathFighterXNA.Screens {
 
         public EquationInput Input { get; set; }
 
-        private Dictionary<DragableNumber, Vector2> Numbers { get; set; }   
+        private Dictionary<DragableNumber, Vector2> Numbers { get; set; }
 
         public VersusPlayerScreen(KinectContext context) : base(context) {
         }
@@ -33,7 +34,7 @@ namespace MathFighterXNA.Screens {
 
             LoadNumbersFromFile();
 
-            AddInput();
+            AddInput();  
         }
 
         private void LoadNumbersFromFile() {
@@ -109,7 +110,9 @@ namespace MathFighterXNA.Screens {
         public override void Draw(SpriteBatch spriteBatch) {
             foreach (var ent in Entities) {
                 ent.Draw(spriteBatch);
-            }            
+            }
+
+            base.Draw(spriteBatch);
         }
     }
 }

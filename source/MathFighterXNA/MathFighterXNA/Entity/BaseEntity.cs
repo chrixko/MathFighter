@@ -19,6 +19,7 @@ namespace MathFighterXNA {
         }
 
         public ActionList Actions = new ActionList();
+        public Coroutines Coroutines = new Coroutines();
 
         public int X { get; set; }
         public int Y { get; set; }
@@ -48,6 +49,7 @@ namespace MathFighterXNA {
         public abstract void Init();
         public virtual void Update(GameTime gameTime) {
             Actions.Update(gameTime);
+            Coroutines.Update();
         }
         public abstract void Draw(SpriteBatch spriteBatch);
         public abstract void Delete();

@@ -21,9 +21,9 @@ namespace MathFighterXNA.Screens {
             Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton);
             AddEntity(Player);
 
-            CurrentEquation = Equation.CreateWithRandomProduct(Player);
+            //CurrentEquation = Equation.CreateWithRandomProduct(Player);
 
-            AddEntity(CurrentEquation);
+            //AddEntity(CurrentEquation);
 
             for (int i = 1; i <= 10; i++)
             {
@@ -37,13 +37,13 @@ namespace MathFighterXNA.Screens {
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            if (CurrentEquation.IsSolved()) {
-                RemoveEntity(CurrentEquation);
-                Timer += 3f;
+            //if (CurrentEquation.IsSolved()) {
+            //    RemoveEntity(CurrentEquation);
+            //    Timer += 3f;
 
-                CurrentEquation = Equation.CreateWithRandomProduct(Player);
-                AddEntity(CurrentEquation);                
-            }
+            //    CurrentEquation = Equation.CreateWithRandomProduct(Player);
+            //    AddEntity(CurrentEquation);                
+            //}
 
             Timer -= gameTime.ElapsedGameTime.TotalSeconds;
 

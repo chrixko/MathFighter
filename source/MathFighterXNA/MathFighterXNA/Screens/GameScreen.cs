@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MathFighterXNA.Bang;
 
 namespace MathFighterXNA.Screens {
 
@@ -10,6 +11,8 @@ namespace MathFighterXNA.Screens {
         public KinectContext Context { get; private set; }
 
         public List<BaseEntity> Entities = new List<BaseEntity>();
+        public ActionList Actions = new ActionList();
+        public Coroutines Coroutines = new Coroutines();
 
         public GameScreen(KinectContext context) {
             Context = context;
@@ -33,7 +36,13 @@ namespace MathFighterXNA.Screens {
             foreach (var ent in Entities.ToArray()) {
                 ent.Update(gameTime);
             }
+
+            Actions.Update(gameTime);
+            Coroutines.Update();
         }
-        public abstract void Draw(SpriteBatch spriteBatch);        
+        public virtual void Draw(SpriteBatch spriteBatch) {
+            spriteBatch.Draw(Assets.CurtainTopLeft, new Rectangle(0, 0, 236, MainGame.Height - 100), Color.White);
+            spriteBatch.Draw(Assets.CurtainTopRight, new Rectangle(MainGame.Width - 236, 0, 236, MainGame.Height - 100), Color.White);
+        }
     }
 }
