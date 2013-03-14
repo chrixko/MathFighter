@@ -38,6 +38,7 @@ namespace MathFighterXNA {
             JointSprite = content.Load<Texture2D>("Joint");
             NumberSlotSprite = content.Load<Texture2D>("balloon_gray");
             BalloonSpritesheet = content.Load<Texture2D>("balloon_spritesheet");
+            CactusSprite = content.Load<Texture2D>("cactus");
 
             CurtainTopLeft = content.Load<Texture2D>("curtain_top_left");
             CurtainTopRight = content.Load<Texture2D>("curtain_top_right");

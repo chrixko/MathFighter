@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MathFighterXNA.Bang;
@@ -45,6 +46,8 @@ namespace MathFighterXNA.Screens {
             BackgroundLeft = new SimpleGraphic(Assets.CurtainBottomLeft, 0, 0, MainGame.Width / 2, MainGame.Height + 20);
             BackgroundRight = new SimpleGraphic(Assets.CurtainBottomRight, MainGame.Width / 2, 0, MainGame.Width / 2, MainGame.Height + 20);
 
+            BackgroundLeft.ZDepth = BackgroundRight.ZDepth = -1;
+
             AddEntity(BackgroundLeft);
             AddEntity(BackgroundRight);
 
@@ -66,7 +69,7 @@ namespace MathFighterXNA.Screens {
             Coroutines.Update();
         }
         public virtual void Draw(SpriteBatch spriteBatch) {
-            foreach (var ent in Entities.ToArray()) {
+            foreach (var ent in Entities.ToArray().OrderBy(e => e.ZDepth)) {
                 ent.Draw(spriteBatch);
             }
         }

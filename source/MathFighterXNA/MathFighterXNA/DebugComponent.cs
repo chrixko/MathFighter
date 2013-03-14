@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace MathFighterXNA {
@@ -37,6 +38,10 @@ namespace MathFighterXNA {
             spriteBatch.DrawString(Assets.SmallDebugFont, "Skeletons: " + Game.CurrentScreen.Context.Skeletons.Count, new Vector2(MainGame.Width - 150, 20), Color.Lime);
             spriteBatch.DrawString(Assets.SmallDebugFont, "LeftSkeleton: " + (Game.CurrentScreen.Context.GetLeftSkeleton() != null).ToString(), new Vector2(MainGame.Width - 150, 30), Color.Lime);
             spriteBatch.DrawString(Assets.SmallDebugFont, "RightSkeleton: " + (Game.CurrentScreen.Context.GetRightSkeleton() != null).ToString(), new Vector2(MainGame.Width - 150, 40), Color.Lime);
+
+            foreach (var ent in Game.CurrentScreen.Entities.Where(ent => ent.collidable)) {
+                (spriteBatch as ExtendedSpriteBatch).DrawRectangle(ent.BoundingBox, Color.Red);
+            }
         }
     }
 }

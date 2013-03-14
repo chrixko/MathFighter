@@ -24,7 +24,9 @@ namespace MathFighterXNA {
         public DragableNumber(Player owner, int posX, int posY, int value) {
             Owner = owner;
             Position = new Point(posX, posY);
-            Size = new Point(64, 64);            
+            Size = new Point(54, 64);
+            Offset = new Point(5, 5);
+
             Value = value;
 
             CollisionType = "number";
@@ -59,14 +61,14 @@ namespace MathFighterXNA {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            //spriteBatch.Draw(Assets.NumberBackgroundSprite, new Rectangle(BoundingBox.X, BoundingBox.Y, 64, 150), Color);
-            //spriteBatch.DrawString(Font, Value.ToString(), new Vector2(BoundingBox.Center.X -8, BoundingBox.Center.Y - 8), Color.Black);
-            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(BoundingBox.X, BoundingBox.Y, 62, 170), new Rectangle(62 * (Value - 1), 0, 62, 170), Color.White);
+            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, 62, 170), new Rectangle(62 * (Value - 1), 0, 62, 170), Color.White);
 
             State.Draw(spriteBatch);            
         }
 
         public override void Delete() {
+            if (DraggedState.DraggedBy != null)
+                DraggedState.DraggedBy.IsDragging = false;
         }
     }
 }

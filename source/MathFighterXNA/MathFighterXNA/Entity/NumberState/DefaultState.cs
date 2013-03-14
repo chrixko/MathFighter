@@ -40,6 +40,8 @@ namespace MathFighterXNA.Entity.NumberState {
 
             if (hoverTime > maxHoverTime) {
                 var copy = new DragableNumber(hand.Player, Owner.X, Owner.Y, Owner.Value);
+                copy.CollisionType = "dragged_number";
+
                 hand.Screen.AddEntity(copy);
 
                 copy.State = copy.DraggedState;

@@ -36,7 +36,15 @@ namespace MathFighterXNA.Screens {
 
             LoadNumbersFromFile();
 
-            AddInput();  
+            AddInput();
+
+            var cactusOne = new Cactus(80, MainGame.Height - 250, 0f);
+            var cactusTwo = new Cactus(MainGame.Width - 230, MainGame.Height - 250, -0f);
+
+            cactusOne.ZDepth = cactusTwo.ZDepth = 1;
+
+            AddEntity(cactusOne);
+            AddEntity(cactusTwo);
         }
 
         private void LoadNumbersFromFile() {
@@ -65,7 +73,7 @@ namespace MathFighterXNA.Screens {
                 CurrentPlayer = PlayerTwo;
 
                 foreach (var num in Numbers.Keys) {
-                    var tweenTo = new Vector2(MainGame.Width - Numbers[num].X, num.Y);
+                    var tweenTo = new Vector2(MainGame.Width - Numbers[num].X - 62, num.Y);
                     num.Actions.AddAction(new TweenPositionTo(num, tweenTo, 1.5f, Back.EaseInOut), true);
 
                     num.Owner = CurrentPlayer;

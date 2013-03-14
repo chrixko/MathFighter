@@ -13,7 +13,8 @@ namespace MathFighterXNA.Entity {
             Graphic = graphic;
             X = posX;
             Y = posY;
-
+            
+            collidable = false;
             Size = new Point(width, height);
         }
 

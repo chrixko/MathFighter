@@ -111,7 +111,9 @@
   <ItemGroup>
     <Compile Include="Assets.cs" />
     <Compile Include="Bang\Coroutines.cs" />
+    <Compile Include="Entity\Cactus.cs" />
     <Compile Include="Entity\SimpleGraphic.cs" />
+    <Compile Include="ExtendedSpriteBatch.cs" />
     <Compile Include="PhysicsBalloon\Balloon.cs" />
     <Compile Include="PhysicsBalloon\VerletPoint.cs" />
     <Compile Include="PhysicsBalloon\VerletStick.cs" />

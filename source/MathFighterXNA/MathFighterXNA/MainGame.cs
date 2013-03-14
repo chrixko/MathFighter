@@ -8,7 +8,7 @@ namespace MathFighterXNA {
     public class MainGame : Microsoft.Xna.Framework.Game {
 
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        ExtendedSpriteBatch spriteBatch;
         KinectContext kinectContext;
 
         DebugComponent debugComponent;
@@ -53,7 +53,7 @@ namespace MathFighterXNA {
         }
 
         protected override void LoadContent() {           
-            spriteBatch = new SpriteBatch(GraphicsDevice);            
+            spriteBatch = new ExtendedSpriteBatch(GraphicsDevice);            
         }
 
         protected override void UnloadContent() {
