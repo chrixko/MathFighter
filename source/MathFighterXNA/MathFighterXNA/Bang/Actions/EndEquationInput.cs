@@ -1,8 +1,8 @@
-﻿using MathFighterXNA.Entity;
+﻿using ClownSchool.Entity;
 using Microsoft.Xna.Framework;
-using MathFighterXNA.Tweening;
+using ClownSchool.Tweening;
 
-namespace MathFighterXNA.Bang.Actions {
+namespace ClownSchool.Bang.Actions {
     public class EndEquationInput : IAction {
 
         public EquationInput Input { get; set; }        

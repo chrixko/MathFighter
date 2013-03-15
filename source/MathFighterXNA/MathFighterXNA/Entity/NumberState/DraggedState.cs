@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MathFighterXNA.Entity.NumberState {
+namespace ClownSchool.Entity.NumberState {
 
     public class DraggedState : INumberState {
         

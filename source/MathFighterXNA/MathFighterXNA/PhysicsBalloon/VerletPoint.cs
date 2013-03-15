@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace MathFighterXNA.PhysicsBalloon {
+namespace ClownSchool.PhysicsBalloon {
     public class VerletPoint {
         public float X;
         public float Y;

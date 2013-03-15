@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MathFighterXNA {
+namespace ClownSchool {
 
     public class Player : BaseEntity {
         public SkeletonPlayerAssignment SkeletonAssignment { get; set; }

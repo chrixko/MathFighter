@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MathFighterXNA.Entity;
-using MathFighterXNA.Entity.NumberState;
+using ClownSchool.Entity;
+using ClownSchool.Entity.NumberState;
 
-namespace MathFighterXNA {
+namespace ClownSchool {
 
     public class DragableNumber : BaseEntity {        
 

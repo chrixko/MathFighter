@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MathFighterXNA.Bang;
-using MathFighterXNA.Bang.Actions;
-using MathFighterXNA.Entity;
-using MathFighterXNA.Tweening;
+using ClownSchool.Bang;
+using ClownSchool.Bang.Actions;
+using ClownSchool.Entity;
+using ClownSchool.Tweening;
 
-namespace MathFighterXNA.Screens {
+namespace ClownSchool.Screens {
 
     public abstract class GameScreen {
 

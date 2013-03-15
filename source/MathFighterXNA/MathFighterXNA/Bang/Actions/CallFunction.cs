@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace MathFighterXNA.Bang.Actions {
+namespace ClownSchool.Bang.Actions {
 
     public class CallFunction : IAction {
 

@@ -1,9 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MathFighterXNA.Screens;
+using ClownSchool.Screens;
 
-namespace MathFighterXNA {
+namespace ClownSchool {
 
     public class MainGame : Microsoft.Xna.Framework.Game {
 

@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MathFighterXNA.Entity;
+using ClownSchool.Entity;
 
-namespace MathFighterXNA.Screens {
+namespace ClownSchool.Screens {
 
     public class Playground : GameScreen {
         public Player Player { get; set; }        

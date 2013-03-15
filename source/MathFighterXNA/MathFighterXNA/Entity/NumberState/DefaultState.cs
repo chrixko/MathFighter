@@ -1,8 +1,8 @@
-﻿using MathFighterXNA.Tweening;
+﻿using ClownSchool.Tweening;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MathFighterXNA.Entity.NumberState {
+namespace ClownSchool.Entity.NumberState {
 
     public class DefaultState : INumberState {
         public DragableNumber Owner;
@@ -15,7 +15,7 @@ namespace MathFighterXNA.Entity.NumberState {
         public DefaultState(DragableNumber owner) {
             Owner = owner;
 
-            defaultMoveTweener = new Tweener(owner.Y, owner.Y + 10, 1f, MathFighterXNA.Tweening.Quadratic.EaseInOut);
+            defaultMoveTweener = new Tweener(owner.Y, owner.Y + 10, 1f, ClownSchool.Tweening.Quadratic.EaseInOut);
             defaultMoveTweener.Ended += delegate() { defaultMoveTweener.Reverse(); };
         }
 

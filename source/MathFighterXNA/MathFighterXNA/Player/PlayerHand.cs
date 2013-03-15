@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Kinect;
 
-namespace MathFighterXNA {
+namespace ClownSchool {
 
     public class PlayerHand : BaseEntity {
 

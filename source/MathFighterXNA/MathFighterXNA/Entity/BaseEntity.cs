@@ -2,10 +2,10 @@
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MathFighterXNA.Screens;
-using MathFighterXNA.Bang;
+using ClownSchool.Screens;
+using ClownSchool.Bang;
 
-namespace MathFighterXNA {
+namespace ClownSchool {
 
     public abstract class BaseEntity {
         public Point Position {

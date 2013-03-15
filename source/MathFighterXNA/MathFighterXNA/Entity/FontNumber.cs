@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace MathFighterXNA.Entity {
+namespace ClownSchool.Entity {
     public class FontNumber : BaseEntity {
 
         public int Value { get; set; }

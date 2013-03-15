@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace MathFighterXNA {
+namespace ClownSchool {
     public class ExtendedSpriteBatch : SpriteBatch {
         /// <summary>
         /// The texture used when drawing rectangles, lines and other 

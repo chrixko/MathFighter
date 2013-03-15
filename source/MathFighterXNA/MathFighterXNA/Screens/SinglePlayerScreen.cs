@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MathFighterXNA.Entity;
+using ClownSchool.Entity;
 using System.Collections.Generic;
 using System;
 
 
-namespace MathFighterXNA.Screens {
+namespace ClownSchool.Screens {
 
     public class SinglePlayerScreen : GameScreen {
         public Player Player { get; set; }

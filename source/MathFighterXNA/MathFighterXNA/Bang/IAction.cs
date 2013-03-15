@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace MathFighterXNA.Bang {
+namespace ClownSchool.Bang {
     public interface IAction {
         bool IsBlocking();
         bool IsComplete();

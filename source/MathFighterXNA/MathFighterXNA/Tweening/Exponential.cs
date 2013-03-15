@@ -4,7 +4,7 @@ using System.Text;
 
 //ORIGINAL CODE FROM http://xnatweener.codeplex.com/
 
-namespace MathFighterXNA.Tweening
+namespace ClownSchool.Tweening
 {
     public static class Exponential
     {

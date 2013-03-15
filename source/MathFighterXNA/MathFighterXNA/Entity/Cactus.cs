@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MathFighterXNA.Entity {
+namespace ClownSchool.Entity {
     public class Cactus : BaseEntity {
 
         public float Rotation;

@@ -1,10 +1,10 @@
 ﻿using System;
-using MathFighterXNA.Screens;
+using ClownSchool.Screens;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using MathFighterXNA.Tweening;
+using ClownSchool.Tweening;
 
-namespace MathFighterXNA.Entity {
+namespace ClownSchool.Entity {
 
     public class EquationInput : BaseEntity {
        

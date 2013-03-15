@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace MathFighterXNA.Entity {
+namespace ClownSchool.Entity {
 
     public class NumberSlot : BaseEntity {
 

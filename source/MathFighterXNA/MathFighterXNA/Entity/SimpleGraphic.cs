@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace MathFighterXNA.Entity {
+namespace ClownSchool.Entity {
     public class SimpleGraphic : BaseEntity {
         public Texture2D Graphic { get; set; }
 

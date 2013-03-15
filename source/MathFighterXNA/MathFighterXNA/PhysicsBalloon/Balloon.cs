@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MathFighterXNA.PhysicsBalloon {
+namespace ClownSchool.PhysicsBalloon {
     public class Balloon {
         private List<VerletPoint> Points;
         private List<VerletStick> Sticks;

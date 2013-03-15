@@ -1,6 +1,6 @@
 using System;
 
-namespace MathFighterXNA
+namespace ClownSchool
 {
 #if WINDOWS || XBOX
     static class Program

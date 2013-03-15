@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace MathFighterXNA.Bang {
+namespace ClownSchool.Bang {
     public class ActionList : IAction {
 
         private List<IAction> Actions = new List<IAction>();

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 
-namespace MathFighterXNA {
+namespace ClownSchool {
 
     public static class Assets {
 

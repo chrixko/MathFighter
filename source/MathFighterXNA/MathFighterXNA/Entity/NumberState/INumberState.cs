@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MathFighterXNA.Entity.NumberState {
+namespace ClownSchool.Entity.NumberState {
 
     public interface INumberState {
         void OnHandCollide(PlayerHand hand);

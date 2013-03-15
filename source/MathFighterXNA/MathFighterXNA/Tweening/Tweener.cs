@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 //ORIGINAL CODE FROM http://xnatweener.codeplex.com/
 
-namespace MathFighterXNA.Tweening
+namespace ClownSchool.Tweening
 {
     public delegate float TweeningFunction(float timeElapsed, float start, float change, float duration);
 

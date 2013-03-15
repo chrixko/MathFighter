@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MathFighterXNA.Entity;
+using ClownSchool.Entity;
 
-namespace MathFighterXNA.Bang.Actions {
+namespace ClownSchool.Bang.Actions {
     public class WaitForEquationInput : IAction {
 
         public EquationInput Input { get; set; }

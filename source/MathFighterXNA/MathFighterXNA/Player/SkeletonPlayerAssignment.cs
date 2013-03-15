@@ -1,4 +1,4 @@
-﻿namespace MathFighterXNA
+﻿namespace ClownSchool
 {
     public enum SkeletonPlayerAssignment
     {

@@ -2,7 +2,7 @@ using System;
 
 //ORIGINAL CODE FROM http://xnatweener.codeplex.com/
 
-namespace MathFighterXNA.Tweening
+namespace ClownSchool.Tweening
 {
     public static class Bounce
     {

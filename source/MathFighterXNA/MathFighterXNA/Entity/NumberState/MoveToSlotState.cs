@@ -1,6 +1,6 @@
-﻿using MathFighterXNA.Tweening;
+﻿using ClownSchool.Tweening;
 
-namespace MathFighterXNA.Entity.NumberState {
+namespace ClownSchool.Entity.NumberState {
 
     public class MoveToSlotState : INumberState {
 

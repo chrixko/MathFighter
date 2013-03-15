@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using MathFighterXNA.Tweening;
+using ClownSchool.Tweening;
 
 
-namespace MathFighterXNA.Bang.Actions {
+namespace ClownSchool.Bang.Actions {
     class TweenPositionTo : IAction {
 
         private bool isBlocking { get; set; }

@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MathFighterXNA.Entity;
-using MathFighterXNA.Bang.Actions;
-using MathFighterXNA.Tweening;
+using ClownSchool.Entity;
+using ClownSchool.Bang.Actions;
+using ClownSchool.Tweening;
 using System.IO;
 using System.Collections.Generic;
-using MathFighterXNA.PhysicsBalloon;
+using ClownSchool.PhysicsBalloon;
 
-namespace MathFighterXNA.Screens {
+namespace ClownSchool.Screens {
 
     public class VersusPlayerScreen : GameScreen {
 

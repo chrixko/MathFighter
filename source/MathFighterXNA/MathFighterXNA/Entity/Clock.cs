@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MathFighterXNA.Entity {
+namespace ClownSchool.Entity {
     public class Clock : BaseEntity {
 
         public int StartValue { get; private set; }

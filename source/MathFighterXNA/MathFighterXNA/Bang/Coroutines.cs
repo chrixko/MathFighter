@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace MathFighterXNA.Bang {
+namespace ClownSchool.Bang {
 
     public class Coroutines {
 
