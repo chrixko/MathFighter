@@ -112,6 +112,7 @@
     <Compile Include="Assets.cs" />
     <Compile Include="Bang\Coroutines.cs" />
     <Compile Include="Entity\Cactus.cs" />
+    <Compile Include="Entity\Clock.cs" />
     <Compile Include="Entity\SimpleGraphic.cs" />
     <Compile Include="ExtendedSpriteBatch.cs" />
     <Compile Include="PhysicsBalloon\Balloon.cs" />
