@@ -13,6 +13,8 @@ namespace MathFighterXNA.Entity {
 
         public bool Paused { get; set; }
 
+        private float secondTimer = 1f;
+
         public Clock(int posX, int posY, int seconds) {
             X = posX;
             Y = posY;
@@ -43,6 +45,16 @@ namespace MathFighterXNA.Entity {
                 if (Value < 0) {
                     Value = 0;
                     Paused = true;
+                }
+
+                secondTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (secondTimer <= 0) {
+                    secondTimer = 1f;
+
+                    if (Value < 10) {
+                        Assets.TimeShort.Play();
+                    }                    
                 }
             }
         }
