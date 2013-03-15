@@ -31,6 +31,10 @@ namespace MathFighterXNA.Entity {
             
         }
 
+        public void Switch() {
+            Paused = !Paused;
+        }
+
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
             base.Update(gameTime);
 

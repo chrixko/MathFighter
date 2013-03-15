@@ -37,8 +37,10 @@ namespace MathFighterXNA.Screens {
             AddEntity(PlayerOne);
             AddEntity(PlayerTwo);
 
-            PlayerOneClock = new Clock(20, 20, 10);
+            PlayerOneClock = new Clock(20, 20, 90);
             PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 90);
+
+            PlayerTwoClock.Paused = true;
 
             AddEntity(PlayerOneClock);
             AddEntity(PlayerTwoClock);
@@ -81,6 +83,9 @@ namespace MathFighterXNA.Screens {
             } else {
                 CurrentPlayer = PlayerOne;
             }
+
+            PlayerOneClock.Switch();
+            PlayerTwoClock.Switch();
 
             foreach (var num in Numbers.Keys) {
                 var posX = Numbers[num].X;
