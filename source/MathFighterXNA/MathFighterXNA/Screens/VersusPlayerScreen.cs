@@ -41,8 +41,6 @@ namespace MathFighterXNA.Screens {
             var cactusOne = new Cactus(80, MainGame.Height - 250, 0f);
             var cactusTwo = new Cactus(MainGame.Width - 230, MainGame.Height - 250, -0f);
 
-            cactusOne.ZDepth = cactusTwo.ZDepth = 1;
-
             AddEntity(cactusOne);
             AddEntity(cactusTwo);
         }
@@ -71,22 +69,21 @@ namespace MathFighterXNA.Screens {
         public void SwitchCurrentPlayer() {
             if (CurrentPlayer == PlayerOne) {
                 CurrentPlayer = PlayerTwo;
-
-                foreach (var num in Numbers.Keys) {
-                    var tweenTo = new Vector2(MainGame.Width - Numbers[num].X - 62, num.Y);
-                    num.Actions.AddAction(new TweenPositionTo(num, tweenTo, 1.5f, Back.EaseInOut), true);
-
-                    num.Owner = CurrentPlayer;
-                }
             } else {
                 CurrentPlayer = PlayerOne;
-                
-                foreach (var num in Numbers.Keys) {
-                    var tweenTo = new Vector2(Numbers[num].X, num.Y);
-                    num.Actions.AddAction(new TweenPositionTo(num, tweenTo, 1.5f, Back.EaseInOut), true);
+            }
 
-                    num.Owner = CurrentPlayer;
+            foreach (var num in Numbers.Keys) {
+                var posX = Numbers[num].X;
+
+                if (CurrentPlayer == PlayerTwo) {
+                    posX = MainGame.Width - Numbers[num].X - 62;
                 }
+
+                var tweenTo = new Vector2(posX, num.Y);
+                num.Actions.AddAction(new TweenPositionTo(num, tweenTo, 1.5f, Back.EaseInOut), true);
+
+                num.Owner = CurrentPlayer;
             }
         }
 
