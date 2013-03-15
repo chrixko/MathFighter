@@ -71,6 +71,8 @@ namespace MathFighterXNA.Screens {
                         var num = new DragableNumber(CurrentPlayer, posX, posY, value);
                         Numbers.Add(num, new Vector2(posX, posY));
 
+                        num.ZDepth = value * -1;
+
                         AddEntity(num);   
                     }                
                 }

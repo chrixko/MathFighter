@@ -39,7 +39,7 @@ namespace MathFighterXNA {
 
         public static void LoadContent(ContentManager content) {
             NumberSlotSprite = content.Load<Texture2D>("balloon_gray");
-            BalloonSpritesheet = content.Load<Texture2D>("balloon_spritesheet");
+            BalloonSpritesheet = content.Load<Texture2D>("balloon_spritesheet_blue");
             CactusSprite = content.Load<Texture2D>("cactus");
             EquationInputSprite = content.Load<Texture2D>("equals");
             ClockFrameSprite = content.Load<Texture2D>("timer_out");
