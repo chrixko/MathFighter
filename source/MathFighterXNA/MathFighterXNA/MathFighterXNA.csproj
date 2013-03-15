@@ -113,6 +113,7 @@
     <Compile Include="Bang\Coroutines.cs" />
     <Compile Include="Entity\Cactus.cs" />
     <Compile Include="Entity\Clock.cs" />
+    <Compile Include="Entity\FontNumber.cs" />
     <Compile Include="Entity\SimpleGraphic.cs" />
     <Compile Include="ExtendedSpriteBatch.cs" />
     <Compile Include="PhysicsBalloon\Balloon.cs" />
@@ -127,7 +128,6 @@
     <Compile Include="DebugComponent.cs" />
     <Compile Include="Entity\DragableNumber.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
-    <Compile Include="Entity\Equation.cs" />
     <Compile Include="Entity\EquationInput.cs" />
     <Compile Include="Entity\NumberSlot.cs" />
     <Compile Include="Entity\NumberState\DefaultState.cs" />

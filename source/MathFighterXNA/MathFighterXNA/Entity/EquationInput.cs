@@ -41,16 +41,19 @@ namespace MathFighterXNA.Entity {
         public EquationInput(int posX, int posY) {
             X = posX;
             Y = posY;
-           
+
+            Size = new Point(337, 300);
+            collidable = false;
+
             Slots = new List<NumberSlot>();
         }
 
         public override void Init() {
-            FirstEquationSlot = new NumberSlot(this, 0, 0, false);
-            SecondEquationSlot = new NumberSlot(this, 100, 0, false);
+            FirstEquationSlot = new NumberSlot(this, 50, 70, false);
+            SecondEquationSlot = new NumberSlot(this, 230, 70, false);
 
-            FirstProductSlot = new NumberSlot(this, 0, 140, true);
-            SecondProductSlot = new NumberSlot(this, 100, 140, true);
+            FirstProductSlot = new NumberSlot(this, 50, 220, true);
+            SecondProductSlot = new NumberSlot(this, 230, 220, true);
 
             Slots.Add(FirstEquationSlot);
             Slots.Add(SecondEquationSlot);
@@ -72,6 +75,8 @@ namespace MathFighterXNA.Entity {
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
+            spriteBatch.Draw(Assets.EquationInputSprite, BoundingBox, Color.White);
+
             foreach (NumberSlot slot in Slots) {
                 slot.Draw(spriteBatch);
             }

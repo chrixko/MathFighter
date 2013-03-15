@@ -6,8 +6,7 @@ using MathFighterXNA.Entity;
 namespace MathFighterXNA.Screens {
 
     public class Playground : GameScreen {
-        public Player Player { get; set; }
-        public Equation CurrentEquation { get; set; }
+        public Player Player { get; set; }        
         
         public Playground(KinectContext context) : base(context) {
         }
@@ -15,10 +14,6 @@ namespace MathFighterXNA.Screens {
         public override void Init() {
             Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton);
             AddEntity(Player);
-
-            CurrentEquation = Equation.CreateWithRandomProduct(Player);
-
-            AddEntity(CurrentEquation);
             
             for (int i = 1; i <= 10; i++) {
                 AddEntity(new DragableNumber(Player, (60 * i) - 30, 20, i));

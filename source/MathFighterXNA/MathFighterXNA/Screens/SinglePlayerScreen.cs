@@ -10,7 +10,6 @@ namespace MathFighterXNA.Screens {
 
     public class SinglePlayerScreen : GameScreen {
         public Player Player { get; set; }
-        public Equation CurrentEquation { get; set; }
 
         double Timer = 60;
 

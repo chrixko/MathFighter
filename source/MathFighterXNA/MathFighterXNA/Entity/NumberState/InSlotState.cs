@@ -17,7 +17,7 @@
 
         void INumberState.Update(Microsoft.Xna.Framework.GameTime gameTime) {
             if (Slot != null) {
-                Owner.Position = Slot.Position;
+                Owner.Position = Slot.NumberPosition;
             }
         }
 

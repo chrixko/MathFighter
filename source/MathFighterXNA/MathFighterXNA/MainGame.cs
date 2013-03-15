@@ -82,7 +82,7 @@ namespace MathFighterXNA {
 
             CurrentScreen.Draw(spriteBatch);
 
-            debugComponent.Draw(spriteBatch, gameTime);
+            //debugComponent.Draw(spriteBatch, gameTime);
             spriteBatch.End();
 
             base.Draw(gameTime);

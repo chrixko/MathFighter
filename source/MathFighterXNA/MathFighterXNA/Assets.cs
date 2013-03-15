@@ -11,6 +11,10 @@ namespace MathFighterXNA {
         public static Texture2D NumberSlotSprite { get; set; }
         public static Texture2D BalloonSpritesheet { get; set; }
         public static Texture2D CactusSprite { get; set; }
+        public static Texture2D EquationInputSprite { get; set; }
+        public static Texture2D ClockFrameSprite { get; set; }
+        public static Texture2D ClockFillSprite { get; set; }
+        public static Texture2D FontNumberSpritesheet { get; set; }
 
         public static Texture2D CurtainTopLeft { get; set; }
         public static Texture2D CurtainTopRight { get; set; }
@@ -34,11 +38,13 @@ namespace MathFighterXNA {
         
 
         public static void LoadContent(ContentManager content) {
-            NumberBackgroundSprite = content.Load<Texture2D>("balloon_red");
-            JointSprite = content.Load<Texture2D>("Joint");
             NumberSlotSprite = content.Load<Texture2D>("balloon_gray");
             BalloonSpritesheet = content.Load<Texture2D>("balloon_spritesheet");
             CactusSprite = content.Load<Texture2D>("cactus");
+            EquationInputSprite = content.Load<Texture2D>("equals");
+            ClockFrameSprite = content.Load<Texture2D>("timer_out");
+            ClockFillSprite = content.Load<Texture2D>("timer_in");
+            FontNumberSpritesheet = content.Load<Texture2D>("font_numbers");
 
             CurtainTopLeft = content.Load<Texture2D>("curtain_top_left");
             CurtainTopRight = content.Load<Texture2D>("curtain_top_right");

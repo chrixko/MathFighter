@@ -14,6 +14,9 @@ namespace MathFighterXNA.Screens {
         public Player PlayerOne { get; set; }
         public Player PlayerTwo { get; set; }
 
+        public Clock PlayerOneClock { get; set; }
+        public Clock PlayerTwoClock { get; set; }
+
         public Player CurrentPlayer { get; set; }
 
         public EquationInput Input { get; set; }
@@ -33,6 +36,12 @@ namespace MathFighterXNA.Screens {
 
             AddEntity(PlayerOne);
             AddEntity(PlayerTwo);
+
+            PlayerOneClock = new Clock(20, 20, 10);
+            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 90);
+
+            AddEntity(PlayerOneClock);
+            AddEntity(PlayerTwoClock);
 
             LoadNumbersFromFile();
 
@@ -88,7 +97,7 @@ namespace MathFighterXNA.Screens {
         }
 
         private void AddInput() {
-            Input = new EquationInput(MainGame.Width / 2, MainGame.Height);
+            Input = new EquationInput((MainGame.Width / 2) - 337 / 2, MainGame.Height);
 
             var left = new Vector2(Input.X - 100, 300);
             var right = new Vector2(Input.X + 80, 300);
