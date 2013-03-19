@@ -94,9 +94,11 @@ namespace ClownSchool.Entity {
 
                     RevoluteJoint rj = JointFactory.CreateRevoluteJoint(prevBody, body, body.GetLocalPoint(anchor));
                     rj.CollideConnected = false;
-                    Screen.World.AddJoint(rj);
+                    Screen.World.AddJoint(rj);                    
                 }
             }
+
+            joints.Last().FixedRotation = true;
         }
 
         public void AttachTo(BaseEntity entity) {
@@ -119,8 +121,6 @@ namespace ClownSchool.Entity {
 
             fixedJoint.WorldAnchorB = ConvertUnits.ToSimUnits(entity.BoundingBox.Center.X, entity.BoundingBox.Center.Y);
             grabJoint.Awake = true;
-
-            grabJoint.Rotation = MathHelper.ToRadians(90);
         }
 
         public override void Update(GameTime gameTime) {

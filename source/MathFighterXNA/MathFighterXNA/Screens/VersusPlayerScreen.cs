@@ -14,11 +14,10 @@ namespace ClownSchool.Screens {
 
         public Player PlayerOne { get; set; }
         public Player PlayerTwo { get; set; }
+        public Player CurrentPlayer { get; set; }
 
         public Clock PlayerOneClock { get; set; }
-        public Clock PlayerTwoClock { get; set; }
-
-        public Player CurrentPlayer { get; set; }
+        public Clock PlayerTwoClock { get; set; }        
 
         public EquationInput Input { get; set; }
 
@@ -125,6 +124,9 @@ namespace ClownSchool.Screens {
             }), true);
 
             AddEntity(Input);
+
+            Input.FirstEquationSlot.Player = Input.SecondEquationSlot.Player = CurrentPlayer == PlayerOne ? PlayerOne : PlayerTwo;
+            Input.FirstProductSlot.Player = Input.SecondProductSlot.Player = CurrentPlayer == PlayerOne ? PlayerTwo : PlayerOne;
         }
 
         public override void Update(GameTime gameTime) {

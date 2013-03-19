@@ -7,9 +7,7 @@ using ClownSchool.Tweening;
 namespace ClownSchool.Entity {
 
     public class EquationInput : BaseEntity {
-       
-        public Player Current { get; set; }
-
+              
         public List<NumberSlot> Slots;
 
         public NumberSlot FirstEquationSlot;
