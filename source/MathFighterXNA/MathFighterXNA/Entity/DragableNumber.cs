@@ -14,9 +14,6 @@ namespace ClownSchool {
         public INumberState State;
 
         public DefaultState DefaultState;
-        public DraggedState DraggedState;
-        public MoveToSlotState MoveToSlotState;
-        public InSlotState InSlotState;
 
         public DragableNumber(Player owner, int posX, int posY, int number) {
             Owner = owner;
@@ -29,9 +26,6 @@ namespace ClownSchool {
             CollisionType = "number";
 
             DefaultState = new DefaultState(this);
-            DraggedState = new DraggedState(this);
-            MoveToSlotState = new MoveToSlotState(this);
-            InSlotState = new InSlotState(this);
 
             State = DefaultState;
         }
@@ -48,11 +42,6 @@ namespace ClownSchool {
                 State.OnHandCollide(hand);
             }
 
-            //var slot = (NumberSlot)GetFirstCollidingEntity(X, Y, "slot");
-            //if (slot != null) {
-            //    State.OnSlotCollide(slot);
-            //}
-
             State.Update(gameTime);
         }
 
@@ -63,8 +52,6 @@ namespace ClownSchool {
         }
 
         public override void Delete() {
-            if (DraggedState.DraggedBy != null)
-                DraggedState.DraggedBy.IsDragging = false;
         }
     }
 }

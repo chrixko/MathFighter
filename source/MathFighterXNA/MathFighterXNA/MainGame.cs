@@ -30,6 +30,8 @@ namespace ClownSchool {
 
         public GameScreen CurrentScreen;
 
+        public bool DebugView = false;
+
         public MainGame() {
             graphics = new GraphicsDeviceManager(this); 
             Content.RootDirectory = "Content";
@@ -70,6 +72,10 @@ namespace ClownSchool {
 
             CurrentScreen.Update(gameTime);
 
+            if (Keyboard.GetState().IsKeyDown(Keys.F12)) {
+                DebugView = !DebugView;
+            }
+
             base.Update(gameTime);
         }
 
@@ -85,7 +91,10 @@ namespace ClownSchool {
 
             CurrentScreen.Draw(spriteBatch);
 
-            debugComponent.Draw(spriteBatch, gameTime);
+            if (DebugView) {
+                debugComponent.Draw(spriteBatch, gameTime);
+            }
+            
             spriteBatch.End();
 
             base.Draw(gameTime);

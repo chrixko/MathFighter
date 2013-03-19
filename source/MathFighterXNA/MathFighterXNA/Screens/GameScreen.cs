@@ -9,6 +9,7 @@ using ClownSchool.Entity;
 using ClownSchool.Tweening;
 using FarseerPhysics.Dynamics;
 using System;
+using ClownSchool.Bang.Coroutine;
 
 namespace ClownSchool.Screens {
 

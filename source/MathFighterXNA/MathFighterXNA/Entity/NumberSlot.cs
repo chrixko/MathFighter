@@ -1,11 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections;
+using System.Diagnostics;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace ClownSchool.Entity {
 
     public class NumberSlot : BaseEntity {
 
-        public DragableNumber Number { get; set; }
-        public EquationInput Owner;
+        public Balloon Balloon { get; private set; }
+        public EquationInput Owner { get; set; }
+        public Player Player { get; set; }
                
         public bool Reassignable { get; set; }
 
@@ -34,6 +38,23 @@ namespace ClownSchool.Entity {
         public override void Init() {            
         }
 
+        public bool TryAttach(Balloon balloon) {
+            PlayerHand hand = (PlayerHand)balloon.AttachedEntity;
+
+            if ((Reassignable || Balloon == null)) {
+                balloon.AttachTo(this);
+                Balloon = balloon;
+
+                hand.IsDragging = false;
+
+                Assets.BalloonDrop.Play();
+
+                return true;
+            }
+
+            return false;
+        }
+
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
             base.Update(gameTime);
 
@@ -42,12 +63,14 @@ namespace ClownSchool.Entity {
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
-            //spriteBatch.Draw(Assets.NumberSlotSprite, BoundingBox, Color.White);
+            if (Balloon != null) {
+                spriteBatch.Draw(Assets.RopeKnot, new Rectangle(BoundingBox.Center.X, BoundingBox.Center.Y, 11, 12), null, Color.White, 0, new Vector2(5.5f, 6f), SpriteEffects.None, 0);
+            }
         }
 
         public override void Delete() {
-            if (Number != null) {
-                Screen.RemoveEntity(Number);            
+            if (Balloon != null) {
+                Screen.RemoveEntity(Balloon);            
             }
         }
     }

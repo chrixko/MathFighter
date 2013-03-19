@@ -20,13 +20,13 @@ namespace ClownSchool.Entity {
 
         public bool IsEquationSet {
             get {
-                return (FirstEquationSlot.Number != null && SecondEquationSlot.Number != null);
+                return (FirstEquationSlot.Balloon != null && SecondEquationSlot.Balloon != null);
             }
         }
 
         public bool IsAnswerSet {
             get {
-                return (FirstProductSlot.Number != null && SecondProductSlot.Number != null);
+                return (FirstProductSlot.Balloon != null && SecondProductSlot.Balloon != null);
             }
         }
 
@@ -34,7 +34,7 @@ namespace ClownSchool.Entity {
             get {
                 if(!IsEquationSet || !IsAnswerSet) return false;
 
-                return (FirstEquationSlot.Number.Number * SecondEquationSlot.Number.Number) == Convert.ToInt32(FirstProductSlot.Number.Number.ToString() + SecondProductSlot.Number.Number.ToString());
+                return (FirstEquationSlot.Balloon.Number * SecondEquationSlot.Balloon.Number) == Convert.ToInt32(FirstProductSlot.Balloon.Number.ToString() + SecondProductSlot.Balloon.Number.ToString());
             }
         }
 
@@ -52,8 +52,8 @@ namespace ClownSchool.Entity {
             FirstEquationSlot = new NumberSlot(this, 50, 70, false);
             SecondEquationSlot = new NumberSlot(this, 230, 70, false);
 
-            FirstProductSlot = new NumberSlot(this, 50, 220, true);
-            SecondProductSlot = new NumberSlot(this, 230, 220, true);
+            FirstProductSlot = new NumberSlot(this, 50, 224, true);
+            SecondProductSlot = new NumberSlot(this, 230, 224, true);
 
             Slots.Add(FirstEquationSlot);
             Slots.Add(SecondEquationSlot);
@@ -64,6 +64,13 @@ namespace ClownSchool.Entity {
             foreach (NumberSlot slot in Slots) {
                 Screen.AddEntity(slot);
             }
+        }
+
+        public void PopBalloons() {
+            FirstEquationSlot.Balloon.Pop();
+            SecondEquationSlot.Balloon.Pop();
+            FirstProductSlot.Balloon.Pop();
+            SecondProductSlot.Balloon.Pop();
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {

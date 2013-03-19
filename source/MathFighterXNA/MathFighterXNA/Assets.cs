@@ -18,6 +18,7 @@ namespace ClownSchool {
         public static Texture2D FontNumberSpritesheet { get; set; }
 
         public static Texture2D RopeSection { get; set; }
+        public static Texture2D RopeKnot { get; set; }
 
         public static Texture2D CurtainTopLeft { get; set; }
         public static Texture2D CurtainTopRight { get; set; }
@@ -49,6 +50,7 @@ namespace ClownSchool {
             ClockFillSprite = content.Load<Texture2D>("timer_in");
             FontNumberSpritesheet = content.Load<Texture2D>("font_numbers");
             RopeSection = content.Load<Texture2D>("rope_section");
+            RopeKnot = content.Load<Texture2D>("rope_knot");
 
             CurtainTopLeft = content.Load<Texture2D>("curtain_top_left");
             CurtainTopRight = content.Load<Texture2D>("curtain_top_right");

@@ -100,7 +100,7 @@ namespace ClownSchool.Screens {
                 var tweenTo = new Vector2(posX, num.Y);
                 num.Actions.AddAction(new TweenPositionTo(num, tweenTo, 1.5f, Back.EaseInOut), true);
 
-                num.Owner = CurrentPlayer;
+                //num.Owner = CurrentPlayer;
             }
         }
 
@@ -110,11 +110,11 @@ namespace ClownSchool.Screens {
             var left = new Vector2(Input.X - 100, 300);
             var right = new Vector2(Input.X + 80, 300);
             
-            Input.Actions.AddAction(new TweenPositionTo(Input, CurrentPlayer == PlayerOne ? left : right, 1f, Tweening.Back.EaseOut), true);
+            Input.Actions.AddAction(new TweenPositionTo(Input, CurrentPlayer == PlayerOne ? left : right, 2f, Tweening.Back.EaseOut), true);
             Input.Actions.AddAction(new WaitForEquationInput(Input, EquationInputType.Equation), true);
             Input.Actions.AddAction(new CallFunction(delegate() { SwitchCurrentPlayer(); }), true);
 
-            Input.Actions.AddAction(new TweenPositionTo(Input, CurrentPlayer == PlayerOne ? right : left, 1f, Tweening.Back.EaseOut), true);
+            Input.Actions.AddAction(new TweenPositionTo(Input, CurrentPlayer == PlayerOne ? right : left, 2f, Tweening.Back.EaseOut), true);
             Input.Actions.AddAction(new WaitForEquationInput(Input, EquationInputType.Product), true);
 
             Input.Actions.AddAction(new EndEquationInput(Input), true);

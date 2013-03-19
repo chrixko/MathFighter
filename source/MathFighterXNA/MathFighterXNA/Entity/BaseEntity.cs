@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ClownSchool.Screens;
 using ClownSchool.Bang;
+using ClownSchool.Bang.Coroutine;
 
 namespace ClownSchool {
 

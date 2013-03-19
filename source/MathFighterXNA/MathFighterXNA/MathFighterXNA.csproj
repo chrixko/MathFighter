@@ -114,7 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets.cs" />
-    <Compile Include="Bang\Coroutines.cs" />
+    <Compile Include="Bang\Coroutine\Coroutines.cs" />
     <Compile Include="Entity\Balloon.cs" />
     <Compile Include="Entity\Cactus.cs" />
     <Compile Include="Entity\Clock.cs" />
@@ -133,10 +133,7 @@
     <Compile Include="Entity\EquationInput.cs" />
     <Compile Include="Entity\NumberSlot.cs" />
     <Compile Include="Entity\NumberState\DefaultState.cs" />
-    <Compile Include="Entity\NumberState\DraggedState.cs" />
     <Compile Include="Entity\NumberState\INumberState.cs" />
-    <Compile Include="Entity\NumberState\MoveToSlotState.cs" />
-    <Compile Include="Entity\NumberState\InSlotState.cs" />
     <Compile Include="KinectContext.cs" />
     <Compile Include="Physics\ConvertUnits.cs" />
     <Compile Include="Player\PlayerHand.cs" />

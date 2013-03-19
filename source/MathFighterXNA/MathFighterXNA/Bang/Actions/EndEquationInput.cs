@@ -32,7 +32,8 @@ namespace ClownSchool.Bang.Actions {
                 Input.Actions.InsertAfter(this, new TweenPositionTo(Input, new Vector2(Input.X, -300), 2f, Back.EaseOut), true);
                 Assets.AnswerCorrect.Play();
             } else {
-                Input.Actions.InsertAfter(this, new TweenPositionTo(Input, new Vector2(Input.X, 1000), 1f, Back.EaseOut), true);
+                Input.PopBalloons();
+                Input.Actions.InsertAfter(this, new TweenPositionTo(Input, new Vector2(Input.X, 1000), 2f, Back.EaseOut), true);
                 Assets.AnswerWrong.Play();
             }
 

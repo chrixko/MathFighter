@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Joints;
@@ -17,7 +16,7 @@ namespace ClownSchool.Entity {
         private Body balloonBody;
         private List<Body> joints = new List<Body>();
 
-        private BaseEntity attachedEntity;
+        public BaseEntity AttachedEntity { get; private set; }
         private FixedMouseJoint fixedJoint;
 
         public int JointCount { get; set; }
@@ -67,7 +66,7 @@ namespace ClownSchool.Entity {
 
                 balloonBody = body;
 
-                Force = -balloonBody.Mass * Screen.World.Gravity.Y * 19f;
+                Force = -balloonBody.Mass * Screen.World.Gravity.Y * 15;
             }
 
             for (int i = 0; i < JointCount; i++) {
@@ -101,18 +100,27 @@ namespace ClownSchool.Entity {
         }
 
         public void AttachTo(BaseEntity entity) {
-            attachedEntity = entity;
-            var grabJoint = joints.Last();
+            if (fixedJoint != null) {
+                Screen.World.RemoveJoint(fixedJoint);
+            }
 
-            X = entity.X;
-            Y = entity.Y + 6;
+            AttachedEntity = entity;
+            var grabJoint = joints.Last();            
 
-            grabJoint.Position = ConvertUnits.ToSimUnits(entity.X, entity.Y);
+            var pos = grabJoint.WorldCenter;
+            pos.Y += ConvertUnits.ToSimUnits(10);            
 
-            fixedJoint = new FixedMouseJoint(grabJoint, ConvertUnits.ToSimUnits(entity.BoundingBox.Center.X, entity.BoundingBox.Center.Y));
+            fixedJoint = new FixedMouseJoint(grabJoint, pos);
             fixedJoint.MaxForce = 1000f * 10000; //I don't really know which numbers are good here lol
+            
+            fixedJoint.Frequency = 10;
+
             Screen.World.AddJoint(fixedJoint);
+
+            fixedJoint.WorldAnchorB = ConvertUnits.ToSimUnits(entity.BoundingBox.Center.X, entity.BoundingBox.Center.Y);
             grabJoint.Awake = true;
+
+            grabJoint.Rotation = MathHelper.ToRadians(90);
         }
 
         public override void Update(GameTime gameTime) {
@@ -122,8 +130,16 @@ namespace ClownSchool.Entity {
 
             balloonBody.ApplyForce(new Vector2(0, Force), balloonBody.WorldCenter);            
 
-            if (fixedJoint != null) {                
-                fixedJoint.WorldAnchorB = ConvertUnits.ToSimUnits(attachedEntity.BoundingBox.Center.X, attachedEntity.BoundingBox.Center.Y);
+            if (fixedJoint != null) {
+                X = AttachedEntity.BoundingBox.Center.X;
+                Y = AttachedEntity.BoundingBox.Center.Y;
+
+                fixedJoint.WorldAnchorB = ConvertUnits.ToSimUnits(X, Y);
+            }
+
+            var slot = GetFirstCollidingEntity(X, Y, "slot");
+            if (slot != null && fixedJoint != null && AttachedEntity.GetType() == typeof(PlayerHand)) {                
+                (slot as NumberSlot).TryAttach(this);
             }
         }
 
@@ -132,19 +148,28 @@ namespace ClownSchool.Entity {
                 var jointPos = ConvertUnits.ToDisplayUnits(joint.Position);
                 spriteBatch.Draw(Assets.RopeSection, new Rectangle((int)jointPos.X, (int)jointPos.Y, 3, 16), null, Color.White, joint.Rotation, new Vector2(0, 0), SpriteEffects.None, 0);
             }
-            
-            var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
-            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)BalloonSize.X, (int)BalloonSize.Y), new Rectangle(62 * (Number - 1), 0, 62, 82), Color.White, balloonBody.Rotation, new Vector2(BalloonSize.X / 2, BalloonSize.Y / 2), SpriteEffects.None, 0);
+
+            if (Screen.World.BodyList.Contains(balloonBody)) {
+                var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
+                spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)BalloonSize.X, (int)BalloonSize.Y), new Rectangle(62 * (Number - 1), 0, 62, 82), Color.White, balloonBody.Rotation, new Vector2(BalloonSize.X / 2, BalloonSize.Y / 2), SpriteEffects.None, 0);
+            }
+        }
+
+        public void Pop() {
+            Assets.BalloonPop.Play();
+            Screen.World.RemoveBody(balloonBody);
         }
 
         public override void Delete() {
-            Screen.World.RemoveBody(balloonBody);
+            if (Screen.World.BodyList.Contains(balloonBody))
+                Screen.World.RemoveBody(balloonBody);
+            
             foreach (Body joint in joints) {
                 Screen.World.RemoveBody(joint);
             }
-
-            Screen.World.RemoveJoint(fixedJoint);
-
+            if (Screen.World.JointList.Contains(fixedJoint))
+                Screen.World.RemoveJoint(fixedJoint);
+            
             //ToDo remove revo joints
         }
     }
