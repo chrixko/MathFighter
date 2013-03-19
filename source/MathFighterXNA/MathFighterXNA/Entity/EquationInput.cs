@@ -34,7 +34,7 @@ namespace ClownSchool.Entity {
             get {
                 if(!IsEquationSet || !IsAnswerSet) return false;
 
-                return (FirstEquationSlot.Number.Value * SecondEquationSlot.Number.Value) == Convert.ToInt32(FirstProductSlot.Number.Value.ToString() + SecondProductSlot.Number.Value.ToString());
+                return (FirstEquationSlot.Number.Number * SecondEquationSlot.Number.Number) == Convert.ToInt32(FirstProductSlot.Number.Number.ToString() + SecondProductSlot.Number.Number.ToString());
             }
         }
 

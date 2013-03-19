@@ -25,11 +25,15 @@ namespace ClownSchool.Entity {
 
         public Vector2 BalloonSize { get; set; }
 
-        public Balloon(int posX, int posY, Vector2 balloonSize) {
+        public int Number { get; set; }
+
+        public Balloon(int posX, int posY, Vector2 balloonSize, int number) {
             X = posX;
             Y = posY;
 
             BalloonSize = balloonSize;
+
+            Number = number;
 
             Size = new Point(5, 24);
             JointCount = 10;
@@ -55,7 +59,7 @@ namespace ClownSchool.Entity {
                 Fixture fixture = body.CreateFixture(balloonShape);
                 fixture.Friction = 0.2f;
                 fixture.CollisionCategories = Category.Cat2;
-                fixture.CollidesWith = Category.All & ~Category.Cat2;
+                fixture.CollidesWith = Category.All & ~Category.Cat1;
 
                 body.AngularDamping = 0.4f;
 
@@ -99,7 +103,6 @@ namespace ClownSchool.Entity {
         public void AttachTo(BaseEntity entity) {
             attachedEntity = entity;
             var grabJoint = joints.Last();
-            //var grabJointPos = ConvertUnits.ToDisplayUnits(grabJoint.Position.X, grabJoint.Position.Y);
 
             X = entity.X;
             Y = entity.Y + 6;
@@ -131,7 +134,7 @@ namespace ClownSchool.Entity {
             }
             
             var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
-            spriteBatch.Draw(Assets.PhysicBalloonSprite, new Rectangle((int)pos.X, (int)pos.Y, (int)BalloonSize.X, (int)BalloonSize.Y), null, Color.White, balloonBody.Rotation, new Vector2(BalloonSize.X / 2, BalloonSize.Y / 2), SpriteEffects.None, 0);
+            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)BalloonSize.X, (int)BalloonSize.Y), new Rectangle(62 * (Number - 1), 0, 62, 82), Color.White, balloonBody.Rotation, new Vector2(BalloonSize.X / 2, BalloonSize.Y / 2), SpriteEffects.None, 0);
         }
 
         public override void Delete() {

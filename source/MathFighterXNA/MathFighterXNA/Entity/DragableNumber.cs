@@ -8,7 +8,7 @@ namespace ClownSchool {
     public class DragableNumber : BaseEntity {        
 
         public Player Owner { get; set; }
-        public int Value { get; private set; }
+        public int Number { get; private set; }
 
         //States
         public INumberState State;
@@ -18,13 +18,13 @@ namespace ClownSchool {
         public MoveToSlotState MoveToSlotState;
         public InSlotState InSlotState;
 
-        public DragableNumber(Player owner, int posX, int posY, int value) {
+        public DragableNumber(Player owner, int posX, int posY, int number) {
             Owner = owner;
             Position = new Point(posX, posY);
             Size = new Point(54, 64);
             Offset = new Point(5, 5);
 
-            Value = value;
+            Number = number;
 
             CollisionType = "number";
 
@@ -57,7 +57,7 @@ namespace ClownSchool {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, 62, 170), new Rectangle(62 * (Value - 1), 0, 62, 170), new Color(255, 255, 255, 255));
+            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, 62, 170), new Rectangle(62 * (Number - 1), 0, 62, 170), new Color(255, 255, 255, 255));
 
             State.Draw(spriteBatch);            
         }
