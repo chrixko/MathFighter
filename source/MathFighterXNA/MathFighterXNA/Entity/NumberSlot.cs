@@ -28,7 +28,7 @@ namespace ClownSchool.Entity {
             OffsetX = offsetX;
             OffsetY = offsetY;
 
-            Size = new Point(64, 64);
+            Size = new Point(44, 44);
 
             Reassignable = reassignable;
 

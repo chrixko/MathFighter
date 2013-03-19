@@ -49,11 +49,11 @@ namespace ClownSchool.Entity {
         }
 
         public override void Init() {
-            FirstEquationSlot = new NumberSlot(this, 50, 70, false);
-            SecondEquationSlot = new NumberSlot(this, 230, 70, false);
+            FirstEquationSlot = new NumberSlot(this, 50, 80, false);
+            SecondEquationSlot = new NumberSlot(this, 250, 80, false);
 
-            FirstProductSlot = new NumberSlot(this, 50, 224, true);
-            SecondProductSlot = new NumberSlot(this, 230, 224, true);
+            FirstProductSlot = new NumberSlot(this, 50, 234, true);
+            SecondProductSlot = new NumberSlot(this, 250, 234, true);
 
             Slots.Add(FirstEquationSlot);
             Slots.Add(SecondEquationSlot);
