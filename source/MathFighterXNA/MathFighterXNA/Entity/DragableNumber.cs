@@ -12,13 +12,14 @@ namespace ClownSchool {
 
         //States
         public INumberState State;
-
         public DefaultState DefaultState;
+
+        private bool selected { get; set; }
 
         public DragableNumber(Player owner, int posX, int posY, int number) {
             Owner = owner;
             Position = new Point(posX, posY);
-            Size = new Point(54, 64);
+            Size = new Point(52, 56);
             Offset = new Point(5, 5);
 
             Number = number;
@@ -39,14 +40,16 @@ namespace ClownSchool {
 
             var hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
             if (hand != null) {
-                State.OnHandCollide(hand);
+                State.OnHandCollide(hand);               
             }
+
+            selected = hand != null;
 
             State.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, 62, 170), new Rectangle(62 * (Number - 1), 0, 62, 170), new Color(255, 255, 255, 255));
+            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, selected ? 72 : 62, selected ? 89 : 79), new Rectangle(62 * (Number - 1), 0, 62, 89), new Color(255, 255, 255, selected ? 255 : 100));
 
             State.Draw(spriteBatch);            
         }
