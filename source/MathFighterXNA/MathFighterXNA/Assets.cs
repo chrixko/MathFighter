@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace ClownSchool {
 
@@ -16,6 +17,9 @@ namespace ClownSchool {
         public static Texture2D ClockFillSprite { get; set; }
         public static Texture2D FontNumberSpritesheet { get; set; }
 
+        public static Texture2D PhysicBalloonSprite { get; set; }
+        public static Texture2D RopeSection { get; set; }
+
         public static Texture2D CurtainTopLeft { get; set; }
         public static Texture2D CurtainTopRight { get; set; }
         public static Texture2D CurtainBottomLeft { get; set; }
@@ -27,6 +31,7 @@ namespace ClownSchool {
         public static SpriteFont DebugFont { get; set; }
         public static SpriteFont SmallDebugFont { get; set; }
 
+        public static SoundEffect BalloonBump { get; set; }
         public static SoundEffect BalloonGrab { get; set; }
         public static SoundEffect BalloonDrop { get; set; }
         public static SoundEffect MenuChoose { get; set; }
@@ -45,6 +50,8 @@ namespace ClownSchool {
             ClockFrameSprite = content.Load<Texture2D>("timer_out");
             ClockFillSprite = content.Load<Texture2D>("timer_in");
             FontNumberSpritesheet = content.Load<Texture2D>("font_numbers");
+            PhysicBalloonSprite = content.Load<Texture2D>("phy_balloon");
+            RopeSection = content.Load<Texture2D>("rope_section");
 
             CurtainTopLeft = content.Load<Texture2D>("curtain_top_left");
             CurtainTopRight = content.Load<Texture2D>("curtain_top_right");
@@ -57,6 +64,7 @@ namespace ClownSchool {
             DebugFont = content.Load<SpriteFont>("DebugFont");
             SmallDebugFont = content.Load<SpriteFont>("SmallDebugFont");
 
+            BalloonBump = content.Load<SoundEffect>("sounds/balloon_bump_01");
             BalloonGrab = content.Load<SoundEffect>("sounds/BalloonGrab"); //http://opengameart.org/content/battle-sound-effects
             BalloonDrop = content.Load<SoundEffect>("sounds/BalloonDrop"); //http://opengameart.org/content/battle-sound-effects
             MenuChoose = content.Load<SoundEffect>("sounds/MenuChoose"); //http://www.flashkit.com/soundfx/Interfaces/deep_pon-xrikazen-7422/index.php

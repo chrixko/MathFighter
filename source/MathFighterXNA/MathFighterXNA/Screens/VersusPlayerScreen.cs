@@ -5,7 +5,8 @@ using ClownSchool.Bang.Actions;
 using ClownSchool.Tweening;
 using System.IO;
 using System.Collections.Generic;
-using ClownSchool.PhysicsBalloon;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
 
 namespace ClownSchool.Screens {
 
@@ -53,7 +54,7 @@ namespace ClownSchool.Screens {
             var cactusTwo = new Cactus(MainGame.Width - 230, MainGame.Height - 250, -0f);
 
             AddEntity(cactusOne);
-            AddEntity(cactusTwo);
+            AddEntity(cactusTwo);           
         }
 
         private void LoadNumbersFromFile() {

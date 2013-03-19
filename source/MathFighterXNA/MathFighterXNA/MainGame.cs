@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ClownSchool.Screens;
+using ClownSchool.Physics;
 
 namespace ClownSchool {
 
@@ -36,6 +37,8 @@ namespace ClownSchool {
             graphics.PreferredBackBufferWidth = Width;
             graphics.PreferredBackBufferHeight = Height;
             this.graphics.SynchronizeWithVerticalRetrace = true;
+            IsFixedTimeStep = true;
+            ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
             this.viewPortRectangle = new Rectangle(0, 0, Width, Height);
         }
 

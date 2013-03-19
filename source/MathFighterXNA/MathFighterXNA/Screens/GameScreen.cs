@@ -7,6 +7,8 @@ using ClownSchool.Bang;
 using ClownSchool.Bang.Actions;
 using ClownSchool.Entity;
 using ClownSchool.Tweening;
+using FarseerPhysics.Dynamics;
+using System;
 
 namespace ClownSchool.Screens {
 
@@ -22,6 +24,9 @@ namespace ClownSchool.Screens {
         private SimpleGraphic CurtainRight;
         private SimpleGraphic BackgroundLeft;
         private SimpleGraphic BackgroundRight;
+
+        //Physics
+        public World World;
 
         public GameScreen(KinectContext context) {
             Context = context;
@@ -57,13 +62,17 @@ namespace ClownSchool.Screens {
             Actions.AddAction(new TweenPositionTo(BackgroundLeft, new Vector2(-(MainGame.Width / 2) + 160, 0), 2f, Sinusoidal.EaseOut), false);
             Actions.AddAction(new TweenPositionTo(BackgroundRight, new Vector2(MainGame.Width - 160, 0), 2f, Sinusoidal.EaseOut), false);
 
+            World = new World(new Vector2(0f, 10f));
+
         }
 
         public virtual void Update(GameTime gameTime) {
+            World.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
             //Dirty? Calling ToArray to make a copy of the entity collection preventing crashing when entities create other entities through an update call
             foreach (var ent in Entities.ToArray()) {
                 ent.Update(gameTime);
             }
+            
 
             Actions.Update(gameTime);
             Coroutines.Update();

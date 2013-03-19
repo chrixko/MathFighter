@@ -18,9 +18,6 @@ namespace ClownSchool {
         public MoveToSlotState MoveToSlotState;
         public InSlotState InSlotState;
 
-        public SpriteFont Font;
-        public Color Color;      
-
         public DragableNumber(Player owner, int posX, int posY, int value) {
             Owner = owner;
             Position = new Point(posX, posY);
@@ -40,8 +37,7 @@ namespace ClownSchool {
         }
 
         public override void Init() {
-            Font = Assets.DebugFont;
-            Color = Color.White;
+
         }
 
         public override void Update(GameTime gameTime) {
@@ -52,16 +48,16 @@ namespace ClownSchool {
                 State.OnHandCollide(hand);
             }
 
-            var slot = (NumberSlot)GetFirstCollidingEntity(X, Y, "slot");
-            if (slot != null) {
-                State.OnSlotCollide(slot);
-            }
+            //var slot = (NumberSlot)GetFirstCollidingEntity(X, Y, "slot");
+            //if (slot != null) {
+            //    State.OnSlotCollide(slot);
+            //}
 
             State.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, 62, 170), new Rectangle(62 * (Value - 1), 0, 62, 170), Color.White);
+            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, 62, 170), new Rectangle(62 * (Value - 1), 0, 62, 170), new Color(255, 255, 255, 255));
 
             State.Draw(spriteBatch);            
         }

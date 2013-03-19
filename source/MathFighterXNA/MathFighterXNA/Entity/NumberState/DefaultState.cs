@@ -39,15 +39,12 @@ namespace ClownSchool.Entity.NumberState {
             }
 
             if (hoverTime > maxHoverTime) {
-                var copy = new DragableNumber(hand.Player, Owner.X, Owner.Y, Owner.Value);
-                copy.CollisionType = "dragged_number";
+                var balloon = new Balloon(hand.X, hand.Y, new Vector2(62, 74));
+                hand.Screen.AddEntity(balloon);
 
-                hand.Screen.AddEntity(copy);
-
-                copy.State = copy.DraggedState;
-
-                copy.DraggedState.DraggedBy = hand;
+                balloon.AttachTo(hand);
                 hand.IsDragging = true;
+
                 Assets.BalloonGrab.Play();
             }
         }
