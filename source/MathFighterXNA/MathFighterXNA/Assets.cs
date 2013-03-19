@@ -31,7 +31,6 @@ namespace ClownSchool {
         public static SpriteFont DebugFont { get; set; }
         public static SpriteFont SmallDebugFont { get; set; }
 
-        public static SoundEffect BalloonBump { get; set; }
         public static SoundEffect BalloonGrab { get; set; }
         public static SoundEffect BalloonDrop { get; set; }
         public static SoundEffect MenuChoose { get; set; }
@@ -64,7 +63,6 @@ namespace ClownSchool {
             DebugFont = content.Load<SpriteFont>("DebugFont");
             SmallDebugFont = content.Load<SpriteFont>("SmallDebugFont");
 
-            BalloonBump = content.Load<SoundEffect>("sounds/balloon_bump_01");
             BalloonGrab = content.Load<SoundEffect>("sounds/BalloonGrab"); //http://opengameart.org/content/battle-sound-effects
             BalloonDrop = content.Load<SoundEffect>("sounds/BalloonDrop"); //http://opengameart.org/content/battle-sound-effects
             MenuChoose = content.Load<SoundEffect>("sounds/MenuChoose"); //http://www.flashkit.com/soundfx/Interfaces/deep_pon-xrikazen-7422/index.php
