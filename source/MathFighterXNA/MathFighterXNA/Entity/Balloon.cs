@@ -35,7 +35,7 @@ namespace ClownSchool.Entity {
 
             Number = number;
 
-            Size = new Point(5, 24);
+            Size = new Point(3, 24);
             JointCount = 10;
 
             collidable = true;
@@ -44,7 +44,7 @@ namespace ClownSchool.Entity {
 
         public override void Init() {
             var balloonRadius = ConvertUnits.ToSimUnits(BalloonSize.X / 2, BalloonSize.Y / 2);
-            var jointSize = ConvertUnits.ToSimUnits(5, 12);
+            var jointSize = ConvertUnits.ToSimUnits(3, 12);
 
             PolygonShape balloonShape = new PolygonShape(PolygonTools.CreateEllipse(balloonRadius.X, balloonRadius.Y, 8), 10);
             PolygonShape jointShape = new PolygonShape(PolygonTools.CreateRectangle(jointSize.X, jointSize.Y), 25);
@@ -130,7 +130,7 @@ namespace ClownSchool.Entity {
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
             foreach (var joint in joints) {
                 var jointPos = ConvertUnits.ToDisplayUnits(joint.Position);
-                spriteBatch.Draw(Assets.RopeSection, new Rectangle((int)jointPos.X, (int)jointPos.Y, 5, 16), null, Color.White, joint.Rotation, new Vector2(0, 0), SpriteEffects.None, 0);
+                spriteBatch.Draw(Assets.RopeSection, new Rectangle((int)jointPos.X, (int)jointPos.Y, 3, 16), null, Color.White, joint.Rotation, new Vector2(0, 0), SpriteEffects.None, 0);
             }
             
             var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
