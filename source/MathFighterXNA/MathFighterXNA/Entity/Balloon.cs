@@ -29,14 +29,13 @@ namespace ClownSchool.Entity {
 
         public int Number { get; set; }
 
-        public Balloon(int posX, int posY, Vector2 balloonSize, int number) {
+        public Balloon(int posX, int posY, int number) {
             X = posX;
             Y = posY;
 
-            BalloonSize = balloonSize;
-
             Number = number;
 
+            BalloonSize = new Vector2(62, 89);
             Size = new Point(3, 24);
             JointCount = 10;
 
