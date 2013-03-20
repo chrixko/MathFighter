@@ -20,7 +20,7 @@ namespace ClownSchool {
         public DragableNumber(Player owner, int posX, int posY, int number) {
             Owner = owner;
             Position = new Point(posX, posY);
-            Size = new Point(52, 56);
+            Size = new Point(52, 64);
             Offset = new Point(5, 5);
 
             Number = number;

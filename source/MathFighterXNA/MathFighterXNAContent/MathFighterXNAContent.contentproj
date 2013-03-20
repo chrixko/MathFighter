@@ -75,13 +75,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="balloon_spritesheet.png">
-      <Name>balloon_spritesheet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="curtain_top_left.png">
       <Name>curtain_top_left</Name>
       <Importer>TextureImporter</Importer>
