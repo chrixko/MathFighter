@@ -39,7 +39,7 @@ namespace ClownSchool.Entity.NumberState {
             }
 
             if (hoverTime > maxHoverTime) {
-                var balloon = new Balloon(hand.X, hand.Y, new Vector2(62, 89), Owner.Number);
+                var balloon = new Balloon(hand.X, hand.Y, Owner.Number);
                 hand.Screen.AddEntity(balloon);
 
                 balloon.AttachTo(hand);
