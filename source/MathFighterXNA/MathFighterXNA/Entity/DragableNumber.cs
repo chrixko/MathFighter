@@ -49,7 +49,7 @@ namespace ClownSchool {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, selected ? 72 : 62, selected ? 89 : 79), new Rectangle(62 * (Number - 1), 0, 62, 89), new Color(255, 255, 255, selected ? 255 : 100));
+            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, selected ? (int)(62 * 1.2f) : 62, selected ? (int)(89 * 1.2f) : 89), new Rectangle(62 * (Number - 1), 0, 62, 89), new Color(255, 255, 255, selected ? 255 : 100));
 
             State.Draw(spriteBatch);            
         }

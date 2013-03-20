@@ -7,6 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
+using System;
 
 namespace ClownSchool.Screens {
 
@@ -59,19 +60,20 @@ namespace ClownSchool.Screens {
         private void LoadNumbersFromFile() {
             Numbers = new Dictionary<DragableNumber, Vector2>();
 
+            var rand = new Random();
+
             using (StreamReader reader = new StreamReader(@"BalloonArrangements\VersusPlayerScreen.csv")) {
 
                 while(!reader.EndOfStream) {
                     string[] data = reader.ReadLine().Split(';');
-                    if(data.Length == 3) {
-                        int value = int.Parse(data[0]);
-                        int posX = int.Parse(data[1]);
-                        int posY = int.Parse(data[2]);
+                    if(data.Length == 2) {
+                        int posX = int.Parse(data[0]);
+                        int posY = int.Parse(data[1]);
 
-                        var num = new DragableNumber(CurrentPlayer, posX, posY, value);
+                        var num = new DragableNumber(CurrentPlayer, posX, posY, rand.Next(1, 11));
                         Numbers.Add(num, new Vector2(posX, posY));
 
-                        num.ZDepth = value * -1;
+                        num.ZDepth = -1;
 
                         AddEntity(num);   
                     }                
@@ -99,7 +101,7 @@ namespace ClownSchool.Screens {
                 var tweenTo = new Vector2(posX, num.Y);
                 num.Actions.AddAction(new TweenPositionTo(num, tweenTo, 1.5f, Back.EaseInOut), true);
 
-                //num.Owner = CurrentPlayer;
+                num.Owner = CurrentPlayer;
             }
         }
 
@@ -130,7 +132,7 @@ namespace ClownSchool.Screens {
         }
 
         public override void Update(GameTime gameTime) {
-            base.Update(gameTime);
+            base.Update(gameTime);            
         }        
 
         public override void Draw(SpriteBatch spriteBatch) {

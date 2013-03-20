@@ -16,6 +16,9 @@ namespace ClownSchool.Entity {
         private Body balloonBody;
         private List<Body> joints = new List<Body>();
 
+        private bool popped;
+        private Animation popAnimation;
+
         public BaseEntity AttachedEntity { get; private set; }
         private FixedMouseJoint fixedJoint;
 
@@ -39,9 +42,13 @@ namespace ClownSchool.Entity {
 
             collidable = true;
             CollisionType = "balloon";
+
+            popped = false;            
         }        
 
         public override void Init() {
+            popAnimation = new Animation("balloon_pop", Assets.BalloonBoom, 200);
+
             var balloonRadius = ConvertUnits.ToSimUnits(BalloonSize.X / 2, BalloonSize.Y / 2);
             var jointSize = ConvertUnits.ToSimUnits(3, 12);
 
@@ -141,6 +148,10 @@ namespace ClownSchool.Entity {
             if (slot != null && fixedJoint != null && AttachedEntity.GetType() == typeof(PlayerHand)) {                
                 (slot as NumberSlot).TryAttach(this);
             }
+            
+            if (popped) {
+                popAnimation.Update(gameTime);
+            }            
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
@@ -153,10 +164,21 @@ namespace ClownSchool.Entity {
                 var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
                 spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)BalloonSize.X, (int)BalloonSize.Y), new Rectangle(62 * (Number - 1), 0, 62, 82), Color.White, balloonBody.Rotation, new Vector2(BalloonSize.X / 2, BalloonSize.Y / 2), SpriteEffects.None, 0);
             }
+
+            if (popped && !popAnimation.Finished) {
+                var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
+                
+                spriteBatch.Draw(popAnimation.SpriteSheet, new Rectangle((int)pos.X, (int)pos.Y, popAnimation.FrameWidth, popAnimation.FrameHeight), popAnimation.FrameRectangle, Color.White, 0, new Vector2(popAnimation.FrameWidth / 2, popAnimation.FrameHeight / 2), SpriteEffects.None, 0);
+            }
         }
 
         public void Pop() {
+            if (popped)
+                return;
+
             Assets.BalloonPop.Play();
+            popAnimation.Play(false);
+            popped = true;
             Screen.World.RemoveBody(balloonBody);
         }
 

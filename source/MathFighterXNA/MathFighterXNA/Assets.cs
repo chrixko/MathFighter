@@ -17,9 +17,10 @@ namespace ClownSchool {
         public static Texture2D ClockFillSprite { get; set; }
         public static Texture2D FontNumberSpritesheet { get; set; }
 
+        public static Texture2D BalloonBoom { get; set; }
         public static Texture2D RopeSection { get; set; }
         public static Texture2D RopeKnot { get; set; }
-
+        
         public static Texture2D CurtainTopLeft { get; set; }
         public static Texture2D CurtainTopRight { get; set; }
         public static Texture2D CurtainBottomLeft { get; set; }
@@ -40,7 +41,6 @@ namespace ClownSchool {
         public static SoundEffect TimeShort { get; set; }
         public static SoundEffect AnswerWrong { get; set; }
         
-
         public static void LoadContent(ContentManager content) {
             NumberSlotSprite = content.Load<Texture2D>("balloon_gray");
             BalloonSpritesheet = content.Load<Texture2D>("balloon_spritesheet_blue");
@@ -49,6 +49,8 @@ namespace ClownSchool {
             ClockFrameSprite = content.Load<Texture2D>("timer_out");
             ClockFillSprite = content.Load<Texture2D>("timer_in");
             FontNumberSpritesheet = content.Load<Texture2D>("font_numbers");
+
+            BalloonBoom = content.Load<Texture2D>("balloon_boom");
             RopeSection = content.Load<Texture2D>("rope_section");
             RopeKnot = content.Load<Texture2D>("rope_knot");
 
