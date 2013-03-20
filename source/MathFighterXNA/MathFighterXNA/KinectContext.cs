@@ -52,7 +52,7 @@ namespace ClownSchool {
             }
 
             if (this.Sensor == null) {
-                throw new Exception("Keine Kinect verfügbar!");
+                Debug.WriteLine("No kinect connected!");
             }
 
             this.CurrentBitmap = Assets.CirclePartFilled;

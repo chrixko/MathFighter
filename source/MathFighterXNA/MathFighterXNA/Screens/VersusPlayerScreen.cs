@@ -4,10 +4,12 @@ using ClownSchool.Entity;
 using ClownSchool.Bang.Actions;
 using ClownSchool.Tweening;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using System;
+using System.Linq;
 
 namespace ClownSchool.Screens {
 
@@ -62,21 +64,29 @@ namespace ClownSchool.Screens {
 
             var rand = new Random();
 
+            var values = new List<int>();
+            for (int i = 1; i < 11; i++) {
+                values.Add(i);
+            }
+
             using (StreamReader reader = new StreamReader(@"BalloonArrangements\VersusPlayerScreen.csv")) {
 
-                while(!reader.EndOfStream) {
+                while (!reader.EndOfStream) {
                     string[] data = reader.ReadLine().Split(';');
-                    if(data.Length == 2) {
+                    if (data.Length == 2) {
                         int posX = int.Parse(data[0]);
                         int posY = int.Parse(data[1]);
 
-                        var num = new DragableNumber(CurrentPlayer, posX, posY, rand.Next(1, 11));
+                        var value = values[rand.Next(0, values.Count)];
+                        values.Remove(value);
+
+                        var num = new DragableNumber(CurrentPlayer, posX, posY, value);
                         Numbers.Add(num, new Vector2(posX, posY));
 
                         num.ZDepth = -1;
 
-                        AddEntity(num);   
-                    }                
+                        AddEntity(num);
+                    }
                 }
             } 
         }
@@ -91,17 +101,38 @@ namespace ClownSchool.Screens {
             PlayerOneClock.Switch();
             PlayerTwoClock.Switch();
 
+            shuffleNumberPositions();
+
             foreach (var num in Numbers.Keys) {
                 var posX = Numbers[num].X;
+                var posY = Numbers[num].Y;
 
                 if (CurrentPlayer == PlayerTwo) {
                     posX = MainGame.Width - Numbers[num].X - 62;
                 }
 
-                var tweenTo = new Vector2(posX, num.Y);
+                var tweenTo = new Vector2(posX, posY);
+
+                var that = num;
+
+                num.State = num.IdleState;
                 num.Actions.AddAction(new TweenPositionTo(num, tweenTo, 1.5f, Back.EaseInOut), true);
+                num.Actions.AddAction(new CallFunction(delegate() { that.State = new ClownSchool.Entity.NumberState.DefaultState(that); }), true);
 
                 num.Owner = CurrentPlayer;
+            }
+        }
+
+        private void shuffleNumberPositions() {            
+            var posList = new List<Vector2>(Numbers.Values.ToArray());
+
+            var rand = new Random();
+
+            foreach (var key in Numbers.Keys.ToArray()) {
+                var randVector = posList[rand.Next(0, posList.Count)];
+                posList.Remove(randVector);
+
+                Numbers[key] = randVector;                
             }
         }
 

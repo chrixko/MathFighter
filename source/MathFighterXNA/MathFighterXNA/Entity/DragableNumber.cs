@@ -13,6 +13,7 @@ namespace ClownSchool {
         //States
         public INumberState State;
         public DefaultState DefaultState;
+        public IdleState IdleState;
 
         private bool selected { get; set; }
 
@@ -27,6 +28,7 @@ namespace ClownSchool {
             CollisionType = "number";
 
             DefaultState = new DefaultState(this);
+            IdleState = new IdleState(this);
 
             State = DefaultState;
         }
@@ -43,7 +45,7 @@ namespace ClownSchool {
                 State.OnHandCollide(hand);               
             }
 
-            selected = hand != null;
+            selected = hand != null && hand.Player == Owner;
 
             State.Update(gameTime);
         }
