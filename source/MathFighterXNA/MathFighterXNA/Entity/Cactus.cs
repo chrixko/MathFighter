@@ -25,7 +25,7 @@ namespace ClownSchool.Entity {
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            var collidingBalloon = GetFirstCollidingEntity(X, Y, "dragged_number");
+            var collidingBalloon = GetFirstCollidingEntity("dragged_number");
             if (collidingBalloon != null) {
                 Assets.BalloonPop.Play();
                 Screen.RemoveEntity(collidingBalloon);

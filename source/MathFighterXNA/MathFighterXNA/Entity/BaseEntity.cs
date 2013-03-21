@@ -35,12 +35,12 @@ namespace ClownSchool {
 
         public int ZDepth = 1;
 
-        public IEnumerable<BaseEntity> GetCollidingEntities(int posX, int posY, string type) {
-            return from ent in Screen.Entities where ent.collidable && ent.CollisionType == type && ent.BoundingBox.Intersects(new Rectangle(posX, posY, Size.X, Size.Y)) select ent;
+        public IEnumerable<BaseEntity> GetCollidingEntities(string type) {
+            return from ent in Screen.Entities where ent.collidable && ent.CollisionType == type && ent.BoundingBox.Intersects(BoundingBox) select ent;
         }
 
-        public BaseEntity GetFirstCollidingEntity(int posX, int posY, string type) {
-            return GetCollidingEntities(posX, posY, type).FirstOrDefault();
+        public BaseEntity GetFirstCollidingEntity(string type) {
+            return GetCollidingEntities(type).FirstOrDefault();
         }
 
         public Rectangle BoundingBox {

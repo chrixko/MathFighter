@@ -40,7 +40,7 @@ namespace ClownSchool {
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            var hand = (PlayerHand)GetFirstCollidingEntity(X, Y, "hand");
+            var hand = (PlayerHand)GetFirstCollidingEntity("hand");
             if (hand != null) {
                 State.OnHandCollide(hand);               
             }
@@ -51,7 +51,7 @@ namespace ClownSchool {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, selected ? (int)(62 * 1.2f) : 62, selected ? (int)(89 * 1.2f) : 89), new Rectangle(62 * (Number - 1), 0, 62, 89), new Color(255, 255, 255, selected ? 255 : 100));
+            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, selected ? (int)(62 * 1.2f) : 62, selected ? (int)(89 * 1.2f) : 89), new Rectangle(62 * (Number - 1), 0, 62, 89), new Color(200, 200, 200, selected ? 255 : 100));
 
             State.Draw(spriteBatch);            
         }

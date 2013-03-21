@@ -22,6 +22,11 @@ namespace ClownSchool {
         public static Texture2D RopeKnot { get; set; }
 
         public static Texture2D Indicator { get; set; }
+
+        public static Texture2D ScissorBottomRight { get; set; }
+        public static Texture2D ScissorTopRight{ get; set; }
+        public static Texture2D ScissorBottomLeft { get; set; }
+        public static Texture2D ScissorTopLeft { get; set; }
         
         public static Texture2D CurtainTopLeft { get; set; }
         public static Texture2D CurtainTopRight { get; set; }
@@ -42,6 +47,7 @@ namespace ClownSchool {
         public static SoundEffect AnswerCorrect { get; set; }
         public static SoundEffect TimeShort { get; set; }
         public static SoundEffect AnswerWrong { get; set; }
+        public static SoundEffect ScissorsSnip { get; set; }
         
         public static void LoadContent(ContentManager content) {
             NumberSlotSprite = content.Load<Texture2D>("balloon_gray");
@@ -57,6 +63,12 @@ namespace ClownSchool {
             RopeKnot = content.Load<Texture2D>("rope_knot");
 
             Indicator = content.Load<Texture2D>("indicator_green");
+
+            ScissorBottomRight = content.Load<Texture2D>("scissors_bot_right");
+            ScissorTopRight = content.Load<Texture2D>("scissors_top_right");
+
+            ScissorBottomLeft = content.Load<Texture2D>("scissors_bot_left");
+            ScissorTopLeft = content.Load<Texture2D>("scissors_top_left");
 
             CurtainTopLeft = content.Load<Texture2D>("curtain_top_left");
             CurtainTopRight = content.Load<Texture2D>("curtain_top_right");
@@ -77,6 +89,7 @@ namespace ClownSchool {
             AnswerCorrect = content.Load<SoundEffect>("sounds/AnswerCorrect"); //http://opengameart.org/content/completion-sound
             TimeShort = content.Load<SoundEffect>("sounds/TimeShort"); //http://www.flashkit.com/soundfx/Cartoon/Timer-GamePro9-8160/index.php
             AnswerWrong = content.Load<SoundEffect>("sounds/AnswerWrong"); //http://www.flashkit.com/soundfx/Cartoon/Slide_fl-Texavery-8987/index.php
+            ScissorsSnip = content.Load<SoundEffect>("sounds/scissors_snip");
         }
     }
 }

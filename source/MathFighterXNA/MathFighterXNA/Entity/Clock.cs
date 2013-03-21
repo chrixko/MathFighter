@@ -52,7 +52,7 @@ namespace ClownSchool.Entity {
                 if (secondTimer <= 0) {
                     secondTimer = 1f;
 
-                    if (Value < 10) {
+                    if (Value < 10 && Value > 0) {
                         Assets.TimeShort.Play();
                     }                    
                 }

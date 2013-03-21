@@ -30,9 +30,9 @@ namespace ClownSchool.Entity.NumberState {
             Owner.Y = (int)defaultMoveTweener.Position;
 
             //TODO: Maybe dirty, should use OnHandCollide somehow, because I query the colliding hand two times, once in number and then here
-            var hand = (PlayerHand)Owner.GetFirstCollidingEntity(Owner.X, Owner.Y, "hand");
+            var hand = (PlayerHand)Owner.GetFirstCollidingEntity("hand");
 
-            if (hand != null && hand.Player == Owner.Owner && !hand.IsDragging) {
+            if (hand != null && hand.Player == Owner.Owner && hand.DraggingBalloon == null) {
                 hoverTime += gameTime.ElapsedGameTime.TotalSeconds;
             } else {
                 hoverTime = 0;
@@ -43,7 +43,7 @@ namespace ClownSchool.Entity.NumberState {
                 hand.Screen.AddEntity(balloon);
 
                 balloon.AttachTo(hand);
-                hand.IsDragging = true;
+                hand.DraggingBalloon = balloon;
 
                 Assets.BalloonGrab.Play();
             }

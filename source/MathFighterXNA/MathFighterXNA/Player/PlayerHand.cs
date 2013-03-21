@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Kinect;
+using ClownSchool.Entity;
 
 namespace ClownSchool {
 
@@ -8,7 +9,7 @@ namespace ClownSchool {
 
         public Player Player { get; private set; }
         public JointType Hand { get; private set; }        
-        public bool IsDragging { get; set; }
+        public Balloon DraggingBalloon { get; set; }
 
         public KinectContext Context {
             get {
@@ -23,8 +24,6 @@ namespace ClownSchool {
             Player = player;
             Hand = hand;
 
-            IsDragging = false;
-
             CollisionType = "hand";
         }
 
@@ -38,7 +37,6 @@ namespace ClownSchool {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            //spriteBatch.Draw(Assets.NumberBackgroundSprite, BoundingBox, Color.White);
         }
 
         public override void Delete() {

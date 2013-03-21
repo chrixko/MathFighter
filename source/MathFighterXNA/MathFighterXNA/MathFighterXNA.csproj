@@ -121,6 +121,7 @@
     <Compile Include="Entity\Clock.cs" />
     <Compile Include="Entity\FontNumber.cs" />
     <Compile Include="Entity\NumberState\IdleState.cs" />
+    <Compile Include="Entity\Scissors.cs" />
     <Compile Include="Entity\SimpleGraphic.cs" />
     <Compile Include="ExtendedSpriteBatch.cs" />
     <Compile Include="Bang\ActionList.cs" />

@@ -45,7 +45,7 @@ namespace ClownSchool.Entity {
                 balloon.AttachTo(this);
                 Balloon = balloon;
 
-                hand.IsDragging = false;
+                hand.DraggingBalloon = null;
 
                 Assets.BalloonDrop.Play();
 

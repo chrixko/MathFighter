@@ -13,7 +13,7 @@ namespace ClownSchool {
 
         public bool IsDragging {
             get {
-                return LeftHand.IsDragging || RightHand.IsDragging;
+                return LeftHand.DraggingBalloon != null || RightHand.DraggingBalloon != null;
             }
         }
 

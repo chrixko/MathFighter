@@ -22,6 +22,7 @@ namespace ClownSchool.Entity {
         public BaseEntity AttachedEntity { get; private set; }
         private FixedMouseJoint fixedJoint;
 
+        public Joint HalfJoint { get; set; }
         public int JointCount { get; set; }
         public float Force { get; set; }
 
@@ -100,7 +101,11 @@ namespace ClownSchool.Entity {
 
                     RevoluteJoint rj = JointFactory.CreateRevoluteJoint(prevBody, body, body.GetLocalPoint(anchor));
                     rj.CollideConnected = false;
-                    Screen.World.AddJoint(rj);                    
+                    Screen.World.AddJoint(rj);
+
+                    if ((int)(JointCount / 2) == i) {
+                        HalfJoint = rj;
+                    }
                 }
             }
 
@@ -143,7 +148,7 @@ namespace ClownSchool.Entity {
                 fixedJoint.WorldAnchorB = ConvertUnits.ToSimUnits(X, Y);
             }
 
-            var slot = GetFirstCollidingEntity(X, Y, "slot");
+            var slot = GetFirstCollidingEntity("slot");
             if (slot != null && fixedJoint != null && AttachedEntity.GetType() == typeof(PlayerHand)) {                
                 (slot as NumberSlot).TryAttach(this);
             }
@@ -179,6 +184,11 @@ namespace ClownSchool.Entity {
             popAnimation.Play(false);
             popped = true;
             Screen.World.RemoveBody(balloonBody);
+        }
+
+        public void Cut() {
+            Screen.World.RemoveJoint(HalfJoint);
+            Screen.World.RemoveJoint(fixedJoint);
         }
 
         public override void Delete() {

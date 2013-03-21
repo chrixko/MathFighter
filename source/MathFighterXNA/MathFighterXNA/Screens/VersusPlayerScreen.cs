@@ -52,11 +52,14 @@ namespace ClownSchool.Screens {
 
             AddInput();
 
-            var cactusOne = new Cactus(80, MainGame.Height - 250, 0f);
-            var cactusTwo = new Cactus(MainGame.Width - 230, MainGame.Height - 250, -0f);
+            //var cactusOne = new Cactus(80, MainGame.Height - 250, 0f);
+            //var cactusTwo = new Cactus(MainGame.Width - 230, MainGame.Height - 250, -0f);
 
-            AddEntity(cactusOne);
-            AddEntity(cactusTwo);           
+            //AddEntity(cactusOne);
+            //AddEntity(cactusTwo);
+
+            AddEntity(new Scissors(120, MainGame.Height - 350, Scissors.ScissorPosition.Left));
+            AddEntity(new Scissors(MainGame.Width - 120, MainGame.Height - 350, Scissors.ScissorPosition.Right));            
         }
 
         private void LoadNumbersFromFile() {
@@ -91,15 +94,25 @@ namespace ClownSchool.Screens {
             } 
         }
 
+        public void PauseClocks() {
+            PlayerOneClock.Paused = true;
+            PlayerTwoClock.Paused = true;
+        }
+
+        public void ResumeCurrentClock() {
+            if (CurrentPlayer == PlayerOne) {
+                PlayerOneClock.Paused = false;
+            } else {
+                PlayerTwoClock.Paused = false;
+            }            
+        }
+
         public void SwitchCurrentPlayer() {
             if (CurrentPlayer == PlayerOne) {
                 CurrentPlayer = PlayerTwo;
             } else {
                 CurrentPlayer = PlayerOne;
             }
-
-            PlayerOneClock.Switch();
-            PlayerTwoClock.Switch();
 
             shuffleNumberPositions();
 
@@ -144,13 +157,18 @@ namespace ClownSchool.Screens {
 
             var left = new Vector2(Input.X - 100, 300);
             var right = new Vector2(Input.X + 80, 300);
-            
-            Input.Actions.AddAction(new TweenPositionTo(Input, CurrentPlayer == PlayerOne ? left : right, 2f, Tweening.Back.EaseOut), true);
-            Input.Actions.AddAction(new WaitForEquationInput(Input, EquationInputType.Equation), true);
-            Input.Actions.AddAction(new CallFunction(delegate() { SwitchCurrentPlayer(); }), true);
 
+            Input.Actions.AddAction(new CallFunction(delegate() { PauseClocks(); }), true);
+            Input.Actions.AddAction(new TweenPositionTo(Input, CurrentPlayer == PlayerOne ? left : right, 2f, Tweening.Back.EaseOut), true);
+            Input.Actions.AddAction(new CallFunction(delegate() { ResumeCurrentClock(); }), true);
+            Input.Actions.AddAction(new WaitForEquationInput(Input, EquationInputType.Equation), true);
+            Input.Actions.AddAction(new CallFunction(delegate() { PauseClocks(); }), true);
+            Input.Actions.AddAction(new CallFunction(delegate() { SwitchCurrentPlayer(); }), true);
+            
             Input.Actions.AddAction(new TweenPositionTo(Input, CurrentPlayer == PlayerOne ? right : left, 2f, Tweening.Back.EaseOut), true);
+            Input.Actions.AddAction(new CallFunction(delegate() { ResumeCurrentClock(); }), true);
             Input.Actions.AddAction(new WaitForEquationInput(Input, EquationInputType.Product), true);
+            Input.Actions.AddAction(new CallFunction(delegate() { PauseClocks(); }), true);
 
             Input.Actions.AddAction(new EndEquationInput(Input), true);
 
@@ -174,6 +192,7 @@ namespace ClownSchool.Screens {
 
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);            
+
         }        
 
         public override void Draw(SpriteBatch spriteBatch) {
