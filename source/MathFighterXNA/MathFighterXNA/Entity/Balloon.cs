@@ -189,6 +189,8 @@ namespace ClownSchool.Entity {
         public void Cut() {
             Screen.World.RemoveJoint(HalfJoint);
             Screen.World.RemoveJoint(fixedJoint);
+            AttachedEntity = null;
+            fixedJoint = null;
         }
 
         public override void Delete() {
