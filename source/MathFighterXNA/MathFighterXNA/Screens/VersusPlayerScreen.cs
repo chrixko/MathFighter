@@ -137,7 +137,10 @@ namespace ClownSchool.Screens {
         }
 
         private void AddInput() {
+           
             Input = new EquationInput((MainGame.Width / 2) - 337 / 2, MainGame.Height);
+
+            Input.CurrentPlayer = CurrentPlayer;
 
             var left = new Vector2(Input.X - 100, 300);
             var right = new Vector2(Input.X + 80, 300);
@@ -151,7 +154,14 @@ namespace ClownSchool.Screens {
 
             Input.Actions.AddAction(new EndEquationInput(Input), true);
 
-            Input.Actions.AddAction(new CallFunction(delegate() { 
+            Input.Actions.AddAction(new CallFunction(delegate() {
+                if (!Input.IsAnswerCorrect) {
+                    if (CurrentPlayer == PlayerOne) {
+                        PlayerOneClock.Value -= 5f;
+                    } else {
+                        PlayerTwoClock.Value -= 5f;
+                    }
+                }
                 RemoveEntity(Input); 
                 AddInput(); 
             }), true);

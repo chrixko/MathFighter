@@ -11,6 +11,12 @@ namespace ClownSchool {
         public PlayerHand LeftHand { get; private set; }
         public PlayerHand RightHand { get; private set; }
 
+        public bool IsDragging {
+            get {
+                return LeftHand.IsDragging || RightHand.IsDragging;
+            }
+        }
+
         public Skeleton Skeleton {
             get {
                 switch (SkeletonAssignment) {

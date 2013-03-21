@@ -20,6 +20,8 @@ namespace ClownSchool {
         public static Texture2D BalloonBoom { get; set; }
         public static Texture2D RopeSection { get; set; }
         public static Texture2D RopeKnot { get; set; }
+
+        public static Texture2D Indicator { get; set; }
         
         public static Texture2D CurtainTopLeft { get; set; }
         public static Texture2D CurtainTopRight { get; set; }
@@ -53,6 +55,8 @@ namespace ClownSchool {
             BalloonBoom = content.Load<Texture2D>("balloon_boom");
             RopeSection = content.Load<Texture2D>("rope_section");
             RopeKnot = content.Load<Texture2D>("rope_knot");
+
+            Indicator = content.Load<Texture2D>("indicator_green");
 
             CurtainTopLeft = content.Load<Texture2D>("curtain_top_left");
             CurtainTopRight = content.Load<Texture2D>("curtain_top_right");

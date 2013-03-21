@@ -7,6 +7,8 @@ using ClownSchool.Tweening;
 namespace ClownSchool.Entity {
 
     public class EquationInput : BaseEntity {
+
+        public Player CurrentPlayer { get; set; }
               
         public List<NumberSlot> Slots;
 
@@ -84,7 +86,7 @@ namespace ClownSchool.Entity {
 
             foreach (NumberSlot slot in Slots) {
                 slot.Draw(spriteBatch);
-            }
+            }          
         }
 
         public override void Delete() {

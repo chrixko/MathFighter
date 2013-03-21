@@ -65,6 +65,10 @@ namespace ClownSchool.Entity {
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
             if (Balloon != null) {
                 spriteBatch.Draw(Assets.RopeKnot, new Rectangle(BoundingBox.Center.X, BoundingBox.Center.Y, 11, 12), null, Color.White, 0, new Vector2(5.5f, 6f), SpriteEffects.None, 0);
+            } else {
+                if (Player.IsDragging) {
+                    spriteBatch.Draw(Assets.Indicator, new Rectangle(BoundingBox.Center.X, BoundingBox.Center.Y, 50, 50), null, new Color(255,255,255, 100), 0, new Vector2(25, 25), SpriteEffects.None, 0);
+                }
             }
         }
 
