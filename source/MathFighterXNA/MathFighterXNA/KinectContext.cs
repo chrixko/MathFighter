@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Kinect;
+using Microsoft.Kinect.Toolkit.Interaction;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,12 +15,16 @@ namespace ClownSchool {
         
         public Texture2D CurrentBitmap { get; private set; }      
         public List<Skeleton> Skeletons { get; private set; }
+        public Dictionary<int, UserInfo> UserInfos { get; private set; }
+
 
         private GraphicsDevice graphicsDevice { get; set; }
+        private InteractionStream interactionStream { get; set; }
 
         public KinectContext(GraphicsDevice device) {
             graphicsDevice = device;
             Skeletons = new List<Skeleton>();
+            UserInfos = new Dictionary<int, UserInfo>();
         }
 
         public void Initialize() {
@@ -38,7 +43,11 @@ namespace ClownSchool {
                     JitterRadius = 0.0f,
                     MaxDeviationRadius = 0.0f
                 };
-                
+
+                 
+                interactionStream = new InteractionStream(Sensor, new InteractionClient());
+
+                this.Sensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
                 this.Sensor.SkeletonStream.Enable(parameters);
                 this.Sensor.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);                
 
@@ -56,6 +65,18 @@ namespace ClownSchool {
             }
 
             this.CurrentBitmap = Assets.CirclePartFilled;
+        }
+
+        void ProcessDepthFrame() {
+            using (var dif = this.Sensor.DepthStream.OpenNextFrame(0)) {
+                if (dif != null) {
+                    DepthImagePixel[] data = new DepthImagePixel[dif.PixelDataLength];
+                    dif.CopyDepthImagePixelDataTo(data);
+
+                    interactionStream.ProcessDepth(data, dif.Timestamp);
+                }
+
+            }
         }
 
         void ProcessColorFrame() {
@@ -83,6 +104,9 @@ namespace ClownSchool {
                     Skeleton[] skeletons = new Skeleton[skeletonFrame.SkeletonArrayLength];
                     skeletonFrame.CopySkeletonDataTo(skeletons);
 
+                    var accelerometerReading = this.Sensor.AccelerometerGetCurrentReading();
+                    interactionStream.ProcessSkeleton(skeletons, accelerometerReading, skeletonFrame.Timestamp);
+
                     Skeletons.Clear();
                     foreach (Skeleton skel in skeletons) {
                         if (skel.TrackingState == SkeletonTrackingState.Tracked) {
@@ -90,6 +114,23 @@ namespace ClownSchool {
                         }
                     }
                 }
+            }
+        }
+
+        void ProcessInteractionFrame() {
+            using(var interactionFrame = interactionStream.OpenNextFrame(0)) {
+                if (interactionFrame != null) {                   
+                    UserInfo[] userInfo = new UserInfo[InteractionFrame.UserInfoArrayLength];
+                    interactionFrame.CopyInteractionDataTo(userInfo);
+
+                    UserInfos.Clear();
+                    foreach (var skel in Skeletons) {
+                        var ui = (from UserInfo u in userInfo where u.SkeletonTrackingId == skel.TrackingId select u).FirstOrDefault();
+                        if (ui != null)
+                            UserInfos.Add(skel.TrackingId, ui);
+                    }
+                }
+
             }
         }
 
@@ -111,12 +152,15 @@ namespace ClownSchool {
         }
 
         public Skeleton GetRightSkeleton() {
+            
             return (from Skeleton s in Skeletons where s != GetLeftSkeleton() orderby s.Position.X descending select s).FirstOrDefault();            
         }
 
         public void Update() {
             ProcessColorFrame();
+            ProcessDepthFrame();
             ProcessSkeletonFrame();
+            ProcessInteractionFrame();
         }
     }
 }

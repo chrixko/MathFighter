@@ -33,7 +33,16 @@ namespace ClownSchool.Entity.NumberState {
             var hand = (PlayerHand)Owner.GetFirstCollidingEntity("hand");
 
             if (hand != null && hand.Player == Owner.Owner && hand.DraggingBalloon == null) {
-                hoverTime += gameTime.ElapsedGameTime.TotalSeconds;
+                if (Configuration.GRABBING_ENABLED) {
+                    if (hand.IsGrabbing) {
+                        var balloon = new Balloon(hand.X, hand.Y, Owner.Number);
+                        hand.Screen.AddEntity(balloon);
+
+                        hand.Grab(balloon);
+                    }
+                } else {
+                    hoverTime += gameTime.ElapsedGameTime.TotalSeconds;
+                }
             } else {
                 hoverTime = 0;
             }
@@ -42,10 +51,7 @@ namespace ClownSchool.Entity.NumberState {
                 var balloon = new Balloon(hand.X, hand.Y, Owner.Number);
                 hand.Screen.AddEntity(balloon);
 
-                balloon.AttachTo(hand);
-                hand.DraggingBalloon = balloon;
-
-                Assets.BalloonGrab.Play();
+                hand.Grab(balloon);
             }
         }
 

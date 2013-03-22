@@ -1,6 +1,7 @@
 ﻿using Microsoft.Kinect;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Kinect.Toolkit.Interaction;
 
 namespace ClownSchool {
 
@@ -52,7 +53,7 @@ namespace ClownSchool {
         }
 
         public override void Update(GameTime gameTime) {
-            if (IsReady) {
+            if (IsReady) {  
                 LeftHand.Update(gameTime);
                 RightHand.Update(gameTime);
             }
