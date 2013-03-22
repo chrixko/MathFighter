@@ -155,7 +155,12 @@ namespace ClownSchool.Entity {
             
             if (popped) {
                 popAnimation.Update(gameTime);
-            }            
+            }
+
+
+            if (ConvertUnits.ToDisplayUnits(balloonBody.Position.Y) < -200) {
+                Screen.RemoveEntity(this);
+            }
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {

@@ -44,8 +44,9 @@ namespace ClownSchool {
                     MaxDeviationRadius = 0.0f
                 };
 
-                 
-                interactionStream = new InteractionStream(Sensor, new InteractionClient());
+                if (Configuration.GRABBING_ENABLED) {
+                    interactionStream = new InteractionStream(Sensor, new InteractionClient());
+                }                 
 
                 this.Sensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
                 this.Sensor.SkeletonStream.Enable(parameters);
@@ -104,8 +105,10 @@ namespace ClownSchool {
                     Skeleton[] skeletons = new Skeleton[skeletonFrame.SkeletonArrayLength];
                     skeletonFrame.CopySkeletonDataTo(skeletons);
 
-                    var accelerometerReading = this.Sensor.AccelerometerGetCurrentReading();
-                    interactionStream.ProcessSkeleton(skeletons, accelerometerReading, skeletonFrame.Timestamp);
+                    if (Configuration.GRABBING_ENABLED) {
+                        var accelerometerReading = this.Sensor.AccelerometerGetCurrentReading();
+                        interactionStream.ProcessSkeleton(skeletons, accelerometerReading, skeletonFrame.Timestamp);
+                    }
 
                     Skeletons.Clear();
                     foreach (Skeleton skel in skeletons) {
@@ -158,9 +161,12 @@ namespace ClownSchool {
 
         public void Update() {
             ProcessColorFrame();
-            ProcessDepthFrame();
+            if(Configuration.GRABBING_ENABLED)
+                ProcessDepthFrame();
             ProcessSkeletonFrame();
-            ProcessInteractionFrame();
+
+            if(Configuration.GRABBING_ENABLED)
+                ProcessInteractionFrame();
         }
     }
 }
