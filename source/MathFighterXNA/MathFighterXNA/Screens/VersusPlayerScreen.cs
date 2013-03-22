@@ -149,8 +149,7 @@ namespace ClownSchool.Screens {
             }
         }
 
-        private void AddInput() {
-           
+        private void AddInput() {           
             Input = new EquationInput((MainGame.Width / 2) - 337 / 2, MainGame.Height);
 
             Input.CurrentPlayer = CurrentPlayer;

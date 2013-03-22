@@ -13,22 +13,24 @@ using System.Diagnostics;
 namespace ClownSchool.Entity {
     public class Balloon : BaseEntity {
 
-        private Body balloonBody;
-        private List<Body> joints = new List<Body>();
-
-        private bool popped;
-        private Animation popAnimation;
-
         public BaseEntity AttachedEntity { get; private set; }
-        private FixedMouseJoint fixedJoint;
-
-        public Joint HalfJoint { get; set; }
-        public int JointCount { get; set; }
-        public float Force { get; set; }
-
-        public Vector2 BalloonSize { get; set; }
-
         public int Number { get; set; }
+
+        private static Vector2 balloonSize = new Vector2(62, 89);
+        private static Vector2 balloonRadius = ConvertUnits.ToSimUnits(balloonSize.X / 2, balloonSize.Y / 2);
+        private static Vector2 jointSize = ConvertUnits.ToSimUnits(3, 12);
+
+        private static PolygonShape balloonShape = new PolygonShape(PolygonTools.CreateEllipse(balloonRadius.X, balloonRadius.Y, 8), 10);
+        private static PolygonShape jointShape = new PolygonShape(PolygonTools.CreateRectangle(jointSize.X, jointSize.Y), 25);
+
+        private Body balloonBody;
+        private Joint HalfJoint { get; set; }
+        private float Force { get; set; }
+        private List<Body> joints = new List<Body>();
+        private FixedMouseJoint fixedJoint;
+        private static int JointCount = 10;
+        private bool popped;
+        private static Animation popAnimation = new Animation("balloon_pop", Assets.BalloonBoom, 200);
 
         public Balloon(int posX, int posY, int number) {
             X = posX;
@@ -36,9 +38,7 @@ namespace ClownSchool.Entity {
 
             Number = number;
 
-            BalloonSize = new Vector2(62, 89);
-            Size = new Point(3, 24);
-            JointCount = 10;
+            Size = new Point(3, 24);            
 
             collidable = true;
             CollisionType = "balloon";
@@ -47,14 +47,6 @@ namespace ClownSchool.Entity {
         }        
 
         public override void Init() {
-            popAnimation = new Animation("balloon_pop", Assets.BalloonBoom, 200);
-
-            var balloonRadius = ConvertUnits.ToSimUnits(BalloonSize.X / 2, BalloonSize.Y / 2);
-            var jointSize = ConvertUnits.ToSimUnits(3, 12);
-
-            PolygonShape balloonShape = new PolygonShape(PolygonTools.CreateEllipse(balloonRadius.X, balloonRadius.Y, 8), 10);
-            PolygonShape jointShape = new PolygonShape(PolygonTools.CreateRectangle(jointSize.X, jointSize.Y), 25);
-
             var ballAnchor = Vector2.Zero;
             //ball
             {
@@ -148,15 +140,16 @@ namespace ClownSchool.Entity {
                 fixedJoint.WorldAnchorB = ConvertUnits.ToSimUnits(X, Y);
             }
 
-            var slot = GetFirstCollidingEntity("slot");
-            if (slot != null && fixedJoint != null && AttachedEntity.GetType() == typeof(PlayerHand)) {                
-                (slot as NumberSlot).TryAttach(this);
+            if (AttachedEntity.CollisionType == "hand") {
+                var slot = GetFirstCollidingEntity("slot");
+                if (slot != null && fixedJoint != null) {
+                    (slot as NumberSlot).TryAttach(this);
+                }
             }
             
             if (popped) {
                 popAnimation.Update(gameTime);
             }
-
 
             if (ConvertUnits.ToDisplayUnits(balloonBody.Position.Y) < -200) {
                 Screen.RemoveEntity(this);
@@ -171,7 +164,7 @@ namespace ClownSchool.Entity {
 
             if (Screen.World.BodyList.Contains(balloonBody)) {
                 var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
-                spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)BalloonSize.X, (int)BalloonSize.Y), new Rectangle(62 * (Number - 1), 0, 62, 89), Color.White, balloonBody.Rotation, new Vector2(BalloonSize.X / 2, BalloonSize.Y / 2), SpriteEffects.None, 0);
+                spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)balloonSize.X, (int)balloonSize.Y), new Rectangle(62 * (Number - 1), 0, 62, 89), Color.White, balloonBody.Rotation, new Vector2(balloonSize.X / 2, balloonSize.Y / 2), SpriteEffects.None, 0);
             }
 
             if (popped && !popAnimation.Finished) {
