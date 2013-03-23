@@ -23,6 +23,9 @@ namespace ClownSchool {
 
         public static Texture2D Indicator { get; set; }
 
+        public static Texture2D InputTop { get; set; }
+        public static Texture2D InputBottom { get; set; }
+
         public static Texture2D ScissorBottomRight { get; set; }
         public static Texture2D ScissorTopRight{ get; set; }
         public static Texture2D ScissorBottomLeft { get; set; }
@@ -63,6 +66,9 @@ namespace ClownSchool {
             RopeKnot = content.Load<Texture2D>("rope_knot");
 
             Indicator = content.Load<Texture2D>("indicator_green");
+
+            InputTop = content.Load<Texture2D>("input_top");
+            InputBottom = content.Load<Texture2D>("input_bottom");
 
             ScissorBottomRight = content.Load<Texture2D>("scissors_bot_right");
             ScissorTopRight = content.Load<Texture2D>("scissors_top_right");

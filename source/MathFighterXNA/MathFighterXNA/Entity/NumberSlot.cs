@@ -42,6 +42,10 @@ namespace ClownSchool.Entity {
             PlayerHand hand = (PlayerHand)balloon.AttachedEntity;
 
             if ((Reassignable || Balloon == null) && (Player == null || hand.Player == Player)) {
+                if (Balloon != null) {
+                    Balloon.Cut();
+                }
+
                 balloon.AttachTo(this);
                 Balloon = balloon;
 

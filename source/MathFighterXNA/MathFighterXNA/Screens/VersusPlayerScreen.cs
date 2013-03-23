@@ -143,7 +143,7 @@ namespace ClownSchool.Screens {
             }
         }
 
-        private void AddInput() {           
+        private void AddInput() {
             Input = new EquationInput((MainGame.Width / 2) - 337 / 2, MainGame.Height);
 
             Input.CurrentPlayer = CurrentPlayer;
@@ -157,7 +157,7 @@ namespace ClownSchool.Screens {
             Input.Actions.AddAction(new WaitForEquationInput(Input, EquationInputType.Equation), true);
             Input.Actions.AddAction(new CallFunction(delegate() { PauseClocks(); }), true);
             Input.Actions.AddAction(new CallFunction(delegate() { SwitchCurrentPlayer(); }), true);
-            
+
             Input.Actions.AddAction(new TweenPositionTo(Input, CurrentPlayer == PlayerOne ? right : left, 2f, Tweening.Back.EaseOut), true);
             Input.Actions.AddAction(new CallFunction(delegate() { ResumeCurrentClock(); }), true);
             Input.Actions.AddAction(new WaitForEquationInput(Input, EquationInputType.Product), true);
@@ -173,8 +173,8 @@ namespace ClownSchool.Screens {
                         PlayerTwoClock.Value -= 5f;
                     }
                 }
-                RemoveEntity(Input); 
-                AddInput(); 
+                RemoveEntity(Input);
+                AddInput();
             }), true);
 
             AddEntity(Input);

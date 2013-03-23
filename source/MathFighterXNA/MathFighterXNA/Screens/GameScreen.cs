@@ -41,6 +41,9 @@ namespace ClownSchool.Screens {
         }
 
         public void RemoveEntity(BaseEntity entity) {
+            if (!Entities.Contains(entity))
+                return;
+
             entity.Delete();
             Entities.Remove(entity);
         }

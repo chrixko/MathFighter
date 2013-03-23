@@ -9,7 +9,7 @@ namespace ClownSchool.Entity {
     public class EquationInput : BaseEntity {
 
         public Player CurrentPlayer { get; set; }
-              
+
         public List<NumberSlot> Slots;
 
         public NumberSlot FirstEquationSlot;
@@ -32,7 +32,7 @@ namespace ClownSchool.Entity {
 
         public bool IsAnswerCorrect {
             get {
-                if(!IsEquationSet || !IsAnswerSet) return false;
+                if (!IsEquationSet || !IsAnswerSet) return false;
 
                 return (FirstEquationSlot.Balloon.Number * SecondEquationSlot.Balloon.Number) == Convert.ToInt32(FirstProductSlot.Balloon.Number.ToString() + SecondProductSlot.Balloon.Number.ToString());
             }
@@ -75,7 +75,7 @@ namespace ClownSchool.Entity {
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
             base.Update(gameTime);
-           
+
             foreach (NumberSlot slot in Slots) {
                 slot.Update(gameTime);
             }
@@ -86,7 +86,7 @@ namespace ClownSchool.Entity {
 
             foreach (NumberSlot slot in Slots) {
                 slot.Draw(spriteBatch);
-            }          
+            }
         }
 
         public override void Delete() {

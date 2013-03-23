@@ -15,6 +15,9 @@ namespace ClownSchool {
         public DefaultState DefaultState;
         public IdleState IdleState;
 
+        private static Color SelectedColor = Color.White;
+        private static Color UnselectedColor = new Color(200, 200, 200, 100);
+
         private bool selected { get; set; }
 
         public DragableNumber(Player owner, int posX, int posY, int number) {
@@ -51,7 +54,7 @@ namespace ClownSchool {
         }
 
         public override void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, selected ? (int)(62 * 1.2f) : 62, selected ? (int)(89 * 1.2f) : 89), new Rectangle(62 * (Number - 1), 0, 62, 89), new Color(200, 200, 200, selected ? 255 : 100));
+            spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle(X, Y, selected ? (int)(62 * 1.2f) : 62, selected ? (int)(89 * 1.2f) : 89), new Rectangle(62 * (Number - 1), 0, 62, 89), selected ? SelectedColor : UnselectedColor);
 
             State.Draw(spriteBatch);            
         }
