@@ -140,7 +140,7 @@ namespace ClownSchool.Entity {
                 fixedJoint.WorldAnchorB = ConvertUnits.ToSimUnits(X, Y);
             }
 
-            if (AttachedEntity.CollisionType == "hand") {
+            if (fixedJoint != null && AttachedEntity.CollisionType == "hand") {
                 var slot = GetFirstCollidingEntity("slot");
                 if (slot != null && fixedJoint != null) {
                     (slot as NumberSlot).TryAttach(this);

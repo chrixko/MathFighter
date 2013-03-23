@@ -62,7 +62,7 @@ namespace ClownSchool {
         }
 
         protected override void UnloadContent() {
-            kinectContext.Sensor.Stop();
+            kinectContext.StopSensor();
         }
 
         protected override void Update(GameTime gameTime) {           

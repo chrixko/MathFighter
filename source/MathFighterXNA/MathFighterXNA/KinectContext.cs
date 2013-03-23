@@ -154,19 +154,26 @@ namespace ClownSchool {
             return (from Skeleton s in Skeletons orderby s.Position.X ascending select s).FirstOrDefault();
         }
 
-        public Skeleton GetRightSkeleton() {
-            
+        public Skeleton GetRightSkeleton() {            
             return (from Skeleton s in Skeletons where s != GetLeftSkeleton() orderby s.Position.X descending select s).FirstOrDefault();            
         }
 
         public void Update() {
-            ProcessColorFrame();
-            if(Configuration.GRABBING_ENABLED)
-                ProcessDepthFrame();
-            ProcessSkeletonFrame();
+            if (this.Sensor != null) {
+                ProcessColorFrame();
+                ProcessSkeletonFrame();
 
-            if(Configuration.GRABBING_ENABLED)
-                ProcessInteractionFrame();
+                if (Configuration.GRABBING_ENABLED) {
+                    ProcessDepthFrame();
+                    ProcessInteractionFrame();
+                }
+            }
+        }
+
+        public void StopSensor() {
+            if (this.Sensor != null) {
+                this.Sensor.Stop();
+            }
         }
     }
 }

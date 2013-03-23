@@ -52,12 +52,6 @@ namespace ClownSchool.Screens {
 
             AddInput();
 
-            //var cactusOne = new Cactus(80, MainGame.Height - 250, 0f);
-            //var cactusTwo = new Cactus(MainGame.Width - 230, MainGame.Height - 250, -0f);
-
-            //AddEntity(cactusOne);
-            //AddEntity(cactusTwo);
-
             AddEntity(new Scissors(120, MainGame.Height - 350, Scissors.ScissorPosition.Left));
             AddEntity(new Scissors(MainGame.Width - 120, MainGame.Height - 350, Scissors.ScissorPosition.Right));            
         }

@@ -15,11 +15,13 @@ namespace ClownSchool.Entity {
 
         private float secondTimer = 1f;
 
+        public static Point ClockSize = new Point(110, 110);
+
         public Clock(int posX, int posY, int seconds) {
             X = posX;
             Y = posY;
 
-            Size = new Point(110, 110);
+            Size = ClockSize;
 
             StartValue = seconds;
             Value = StartValue;
@@ -62,7 +64,7 @@ namespace ClownSchool.Entity {
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {          
             for (int i = 0; i <= 360; i++) {
                 if ((360 / (float)StartValue) * (Value - 1) >= i) {
-                    var destRect = new Rectangle(this.X + 55, this.Y + 55, 1, 50);
+                    var destRect = new Rectangle(this.X + (Size.X / 2), this.Y + (Size.Y / 2), 1, 50);
                     spriteBatch.Draw(Assets.ClockFillSprite, destRect, null, Color.White, -MathHelper.ToRadians(i + 180), new Vector2(0, 0), SpriteEffects.None, 0);
                 }                
             }            
