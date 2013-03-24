@@ -184,8 +184,14 @@ namespace ClownSchool.Screens {
         }
 
         public override void Update(GameTime gameTime) {
-            base.Update(gameTime);            
+            base.Update(gameTime);
 
+            if (!PlayerOne.IsReady) {
+                var pauseScreen = new PauseScreen(Context);
+                pauseScreen.WaitForPlayerCount(1);
+
+                Manager.AddScreen(pauseScreen);
+            }
         }        
 
         public override void Draw(SpriteBatch spriteBatch) {

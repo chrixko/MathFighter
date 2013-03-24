@@ -38,6 +38,10 @@ namespace ClownSchool {
 
         public static Texture2D CirclePartEmpty { get; set; }
         public static Texture2D CirclePartFilled { get; set; }
+
+        public static Texture2D PauseBackground { get; set; }
+        public static Texture2D TextPlayerLeft { get; set; }
+        public static Texture2D TextPleaseComeBack { get; set; }
         
         public static SpriteFont DebugFont { get; set; }
         public static SpriteFont SmallDebugFont { get; set; }
@@ -83,6 +87,10 @@ namespace ClownSchool {
 
             CirclePartEmpty = content.Load<Texture2D>("circle_part_empty");
             CirclePartFilled = content.Load<Texture2D>("circle_part_filled");
+
+            PauseBackground = content.Load<Texture2D>("pause_background");
+            TextPlayerLeft = content.Load<Texture2D>("text_left");
+            TextPleaseComeBack = content.Load<Texture2D>("text_come_back");
             
             DebugFont = content.Load<SpriteFont>("DebugFont");
             SmallDebugFont = content.Load<SpriteFont>("SmallDebugFont");

@@ -16,6 +16,10 @@ namespace ClownSchool.Screens {
     public abstract class GameScreen {
 
         public KinectContext Context { get; private set; }
+        public ScreenManager Manager { get; set; }
+
+        public bool Inited { get; private set; }
+        public bool RenderMasterLayout { get; set; }
 
         public List<BaseEntity> Entities = new List<BaseEntity>();
         public ActionList Actions = new ActionList();
@@ -31,6 +35,8 @@ namespace ClownSchool.Screens {
 
         public GameScreen(KinectContext context) {
             Context = context;
+            Inited = false;
+            RenderMasterLayout = true;
         }
 
         public void AddEntity(BaseEntity entity) {
@@ -49,25 +55,29 @@ namespace ClownSchool.Screens {
         }
 
         public virtual void Init() {
-            CurtainLeft = new SimpleGraphic(Assets.CurtainTopLeft, 0, 0, 260, MainGame.Height - 50);
-            CurtainRight = new SimpleGraphic(Assets.CurtainTopRight, MainGame.Width - 260, 0, 260, MainGame.Height - 50);
+            if (RenderMasterLayout) {
+                CurtainLeft = new SimpleGraphic(Assets.CurtainTopLeft, 0, 0, 260, MainGame.Height - 50);
+                CurtainRight = new SimpleGraphic(Assets.CurtainTopRight, MainGame.Width - 260, 0, 260, MainGame.Height - 50);
 
-            BackgroundLeft = new SimpleGraphic(Assets.CurtainBottomLeft, 0, 0, MainGame.Width / 2, MainGame.Height + 20);
-            BackgroundRight = new SimpleGraphic(Assets.CurtainBottomRight, MainGame.Width / 2, 0, MainGame.Width / 2, MainGame.Height + 20);
+                BackgroundLeft = new SimpleGraphic(Assets.CurtainBottomLeft, 0, 0, MainGame.Width / 2, MainGame.Height + 20);
+                BackgroundRight = new SimpleGraphic(Assets.CurtainBottomRight, MainGame.Width / 2, 0, MainGame.Width / 2, MainGame.Height + 20);
 
-            BackgroundLeft.ZDepth = BackgroundRight.ZDepth = -1;
+                BackgroundLeft.ZDepth = BackgroundRight.ZDepth = -1;
 
-            AddEntity(BackgroundLeft);
-            AddEntity(BackgroundRight);
+                AddEntity(BackgroundLeft);
+                AddEntity(BackgroundRight);
 
-            AddEntity(CurtainLeft);
-            AddEntity(CurtainRight);
+                AddEntity(CurtainLeft);
+                AddEntity(CurtainRight);
 
-            Actions.AddAction(new TweenPositionTo(BackgroundLeft, new Vector2(-(MainGame.Width / 2) + 160, 0), 2f, Sinusoidal.EaseOut), false);
-            Actions.AddAction(new TweenPositionTo(BackgroundRight, new Vector2(MainGame.Width - 160, 0), 2f, Sinusoidal.EaseOut), false);
+                Actions.AddAction(new TweenPositionTo(BackgroundLeft, new Vector2(-(MainGame.Width / 2) + 160, 0), 2f, Sinusoidal.EaseOut), false);
+                Actions.AddAction(new TweenPositionTo(BackgroundRight, new Vector2(MainGame.Width - 160, 0), 2f, Sinusoidal.EaseOut), false);
+            }
+
 
             World = new World(new Vector2(0f, 10f));
 
+            Inited = true;
         }
 
         public virtual void Update(GameTime gameTime) {

@@ -28,7 +28,7 @@ namespace ClownSchool {
         public static int KinectOffsetX = 150;
         public static int KinectOffsetY = 0;
 
-        public GameScreen CurrentScreen;
+        public ScreenManager ScreenManager;
 
         public bool DebugView = false;
 
@@ -49,8 +49,8 @@ namespace ClownSchool {
             kinectContext = new KinectContext(graphics.GraphicsDevice);
             kinectContext.Initialize();
 
-            CurrentScreen = new VersusPlayerScreen(kinectContext);
-            CurrentScreen.Init();
+            ScreenManager = new ScreenManager();
+            ScreenManager.AddScreen(new VersusPlayerScreen(kinectContext));
 
             debugComponent = new DebugComponent(this);
 
@@ -70,7 +70,7 @@ namespace ClownSchool {
             
             kinectContext.Update();
 
-            CurrentScreen.Update(gameTime);
+            ScreenManager.Update(gameTime);
 
             if (Keyboard.GetState().IsKeyDown(Keys.F12)) {
                 DebugView = !DebugView;
@@ -89,7 +89,7 @@ namespace ClownSchool {
                 spriteBatch.Draw(kinectContext.CurrentBitmap, new Rectangle(KinectOffsetX, KinectOffsetY, KinectWidth, KinectHeight), Color.White);
             }
 
-            CurrentScreen.Draw(spriteBatch);
+            ScreenManager.Draw(spriteBatch);
 
             if (DebugView) {
                 debugComponent.Draw(spriteBatch, gameTime);

@@ -118,6 +118,7 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="Assets.cs" />
+    <Compile Include="Bang\Actions\WaitForPlayerCount.cs" />
     <Compile Include="Bang\Coroutine\Coroutines.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Entity\Balloon.cs" />
@@ -151,6 +152,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Screens\GameScreen.cs" />
+    <Compile Include="Screens\PauseScreen.cs" />
+    <Compile Include="Screens\ScreenManager.cs" />
     <Compile Include="Screens\VersusPlayerScreen.cs" />
     <Compile Include="Screens\SinglePlayerScreen.cs" />
     <Compile Include="Screens\Playground.cs" />
