@@ -174,10 +174,10 @@
   <ItemGroup>
     <Content Include="lib\FarseerPhysicsXNA.dll" />
     <Content Include="lib\FarseerPhysicsXNA.pdb" />
-    <Content Include="lib\KinectInteraction170_32.dll">
+    <Content Include="KinectInteraction170_32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="lib\KinectInteraction170_64.dll">
+    <Content Include="KinectInteraction170_64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="BalloonArrangements\VersusPlayerScreen.csv">

@@ -21,7 +21,8 @@ namespace ClownSchool {
         public static Texture2D RopeSection { get; set; }
         public static Texture2D RopeKnot { get; set; }
 
-        public static Texture2D Indicator { get; set; }
+        public static Texture2D IndicatorGreen { get; set; }
+        public static Texture2D IndicatorYellow { get; set; }
 
         public static Texture2D InputTop { get; set; }
         public static Texture2D InputBottom { get; set; }
@@ -70,7 +71,8 @@ namespace ClownSchool {
             RopeSection = content.Load<Texture2D>("rope_section");
             RopeKnot = content.Load<Texture2D>("rope_knot");
 
-            Indicator = content.Load<Texture2D>("indicator_green");
+            IndicatorGreen = content.Load<Texture2D>("indicator_green");
+            IndicatorYellow = content.Load<Texture2D>("indicator_yellow");
 
             InputTop = content.Load<Texture2D>("input_top");
             InputBottom = content.Load<Texture2D>("input_bottom");

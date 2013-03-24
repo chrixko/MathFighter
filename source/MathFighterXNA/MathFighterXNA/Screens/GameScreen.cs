@@ -29,6 +29,12 @@ namespace ClownSchool.Screens {
         private SimpleGraphic BackgroundLeft;
         private SimpleGraphic BackgroundRight;
 
+        public bool SomePlayerIsDragging {
+            get {
+                return Entities.Where(h => (h.CollisionType == "hand" && (h as PlayerHand).DraggingBalloon != null)).Count() > 0;
+            }
+        }
+
         //Physics
         public World World;
 
@@ -52,7 +58,7 @@ namespace ClownSchool.Screens {
             Entities.Remove(entity);
         }
 
-        public virtual void Init() {
+        public virtual void Init() {            
             World = new World(new Vector2(0f, 10f));
 
             Inited = true;
