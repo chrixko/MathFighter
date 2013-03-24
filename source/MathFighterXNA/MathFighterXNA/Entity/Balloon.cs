@@ -164,7 +164,7 @@ namespace ClownSchool.Entity {
 
             if (Screen.World.BodyList.Contains(balloonBody)) {
                 var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
-                spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)balloonSize.X, (int)balloonSize.Y), new Rectangle(62 * (Number - 1), 0, 62, 89), Color.White, balloonBody.Rotation, new Vector2(balloonSize.X / 2, balloonSize.Y / 2), SpriteEffects.None, 0);
+                spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)balloonSize.X, (int)balloonSize.Y), new Rectangle(62 * (Number), 0, 62, 89), Color.White, balloonBody.Rotation, new Vector2(balloonSize.X / 2, balloonSize.Y / 2), SpriteEffects.None, 0);
             }
 
             if (popped && !popAnimation.Finished) {

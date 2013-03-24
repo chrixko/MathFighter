@@ -26,6 +26,8 @@ namespace ClownSchool.Screens {
 
         private Dictionary<DragableNumber, Vector2> Numbers { get; set; }
 
+        private bool Ended = false;
+
         public VersusPlayerScreen(KinectContext context) : base(context) {
         }
 
@@ -42,7 +44,7 @@ namespace ClownSchool.Screens {
             AddEntity(PlayerTwo);
 
             PlayerOneClock = new Clock(20, 20, 90);
-            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 90);
+            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 10);
 
             PlayerTwoClock.Paused = true;
 
@@ -65,7 +67,7 @@ namespace ClownSchool.Screens {
             var rand = new Random();
 
             var values = new List<int>();
-            for (int i = 1; i < 11; i++) {
+            for (int i = 0; i < 11; i++) {
                 values.Add(i);
             }
 
@@ -191,6 +193,27 @@ namespace ClownSchool.Screens {
 
             if (!PlayerOne.IsReady) {
                 AddPauseScreen();
+            }
+
+            if (!Ended) {
+                if (PlayerOneClock.Value == 0) {
+                    EndGame(PlayerTwo);
+                } else if (PlayerTwoClock.Value == 0) {
+                    EndGame(PlayerOne);
+                }
+            }
+
+        }
+
+        public void EndGame(Player winner) {
+            Ended = true;
+            for (int i = 0; i < 4; i++) {
+                var hand = i < 2 ? winner.LeftHand : winner.RightHand;
+
+                var balloon = new Balloon(100 * i, 0, 11);
+                AddEntity(balloon);
+
+                balloon.AttachTo(hand);
             }
         }
 
