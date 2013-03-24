@@ -50,7 +50,7 @@ namespace ClownSchool {
             kinectContext.Initialize();
 
             ScreenManager = new ScreenManager();
-            ScreenManager.AddScreen(new VersusPlayerScreen(kinectContext));
+            ScreenManager.AddScreen(new MenuScreen(kinectContext));
 
             debugComponent = new DebugComponent(this);
 

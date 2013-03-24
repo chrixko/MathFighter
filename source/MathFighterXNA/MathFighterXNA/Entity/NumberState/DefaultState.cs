@@ -9,8 +9,8 @@ namespace ClownSchool.Entity.NumberState {
 
         private Tweener defaultMoveTweener;
 
-        double maxHoverTime = .7;
-        double hoverTime = 0;
+        float maxHoverTime = .7f;
+        float hoverTime = 0;
 
         public DefaultState(DragableNumber owner) {
             Owner = owner;
@@ -41,7 +41,7 @@ namespace ClownSchool.Entity.NumberState {
                         hand.Grab(balloon);
                     }
                 } else {
-                    hoverTime += gameTime.ElapsedGameTime.TotalSeconds;
+                    hoverTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
             } else {
                 hoverTime = 0;

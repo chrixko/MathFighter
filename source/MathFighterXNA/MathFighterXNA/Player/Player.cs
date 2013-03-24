@@ -12,6 +12,8 @@ namespace ClownSchool {
         public PlayerHand LeftHand { get; private set; }
         public PlayerHand RightHand { get; private set; }
 
+        public bool DrawHands { get; set; }
+
         public bool IsDragging {
             get {
                 return LeftHand.DraggingBalloon != null || RightHand.DraggingBalloon != null;
@@ -45,6 +47,8 @@ namespace ClownSchool {
 
             LeftHand = new PlayerHand(this, JointType.HandLeft);
             RightHand = new PlayerHand(this, JointType.HandRight);
+
+            DrawHands = false;
         }
 
         public override void Init() {

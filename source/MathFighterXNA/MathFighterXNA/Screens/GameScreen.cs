@@ -68,8 +68,8 @@ namespace ClownSchool.Screens {
             CurtainLeft = new SimpleGraphic(Assets.CurtainTopLeft, 0, 0, 260, MainGame.Height - 50);
             CurtainRight = new SimpleGraphic(Assets.CurtainTopRight, MainGame.Width - 260, 0, 260, MainGame.Height - 50);
 
-            BackgroundLeft = new SimpleGraphic(Assets.CurtainBottomLeft, 0, 0, MainGame.Width / 2, MainGame.Height + 20);
-            BackgroundRight = new SimpleGraphic(Assets.CurtainBottomRight, MainGame.Width / 2, 0, MainGame.Width / 2, MainGame.Height + 20);
+            BackgroundLeft = new SimpleGraphic(Assets.CurtainBottomLeft, 0, 0, (MainGame.Width / 2) + 10, MainGame.Height + 20);
+            BackgroundRight = new SimpleGraphic(Assets.CurtainBottomRight, (MainGame.Width / 2) - 10, 0, (MainGame.Width / 2) + 10, MainGame.Height + 20);
 
             BackgroundLeft.ZDepth = BackgroundRight.ZDepth = -1;
 

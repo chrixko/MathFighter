@@ -44,6 +44,21 @@ namespace ClownSchool {
         public static Texture2D TextPlayerLeft { get; set; }
         public static Texture2D TextPleaseComeBack { get; set; }
         public static Texture2D PlayerSilhouette { get; set; }
+
+        public static Texture2D Glove { get; set; }
+
+        public static Texture2D MenuBalloons { get; set; }
+        public static Texture2D MenuLogo { get; set; }
+        public static Texture2D MenuSignGlow { get; set; }
+        public static Texture2D MenuSignSinglePlayer { get; set; }
+        public static Texture2D MenuSignMultiPlayer { get; set; }
+        public static Texture2D MenuSignCoop { get; set; }
+        public static Texture2D MenuSignVersus { get; set; }
+        public static Texture2D MenuSignHelp { get; set; }
+        public static Texture2D MenuSignHighscore { get; set; }
+
+        public static Texture2D MenuButtonGlow { get; set; }
+        public static Texture2D MenuButtonExit { get; set; }
         
         public static SpriteFont DebugFont { get; set; }
         public static SpriteFont SmallDebugFont { get; set; }
@@ -95,6 +110,21 @@ namespace ClownSchool {
             TextPlayerLeft = content.Load<Texture2D>("text_left");
             TextPleaseComeBack = content.Load<Texture2D>("text_come_back");
             PlayerSilhouette = content.Load<Texture2D>("silhouette");
+
+            Glove = content.Load<Texture2D>("glove");
+
+            MenuBalloons = content.Load<Texture2D>("Menu/menu_balloons");
+            MenuLogo = content.Load<Texture2D>("Menu/menu_logo");
+            MenuSignGlow = content.Load<Texture2D>("Menu/menu_sign_glow");
+            MenuSignSinglePlayer = content.Load<Texture2D>("Menu/menu_sign_singleplayer");
+            MenuSignMultiPlayer = content.Load<Texture2D>("Menu/menu_sign_multiplayer");
+            MenuSignCoop = content.Load<Texture2D>("Menu/menu_sign_coop");
+            MenuSignVersus = content.Load<Texture2D>("Menu/menu_sign_versus");
+            MenuSignHighscore = content.Load<Texture2D>("Menu/menu_sign_highscore");
+            MenuSignHelp = content.Load<Texture2D>("Menu/menu_sign_help");
+
+            MenuButtonExit = content.Load<Texture2D>("Menu/menu_button_exit");
+            MenuButtonGlow = content.Load<Texture2D>("Menu/menu_button_glow");
             
             DebugFont = content.Load<SpriteFont>("DebugFont");
             SmallDebugFont = content.Load<SpriteFont>("SmallDebugFont");
