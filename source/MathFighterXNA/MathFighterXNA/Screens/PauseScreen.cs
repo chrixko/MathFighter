@@ -14,7 +14,6 @@ namespace ClownSchool.Screens {
         public PauseState State;
 
         public PauseScreen(KinectContext context): base(context) {
-            RenderMasterLayout = false;
             State = PauseState.Default;
         }
 
@@ -23,15 +22,21 @@ namespace ClownSchool.Screens {
             Actions.AddAction(new WaitForPlayerCount(count, Context), true);
             Actions.AddAction(new CallFunction(delegate() { State = PauseState.Countdown; }), true);
         }
-
-        //private float countdownTime = 5;
-        private float countDownTimer = 5;
+    
+        private float countDownTimer = 6;
+        private float secondTimer = 0;
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
             switch (State) {
                 case PauseState.Countdown:
                     countDownTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    secondTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    if (secondTimer <= 0) {
+                        Assets.TimeShort.Play();
+                        secondTimer = 1f;
+                    }
 
                     if(countDownTimer <= 0) {
                         Manager.RemoveScreen(this);

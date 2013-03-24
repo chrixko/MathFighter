@@ -30,7 +30,8 @@ namespace ClownSchool.Screens {
         }
 
         public override void Init() {
-            base.Init();
+            AddCurtain();
+            OpenCurtain();
 
             PlayerOne = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
             PlayerTwo = new Player(Context, SkeletonPlayerAssignment.RightSkeleton);
@@ -53,7 +54,9 @@ namespace ClownSchool.Screens {
             AddInput();
 
             AddEntity(new Scissors(120, MainGame.Height - 350, Scissors.ScissorPosition.Left));
-            AddEntity(new Scissors(MainGame.Width - 120, MainGame.Height - 350, Scissors.ScissorPosition.Right));            
+            AddEntity(new Scissors(MainGame.Width - 120, MainGame.Height - 350, Scissors.ScissorPosition.Right));
+
+            base.Init();
         }
 
         private void LoadNumbersFromFile() {
@@ -187,12 +190,21 @@ namespace ClownSchool.Screens {
             base.Update(gameTime);
 
             if (!PlayerOne.IsReady) {
-                var pauseScreen = new PauseScreen(Context);
-                pauseScreen.WaitForPlayerCount(1);
-
-                Manager.AddScreen(pauseScreen);
+                AddPauseScreen();
             }
-        }        
+        }
+
+        public void AddPauseScreen() {
+            var pauseScreen = new PauseScreen(Context);
+            var sil1 = new SimpleGraphic(Assets.PlayerSilhouette, 250, 75, 480, 588);
+            var sil2 = new SimpleGraphic(Assets.PlayerSilhouette, 650, 75, 480, 588);
+            pauseScreen.AddEntity(sil1);
+            pauseScreen.AddEntity(sil2);
+            pauseScreen.WaitForPlayerCount(1);
+
+            Manager.AddScreen(pauseScreen);
+
+        }
 
         public override void Draw(SpriteBatch spriteBatch) {
             base.Draw(spriteBatch);
