@@ -10,6 +10,7 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using System;
 using System.Linq;
+using System.Diagnostics;
 
 namespace ClownSchool.Screens {
 
@@ -51,7 +52,7 @@ namespace ClownSchool.Screens {
             AddEntity(PlayerOneClock);
             AddEntity(PlayerTwoClock);
 
-            LoadNumbersFromFile();
+            Coroutines.Start(LoadNumbersFromFile());
 
             AddInput();
 
@@ -61,7 +62,7 @@ namespace ClownSchool.Screens {
             base.Init();
         }
 
-        private void LoadNumbersFromFile() {
+        private IEnumerator LoadNumbersFromFile() {
             Numbers = new Dictionary<DragableNumber, Vector2>();
 
             var rand = new Random();
@@ -87,10 +88,18 @@ namespace ClownSchool.Screens {
 
                         num.ZDepth = -1;
 
+                        yield return Pause(0.1f);
+
                         AddEntity(num);
                     }
                 }
-            } 
+            }   
+        }
+
+        private static IEnumerator Pause(float time) {
+            var watch = Stopwatch.StartNew();
+            while (watch.Elapsed.TotalSeconds < time)
+                yield return 0;
         }
 
         public void PauseClocks() {

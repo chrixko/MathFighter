@@ -15,7 +15,7 @@ namespace ClownSchool.Entity.NumberState {
         public DefaultState(DragableNumber owner) {
             Owner = owner;
 
-            defaultMoveTweener = new Tweener(owner.Y, owner.Y + 10, 1f, ClownSchool.Tweening.Quadratic.EaseInOut);
+            defaultMoveTweener = new Tweener(owner.Y, owner.Y + 5, 1f, ClownSchool.Tweening.Quadratic.EaseInOut);
             defaultMoveTweener.Ended += delegate() { defaultMoveTweener.Reverse(); };
         }
 
