@@ -44,7 +44,7 @@ namespace ClownSchool.Screens {
             AddEntity(PlayerTwo);
 
             PlayerOneClock = new Clock(20, 20, 90);
-            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 10);
+            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 90);
 
             PlayerTwoClock.Paused = true;
 
@@ -207,7 +207,14 @@ namespace ClownSchool.Screens {
 
         public void EndGame(Player winner) {
             Ended = true;
-            for (int i = 0; i < 4; i++) {
+
+            Actions.AddAction(new EndEquationInput(Input), true);
+
+            foreach (DragableNumber num in Entities.Where(ent => ent.CollisionType == "number")) {
+                Actions.AddAction(new TweenPositionTo(num, new Vector2(1300, -200), 1f, Back.EaseIn), false);
+            }
+
+            for (int i = 0; i < 4; i++) {               
                 var hand = i < 2 ? winner.LeftHand : winner.RightHand;
 
                 var balloon = new Balloon(100 * i, 0, 11);

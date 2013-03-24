@@ -16,6 +16,16 @@ namespace ClownSchool.Entity {
         public int OffsetX { get; set; }
         public int OffsetY { get; set; }
 
+        public int Number {
+            get {
+                if (Balloon != null) {
+                    return Balloon.Number;
+                }
+
+                return 0;
+            }
+        }
+
         public Point NumberPosition {
             get {
                 return new Point(this.X, this.BoundingBox.Center.Y - 170);
@@ -73,6 +83,12 @@ namespace ClownSchool.Entity {
                 if (Player.IsDragging) {
                     spriteBatch.Draw(Assets.Indicator, new Rectangle(BoundingBox.Center.X, BoundingBox.Center.Y, 50, 50), null, new Color(255,255,255, 100), 0, new Vector2(25, 25), SpriteEffects.None, 0);
                 }
+            }
+        }
+
+        public void PopBalloon() {
+            if (Balloon != null) {
+                Balloon.Pop();
             }
         }
 

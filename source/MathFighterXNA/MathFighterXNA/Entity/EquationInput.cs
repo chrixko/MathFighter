@@ -26,7 +26,11 @@ namespace ClownSchool.Entity {
 
         public bool IsAnswerSet {
             get {
-                return (FirstProductSlot.Balloon != null && SecondProductSlot.Balloon != null);
+                if (Product.ToString().Length > 1) {
+                    return (FirstProductSlot.Balloon != null && SecondProductSlot.Balloon != null);
+                } else {
+                    return (FirstProductSlot.Balloon != null || SecondProductSlot.Balloon != null);
+                }                
             }
         }
 
@@ -34,7 +38,19 @@ namespace ClownSchool.Entity {
             get {
                 if (!IsEquationSet || !IsAnswerSet) return false;
 
-                return (FirstEquationSlot.Balloon.Number * SecondEquationSlot.Balloon.Number) == Convert.ToInt32(FirstProductSlot.Balloon.Number.ToString() + SecondProductSlot.Balloon.Number.ToString());
+                return Product == Answer;
+            }
+        }
+
+        public int Product {
+            get {
+                return FirstEquationSlot.Number * SecondEquationSlot.Number;
+            }
+        }
+
+        public int Answer {
+            get {
+                return Convert.ToInt32(FirstProductSlot.Number.ToString() + SecondProductSlot.Number.ToString());
             }
         }
 
@@ -67,10 +83,10 @@ namespace ClownSchool.Entity {
         }
 
         public void PopBalloons() {
-            FirstEquationSlot.Balloon.Pop();
-            SecondEquationSlot.Balloon.Pop();
-            FirstProductSlot.Balloon.Pop();
-            SecondProductSlot.Balloon.Pop();
+            FirstEquationSlot.PopBalloon();
+            SecondEquationSlot.PopBalloon();
+            FirstProductSlot.PopBalloon();
+            SecondProductSlot.PopBalloon();
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
