@@ -67,6 +67,8 @@ namespace ClownSchool.Entity.Menu {
 
             if (hoverTime > 0 && hoverTime <= maxHoverTime) {
                 PlayerHand hand = (PlayerHand)GetFirstCollidingEntity("hand");
+                if (hand == null)
+                    return;
 
                 for (int i = 0; i <= 360; i++) {
                     var destRect = new Rectangle(hand.X - 50, hand.Y - 50, 1, 20);

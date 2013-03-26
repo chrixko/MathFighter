@@ -28,6 +28,9 @@ namespace ClownSchool.Entity {
         public static List<FontNumber> FromInteger(int number, int posX, int posY, Point size) {
             var numbers = new List<FontNumber>();
 
+            if (number < 0)
+                number = 0;
+
             var numString = number.ToString("00");
 
             for (int i = 0; i < numString.Length; i++) {

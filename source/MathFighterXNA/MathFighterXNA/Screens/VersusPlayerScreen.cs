@@ -6,11 +6,10 @@ using ClownSchool.Tweening;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
 using System;
 using System.Linq;
 using System.Diagnostics;
+using ClownSchool.Entity.Menu;
 
 namespace ClownSchool.Screens {
 
@@ -56,8 +55,10 @@ namespace ClownSchool.Screens {
 
             AddInput();
 
-            AddEntity(new Scissors(120, MainGame.Height - 350, Scissors.ScissorPosition.Left));
-            AddEntity(new Scissors(MainGame.Width - 120, MainGame.Height - 350, Scissors.ScissorPosition.Right));
+            if (!Configuration.GRABBING_ENABLED) {
+                AddEntity(new Scissors(120, MainGame.Height - 350, Scissors.ScissorPosition.Left));
+                AddEntity(new Scissors(MainGame.Width - 120, MainGame.Height - 350, Scissors.ScissorPosition.Right));
+            }
 
             base.Init();
         }
@@ -89,7 +90,7 @@ namespace ClownSchool.Screens {
                         num.ZDepth = -1;
 
                         yield return Pause(0.1f);
-
+                        Assets.BalloonPlace.Play(0.5f, 0, 0);
                         AddEntity(num);
                     }
                 }
@@ -162,8 +163,8 @@ namespace ClownSchool.Screens {
 
             Input.CurrentPlayer = CurrentPlayer;
 
-            var left = new Vector2(Input.X - 100, 300);
-            var right = new Vector2(Input.X + 80, 300);
+            var left = new Vector2(Input.X - 50, 250);
+            var right = new Vector2(Input.X + 80, 250);
 
             Input.Actions.AddAction(new CallFunction(delegate() { PauseClocks(); }), true);
             Input.Actions.AddAction(new TweenPositionTo(Input, CurrentPlayer == PlayerOne ? left : right, 2f, Tweening.Back.EaseOut), true);
@@ -217,10 +218,12 @@ namespace ClownSchool.Screens {
         public void EndGame(Player winner) {
             Ended = true;
 
+            Manager.FadeInSong(Assets.WinSong, false);
+
             Actions.AddAction(new EndEquationInput(Input), true);
 
             foreach (DragableNumber num in Entities.Where(ent => ent.CollisionType == "number")) {
-                Actions.AddAction(new TweenPositionTo(num, new Vector2(1300, -200), 1f, Back.EaseIn), false);
+                Actions.AddAction(new TweenPositionTo(num, new Vector2(1300, -200), 1f, Linear.EaseIn), false);
             }
 
             for (int i = 0; i < 4; i++) {               
@@ -231,6 +234,17 @@ namespace ClownSchool.Screens {
 
                 balloon.AttachTo(hand);
             }
+
+            var posMenu = new Vector2(300, (MainGame.Height / 2) - 250);
+            var menu = new MenuItem(Assets.MenuSignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); Manager.FadeInSong(Assets.MenuSong, true); });
+            menu.Actions.AddAction(new TweenPositionTo(menu, posMenu, 2f, Back.EaseOut), true);
+            AddEntity(menu);
+
+            var posRestart = new Vector2(MainGame.Width - 600, (MainGame.Height / 2) - 250);
+
+            var restart = new MenuItem(Assets.MenuSignRestart, MainGame.Width + 100, -300, delegate() { Manager.SwitchScreen(new VersusPlayerScreen(Context)); Manager.FadeInSong(Assets.GameSong, true); });
+            restart.Actions.AddAction(new TweenPositionTo(restart, posRestart, 2f, Back.EaseOut), true);
+            AddEntity(restart);
         }
 
         public void AddPauseScreen() {

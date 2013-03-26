@@ -56,6 +56,8 @@ namespace ClownSchool {
         public static Texture2D MenuSignVersus { get; set; }
         public static Texture2D MenuSignHelp { get; set; }
         public static Texture2D MenuSignHighscore { get; set; }
+        public static Texture2D MenuSignRestart { get; set; }
+        public static Texture2D MenuSignMenu { get; set; }
 
         public static Texture2D MenuButtonGlow { get; set; }
         public static Texture2D MenuButtonExit { get; set; }
@@ -72,6 +74,11 @@ namespace ClownSchool {
         public static SoundEffect TimeShort { get; set; }
         public static SoundEffect AnswerWrong { get; set; }
         public static SoundEffect ScissorsSnip { get; set; }
+        public static SoundEffect BalloonPlace { get; set; }
+
+        public static Song GameSong { get; set; }
+        public static Song MenuSong { get; set; }
+        public static Song WinSong { get; private set; }
         
         public static void LoadContent(ContentManager content) {
             NumberSlotSprite = content.Load<Texture2D>("balloon_gray");
@@ -122,6 +129,8 @@ namespace ClownSchool {
             MenuSignVersus = content.Load<Texture2D>("Menu/menu_sign_versus");
             MenuSignHighscore = content.Load<Texture2D>("Menu/menu_sign_highscore");
             MenuSignHelp = content.Load<Texture2D>("Menu/menu_sign_help");
+            MenuSignRestart = content.Load<Texture2D>("Menu/menu_sign_restart");
+            MenuSignMenu = content.Load<Texture2D>("Menu/menu_sign_menu");
 
             MenuButtonExit = content.Load<Texture2D>("Menu/menu_button_exit");
             MenuButtonGlow = content.Load<Texture2D>("Menu/menu_button_glow");
@@ -138,6 +147,11 @@ namespace ClownSchool {
             TimeShort = content.Load<SoundEffect>("sounds/TimeShort"); //http://www.flashkit.com/soundfx/Cartoon/Timer-GamePro9-8160/index.php
             AnswerWrong = content.Load<SoundEffect>("sounds/AnswerWrong"); //http://www.flashkit.com/soundfx/Cartoon/Slide_fl-Texavery-8987/index.php
             ScissorsSnip = content.Load<SoundEffect>("sounds/scissors_snip");
+            BalloonPlace = content.Load<SoundEffect>("sounds/BalloonPlace");
+
+            GameSong = content.Load<Song>("songs/toon");
+            MenuSong = content.Load<Song>("songs/menu");
+            WinSong = content.Load <Song>("songs/win");
         }
     }
 }

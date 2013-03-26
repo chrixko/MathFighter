@@ -78,7 +78,7 @@ namespace ClownSchool {
 
             if (Configuration.GRABBING_ENABLED) {
                 if (IsGrabbing) {
-                    spriteBatch.Draw(Assets.CactusSprite, BoundingBox, new Color(100, 100, 100, 50));
+                    //spriteBatch.Draw(Assets.CactusSprite, BoundingBox, new Color(100, 100, 100, 50));
                 }
             }
 
