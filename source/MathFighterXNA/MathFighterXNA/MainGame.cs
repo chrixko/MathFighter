@@ -32,10 +32,12 @@ namespace ClownSchool {
 
         public bool DebugView = false;
 
+        Matrix spriteScale;
+
         public MainGame() {
             graphics = new GraphicsDeviceManager(this); 
             Content.RootDirectory = "Content";
-
+                       
             graphics.PreferredBackBufferWidth = Width;
             graphics.PreferredBackBufferHeight = Height;
             this.graphics.SynchronizeWithVerticalRetrace = false;
@@ -58,7 +60,12 @@ namespace ClownSchool {
         }
 
         protected override void LoadContent() {           
-            spriteBatch = new ExtendedSpriteBatch(GraphicsDevice);            
+            spriteBatch = new ExtendedSpriteBatch(GraphicsDevice);
+
+            float scaleX = graphics.GraphicsDevice.Viewport.Width / 1324f;
+            float scaleY = graphics.GraphicsDevice.Viewport.Height / 768f;
+
+            spriteScale = Matrix.CreateScale(scaleX, scaleY, 1);
         }
 
         protected override void UnloadContent() {
@@ -81,8 +88,8 @@ namespace ClownSchool {
 
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
-            
-            spriteBatch.Begin();
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, spriteScale);
 
             //TODO move kinectContext into the corresponding screens
             if (kinectContext.CurrentBitmap != null) {
