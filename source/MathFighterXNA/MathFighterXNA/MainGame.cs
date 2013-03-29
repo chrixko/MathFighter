@@ -44,6 +44,8 @@ namespace ClownSchool {
             IsFixedTimeStep = true;
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
             this.viewPortRectangle = new Rectangle(0, 0, Width, Height);
+
+            graphics.IsFullScreen = false;
         }
 
         protected override void Initialize() {

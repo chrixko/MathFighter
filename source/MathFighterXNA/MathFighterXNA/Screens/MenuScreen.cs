@@ -29,12 +29,12 @@ namespace ClownSchool.Screens {
 
             MediaPlayer.Volume = 0f;
 
-            Manager.FadeInSong(Assets.MenuSong, true);
+            Manager.FadeInSong(Assets.MenuSong, true, 0.5f);
 
             tweenerY = new Tweener(0, 20, 1.5f, Linear.EaseIn);
             tweenerY.Ended += delegate() { tweenerY.Reverse(); };
 
-            Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton);
+            Player = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
             Player.DrawHands = true;
 
             AddEntity(Player);
@@ -85,7 +85,7 @@ namespace ClownSchool.Screens {
         void OnClick_Multiplayer() {
             Manager.AddScreen(new VersusPlayerScreen(Context));
             Manager.RemoveScreen(this);
-            Manager.FadeInSong(Assets.GameSong, true);
+            Manager.FadeInSong(Assets.GameSong, true, 0.2f);
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {

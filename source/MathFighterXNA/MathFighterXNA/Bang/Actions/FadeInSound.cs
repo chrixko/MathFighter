@@ -11,12 +11,13 @@ namespace ClownSchool.Bang.Actions {
         private bool isComplete { get; set; }
 
         public Song Song { get; set; }
-
         public bool Repeat { get; set; }
+        public float MaxVolume { get; set; }
 
-        public FadeInSong(Song song, bool repeat) {
+        public FadeInSong(Song song, bool repeat, float maxVolume) {
             Song = song;
             Repeat = repeat;
+            MaxVolume = maxVolume;
         }
 
         public bool IsBlocking() {
@@ -45,7 +46,7 @@ namespace ClownSchool.Bang.Actions {
                     MediaPlayer.Play(Song);
                 }
             } else {
-                if(MediaPlayer.Volume < 0.4f) {
+                if(MediaPlayer.Volume < MaxVolume) {
                     MediaPlayer.Volume += 0.01f;
                 } else {
                     Complete();

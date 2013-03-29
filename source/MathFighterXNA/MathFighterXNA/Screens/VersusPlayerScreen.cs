@@ -43,8 +43,8 @@ namespace ClownSchool.Screens {
             AddEntity(PlayerOne);
             AddEntity(PlayerTwo);
 
-            PlayerOneClock = new Clock(20, 20, 90);
-            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 90);
+            PlayerOneClock = new Clock(20, 20, 40);
+            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 40);
 
             PlayerTwoClock.Paused = true;
 
@@ -218,7 +218,7 @@ namespace ClownSchool.Screens {
         public void EndGame(Player winner) {
             Ended = true;
 
-            Manager.FadeInSong(Assets.WinSong, false);
+            Manager.FadeInSong(Assets.WinSong, false, 0.8f);
 
             Actions.AddAction(new EndEquationInput(Input), true);
 
@@ -236,13 +236,13 @@ namespace ClownSchool.Screens {
             }
 
             var posMenu = new Vector2(300, (MainGame.Height / 2) - 250);
-            var menu = new MenuItem(Assets.MenuSignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); Manager.FadeInSong(Assets.MenuSong, true); });
+            var menu = new MenuItem(Assets.MenuSignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); Manager.FadeInSong(Assets.MenuSong, true, 0.5f); });
             menu.Actions.AddAction(new TweenPositionTo(menu, posMenu, 2f, Back.EaseOut), true);
             AddEntity(menu);
 
             var posRestart = new Vector2(MainGame.Width - 600, (MainGame.Height / 2) - 250);
 
-            var restart = new MenuItem(Assets.MenuSignRestart, MainGame.Width + 100, -300, delegate() { Manager.SwitchScreen(new VersusPlayerScreen(Context)); Manager.FadeInSong(Assets.GameSong, true); });
+            var restart = new MenuItem(Assets.MenuSignRestart, MainGame.Width + 100, -300, delegate() { Manager.SwitchScreen(new VersusPlayerScreen(Context)); Manager.FadeInSong(Assets.GameSong, true, 0.2f); });
             restart.Actions.AddAction(new TweenPositionTo(restart, posRestart, 2f, Back.EaseOut), true);
             AddEntity(restart);
         }

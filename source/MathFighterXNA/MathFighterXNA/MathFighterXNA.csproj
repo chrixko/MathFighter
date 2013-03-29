@@ -119,6 +119,7 @@
     <Compile Include="Animation.cs" />
     <Compile Include="Assets.cs" />
     <Compile Include="Bang\Actions\FadeInSound.cs" />
+    <Compile Include="Bang\Actions\WaitForCondition.cs" />
     <Compile Include="Bang\Actions\WaitForPlayerCount.cs" />
     <Compile Include="Bang\Coroutine\Coroutines.cs" />
     <Compile Include="Configuration.cs" />

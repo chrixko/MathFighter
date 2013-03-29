@@ -60,7 +60,7 @@ namespace ClownSchool.Entity.Menu {
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
             if (selected) {
-                spriteBatch.Draw(Assets.MenuSignGlow, new Rectangle(X - 20, Y - 20, Size.X + 40, Size.Y + 40), Color.White);
+                spriteBatch.Draw(Assets.MenuSignGlow, new Rectangle(X - 30, Y - 30, Size.X + 60, Size.Y + 60), Color.White);
             }
             
             spriteBatch.Draw(Graphic, new Rectangle(X, Y, Size.X, Size.Y), Color.White);

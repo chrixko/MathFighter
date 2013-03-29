@@ -31,8 +31,8 @@ namespace ClownSchool.Screens {
                 screen.Init();            
         }
 
-        public void FadeInSong(Song song, bool repeat) {
-            Actions.AddAction(new FadeInSong(song, repeat), true);
+        public void FadeInSong(Song song, bool repeat, float maxVolume) {
+            Actions.AddAction(new FadeInSong(song, repeat, maxVolume), true);
         }
 
         public void RemoveScreen(GameScreen screen) {

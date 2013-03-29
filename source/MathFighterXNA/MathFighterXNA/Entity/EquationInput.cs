@@ -50,7 +50,14 @@ namespace ClownSchool.Entity {
 
         public int Answer {
             get {
-                return Convert.ToInt32(FirstProductSlot.Number.ToString() + SecondProductSlot.Number.ToString());
+                string num = "";
+                if (FirstEquationSlot.HasNumber)
+                    num += FirstEquationSlot.Number.ToString();
+
+                if (SecondEquationSlot.HasNumber)
+                    num += SecondEquationSlot.Number.ToString();
+
+                return Convert.ToInt32(num);
             }
         }
 

@@ -191,6 +191,12 @@ namespace ClownSchool.Entity {
             fixedJoint = null;
         }
 
+        public void Loose() {
+            Screen.World.RemoveJoint(fixedJoint);
+            fixedJoint = null;
+            AttachedEntity = null;
+        }
+
         public override void Delete() {
             if (Screen.World.BodyList.Contains(balloonBody))
                 Screen.World.RemoveBody(balloonBody);
