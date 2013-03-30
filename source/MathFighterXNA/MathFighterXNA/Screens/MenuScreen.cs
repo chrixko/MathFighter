@@ -8,6 +8,7 @@ using ClownSchool.Tweening;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 using ClownSchool.Bang.Actions;
+using Microsoft.Xna.Framework.Input;
 
 namespace ClownSchool.Screens {
     public class MenuScreen : GameScreen {
@@ -85,7 +86,6 @@ namespace ClownSchool.Screens {
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
             base.Update(gameTime);
 
-            
 
             if (TopRight != null && TopRight.Actions.IsComplete()) {
                 tweenerY.Update(gameTime);

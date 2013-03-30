@@ -151,7 +151,7 @@ namespace ClownSchool.Entity {
                 popAnimation.Update(gameTime);
             }
 
-            if (ConvertUnits.ToDisplayUnits(balloonBody.Position.Y) < -200) {
+            if (ConvertUnits.ToDisplayUnits(balloonBody.Position.Y) < -500) {
                 Screen.RemoveEntity(this);
             }
         }

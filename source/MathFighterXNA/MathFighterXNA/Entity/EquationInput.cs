@@ -8,8 +8,6 @@ namespace ClownSchool.Entity {
 
     public class EquationInput : BaseEntity {
 
-        public Player CurrentPlayer { get; set; }
-
         public List<NumberSlot> Slots;
 
         public NumberSlot FirstEquationSlot;

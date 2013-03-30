@@ -22,8 +22,8 @@ namespace ClownSchool {
         }
 
         public PlayerHand(Player player, JointType hand) {            
-            this.Offset = new Point(-20, -20);
-            this.Size = new Point(40, 40);
+            this.Offset = new Point(-30, -30);
+            this.Size = new Point(50, 50);
 
             Player = player;
             Hand = hand;

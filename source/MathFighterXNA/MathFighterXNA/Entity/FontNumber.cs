@@ -25,13 +25,13 @@ namespace ClownSchool.Entity {
             spriteBatch.Draw(Assets.FontNumberSpritesheet, BoundingBox, new Rectangle(Value * 87, 0, 87, 100), Color.White);
         }
 
-        public static List<FontNumber> FromInteger(int number, int posX, int posY, Point size) {
+        public static List<FontNumber> FromInteger(int number, int posX, int posY, Point size, string format) {
             var numbers = new List<FontNumber>();
 
             if (number < 0)
                 number = 0;
 
-            var numString = number.ToString("00");
+            var numString = number.ToString(format);
 
             for (int i = 0; i < numString.Length; i++) {
                 numbers.Add(new FontNumber(int.Parse(numString[i].ToString()), posX + (i * size.X), posY, size));

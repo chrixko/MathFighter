@@ -8,38 +8,24 @@ using System;
 
 namespace ClownSchool.Screens {
 
-    public class SinglePlayerScreen : GameScreen {
-        public Player Player { get; set; }
+    public class SinglePlayerScreen : CoopPlayerScreen {
 
-        double Timer = 60;
+        public SinglePlayerScreen(KinectContext context)
+            : base(context) {                
+        }
 
-        public SinglePlayerScreen(KinectContext context) : base(context) {            
+        public override void AddPlayers() {
+            PlayerOne = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
+            PlayerTwo = PlayerOne;
+
+            AddEntity(PlayerOne);
         }
 
         public override void Init() {
             base.Init();
 
-            Player = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton);
-            AddEntity(Player);
-
-            for (int i = 1; i <= 10; i++)
-            {
-                double dy = System.Math.Pow((60 * i - 30)-300, 2) * 0.002 +15;
-                AddEntity(new DragableNumber(Player, System.Convert.ToInt32((60 * i)-30), System.Convert.ToInt32(dy), i));
-            }                       
-
+            NeededPlayerCount = 1;
         }
 
-        public override void Update(GameTime gameTime) {
-            base.Update(gameTime);
-
-            Timer -= gameTime.ElapsedGameTime.TotalSeconds;
-        }        
-
-        public override void Draw(SpriteBatch spriteBatch) {
-            base.Draw(spriteBatch);
-
-            spriteBatch.DrawString(Assets.DebugFont, string.Concat(((int)Timer).ToString(), "s"), new Vector2(MainGame.Width / 2 - 20, 100), Color.Orange);
-        }
     }
 }
