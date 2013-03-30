@@ -43,8 +43,8 @@ namespace ClownSchool.Screens {
             AddEntity(PlayerOne);
             AddEntity(PlayerTwo);
 
-            PlayerOneClock = new Clock(20, 20, 40);
-            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 40);
+            PlayerOneClock = new Clock(20, 20, 90);
+            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 90);
 
             PlayerTwoClock.Paused = true;
 

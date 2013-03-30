@@ -19,8 +19,10 @@ namespace ClownSchool.Screens {
             }
         }
 
-        public ScreenManager() {
+        public MainGame Game { get; private set; }
 
+        public ScreenManager(MainGame game) {
+            Game = game;
         }
 
         public void AddScreen(GameScreen screen) {

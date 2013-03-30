@@ -39,7 +39,7 @@ namespace ClownSchool.Entity.Menu {
 
         public override void Delete() {
             foreach (var itm in Items) {
-                itm.Delete();
+                Screen.RemoveEntity(itm);
             }
         }
     }

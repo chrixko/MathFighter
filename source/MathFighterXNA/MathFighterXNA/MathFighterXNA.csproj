@@ -127,6 +127,7 @@
     <Compile Include="Entity\Cactus.cs" />
     <Compile Include="Entity\Clock.cs" />
     <Compile Include="Entity\FontNumber.cs" />
+    <Compile Include="Entity\Menu\MenuButton.cs" />
     <Compile Include="Entity\Menu\Menu.cs" />
     <Compile Include="Entity\Menu\MenuItem.cs" />
     <Compile Include="Entity\NumberState\IdleState.cs" />

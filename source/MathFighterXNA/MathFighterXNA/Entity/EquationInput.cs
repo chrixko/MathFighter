@@ -51,11 +51,11 @@ namespace ClownSchool.Entity {
         public int Answer {
             get {
                 string num = "";
-                if (FirstEquationSlot.HasNumber)
-                    num += FirstEquationSlot.Number.ToString();
+                if (FirstProductSlot.HasNumber)
+                    num += FirstProductSlot.Number.ToString();
 
-                if (SecondEquationSlot.HasNumber)
-                    num += SecondEquationSlot.Number.ToString();
+                if (SecondProductSlot.HasNumber)
+                    num += SecondProductSlot.Number.ToString();
 
                 return Convert.ToInt32(num);
             }

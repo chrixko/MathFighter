@@ -6,30 +6,26 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
 namespace ClownSchool.Entity.Menu {
-    public class MenuItem : BaseEntity {
+    public class MenuButton : BaseEntity {
 
         public Texture2D Graphic { get; set; }
         public Action OnClick { get; set; }
 
         public Menu Menu { get; set; }
 
-        public bool RenderBalloons { get; set; }
-
         private bool selected { get; set; }
 
         private float hoverTime = 0f;
         private float maxHoverTime = 2f;
 
-        public MenuItem(Texture2D graphic, int posX, int posY, Action onClick) {
+        public MenuButton(Texture2D graphic, int posX, int posY, Action onClick) {
             Graphic = graphic;
             OnClick = onClick;
 
             X = posX;
             Y = posY;
 
-            Size = new Point(200, 107);
-
-            RenderBalloons = false;
+            Size = new Point(130, 130);
         }
 
         public override void Init() {
@@ -63,13 +59,8 @@ namespace ClownSchool.Entity.Menu {
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
-            if (RenderBalloons) {
-                spriteBatch.Draw(Assets.MenuBalloons, new Rectangle(X - 55, Y - 190, 150, 195), Color.White);
-                spriteBatch.Draw(Assets.MenuBalloons, new Rectangle(X + 123, Y - 190, 150, 195), Color.White);
-            }
-
             if (selected) {
-                spriteBatch.Draw(Assets.MenuSignGlow, new Rectangle(X - 30, Y - 30, Size.X + 60, Size.Y + 60), Color.White);
+                spriteBatch.Draw(Assets.MenuButtonGlow, new Rectangle(X - 30, Y - 30, Size.X + 60, Size.Y + 60), Color.White);
             }
             
             spriteBatch.Draw(Graphic, new Rectangle(X, Y, Size.X, Size.Y), Color.White);

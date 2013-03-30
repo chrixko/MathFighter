@@ -19,6 +19,16 @@ namespace ClownSchool.Screens {
         private Tweener tweenerY;
 
         private Dictionary<BaseEntity, Vector2> tweenObjects = new Dictionary<BaseEntity, Vector2>();
+        
+        private static Vector2 topRightPosition = new Vector2(MainGame.Width - 400, 250);
+        private static Vector2 topLeftPosition = new Vector2(200, 250);
+        private static Vector2 bottomRightPosition = new Vector2(MainGame.Width - 400, 450);
+        private static Vector2 bottomLeftPosition = new Vector2(200, 450);            
+
+        private MenuItem TopRight;
+        private MenuItem TopLeft;
+        private MenuItem BottomRight;
+        private MenuItem BottomLeft;
 
         public MenuScreen(KinectContext context): base(context) {
             MainMenu = new Menu();
@@ -47,42 +57,26 @@ namespace ClownSchool.Screens {
             var logo = new SimpleGraphic(Assets.MenuLogo, (MainGame.Width / 2) - logoWidth / 2, ((MainGame.Height / 2) - logoHeight / 2) - 100, logoWidth, logoHeight);
             AddEntity(logo);
 
-            var balloon1 = new SimpleGraphic(Assets.MenuBalloons, 145, 250 - 190, 150, 195);
-            tweenObjects.Add(balloon1, new Vector2(balloon1.X, balloon1.Y));
-            AddEntity(balloon1);
+            MainMenu.AddItem(new MenuItem(Assets.MenuSignMultiPlayer, 0, 0, OnClick_Multiplayer));
+            MainMenu.AddItem(new MenuItem(Assets.MenuSignSinglePlayer, 0, 0, null));
+            MainMenu.AddItem(new MenuItem(Assets.MenuSignHighscore, 0, 0, null));
+            MainMenu.AddItem(new MenuItem(Assets.MenuSignHelp, 0, 0, null));
 
-            var balloon2 = new SimpleGraphic(Assets.MenuBalloons, 323, 250 - 190, 150, 195);
-            tweenObjects.Add(balloon2, new Vector2(balloon2.X, balloon2.Y));
-            AddEntity(balloon2);
+            LoadMenu(MainMenu);
 
-            var balloon3 = new SimpleGraphic(Assets.MenuBalloons, 868, 250 - 190, 150, 195);
-            tweenObjects.Add(balloon3, new Vector2(balloon3.X, balloon3.Y));
-            AddEntity(balloon3);
+            var exit = new MenuButton(Assets.MenuButtonExit, (MainGame.Width / 2) - 65, MainGame.Height - 150, OnClick_Exit);
+            AddEntity(exit);
+        }
 
-            var balloon4 = new SimpleGraphic(Assets.MenuBalloons, 1048, 250 - 190, 150, 195);
-            tweenObjects.Add(balloon4, new Vector2(balloon4.X, balloon4.Y));
-            AddEntity(balloon4);
-
-            var singlePlayer = new MenuItem(Assets.MenuSignSinglePlayer, 200, 450, null);
-            tweenObjects.Add(singlePlayer, new Vector2(singlePlayer.X, singlePlayer.Y));
-            MainMenu.AddItem(singlePlayer);
-
-            var highscore = new MenuItem(Assets.MenuSignHighscore, MainGame.Width - 400, 250, null);
-            tweenObjects.Add(highscore, new Vector2(highscore.X, highscore.Y));
-            MainMenu.AddItem(highscore);
-            
-            var multiPlayer = new MenuItem(Assets.MenuSignMultiPlayer, 200, 250, OnClick_Multiplayer);
-            tweenObjects.Add(multiPlayer, new Vector2(multiPlayer.X, multiPlayer.Y));
-            MainMenu.AddItem(multiPlayer);            
-            
-            var help = new MenuItem(Assets.MenuSignHelp, MainGame.Width - 400, 450, null);
-            tweenObjects.Add(help, new Vector2(help.X, help.Y));
-            MainMenu.AddItem(help);
-
-            AddEntity(MainMenu);            
+        void OnClick_Exit() {
+            Manager.Game.Exit();
         }
 
         void OnClick_Multiplayer() {
+            LoadMultiPlayerMenu();
+        }
+
+        void OnClick_Versus() {
             Manager.AddScreen(new VersusPlayerScreen(Context));
             Manager.RemoveScreen(this);
             Manager.FadeInSong(Assets.GameSong, true, 0.2f);
@@ -91,11 +85,78 @@ namespace ClownSchool.Screens {
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
             base.Update(gameTime);
 
-            tweenerY.Update(gameTime);
+            
 
-            foreach (var ent in tweenObjects.Keys) {
-                ent.Y = (int)tweenObjects[ent].Y + (int)tweenerY.Position;
+            if (TopRight != null && TopRight.Actions.IsComplete()) {
+                tweenerY.Update(gameTime);
+
+                TopRight.Y = (int)topRightPosition.Y + (int)tweenerY.Position;
             }
+
+            if (TopLeft != null && TopLeft.Actions.IsComplete()) {
+                TopLeft.Y = (int)topLeftPosition.Y + (int)tweenerY.Position;
+            }
+
+            if (BottomRight != null && BottomRight.Actions.IsComplete()) {
+                BottomRight.Y = (int)bottomRightPosition.Y + (int)tweenerY.Position;
+            }
+
+            if (BottomLeft != null && BottomLeft.Actions.IsComplete()) {
+                BottomLeft.Y = (int)bottomLeftPosition.Y + (int)tweenerY.Position;
+            }
+        }
+
+        public void LoadMenu(Menu menu) {
+            for (int i = 0; i < menu.Items.Count; i++) {
+                var mi = menu.Items[i];
+
+                switch (i) {
+                    case 0:
+                        mi.Position = new Point((int)topLeftPosition.X - 600, (int)topLeftPosition.Y - 600);
+                        mi.RenderBalloons = true;
+
+                        TopLeft = mi;
+                        TopLeft.Actions.AddAction(new TweenPositionTo(mi, topLeftPosition, 3f, Back.EaseOut), true);
+
+                        break;
+                    case 1:
+                        mi.Position = new Point((int)bottomLeftPosition.X - 600, (int)bottomLeftPosition.Y + 600);
+                        BottomLeft = mi;
+                        BottomLeft.Actions.AddAction(new TweenPositionTo(mi, bottomLeftPosition, 3f, Back.EaseOut), true);
+
+                        break;
+                    case 2:
+                        mi.Position = new Point((int)topRightPosition.X + 600, (int)topRightPosition.Y - 600);
+                        mi.RenderBalloons = true;
+
+                        TopRight = mi;
+                        TopRight.Actions.AddAction(new TweenPositionTo(mi, topRightPosition, 3f, Back.EaseOut), true);
+
+                        break;
+                    case 3:
+                        mi.Position = new Point((int)bottomRightPosition.X + 600, (int)bottomRightPosition.Y + 600);
+                        BottomRight = mi;
+                        BottomRight.Actions.AddAction(new TweenPositionTo(mi, bottomRightPosition, 3f, Back.EaseOut), true);
+
+                        break;
+                    default:
+                        throw new ArgumentException("No more than 4 menu items allowed!");
+                }
+            }
+
+            AddEntity(menu);
+        }
+
+        public void LoadMultiPlayerMenu() {
+            RemoveEntity(MainMenu);
+
+            var multiPlayer = new Menu();
+
+            multiPlayer.AddItem(new MenuItem(Assets.MenuSignVersus, 0, 0, OnClick_Versus));
+            multiPlayer.AddItem(new MenuItem(Assets.MenuSignCoop, 0, 0, null));
+            multiPlayer.AddItem(new MenuItem(Assets.MenuSignMenu, 0, 0, delegate() { RemoveEntity(multiPlayer); LoadMenu(MainMenu); }));
+
+            LoadMenu(multiPlayer);           
         }
     }
 }
