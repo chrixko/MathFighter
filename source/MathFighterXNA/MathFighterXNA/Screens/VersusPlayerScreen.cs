@@ -32,6 +32,8 @@ namespace ClownSchool.Screens {
         }
 
         public override void Init() {
+            Manager.FadeInSong(Assets.GameSong, true, 0.2f);
+
             AddCurtain();
             OpenCurtain();
 
@@ -234,13 +236,13 @@ namespace ClownSchool.Screens {
             }
 
             var posMenu = new Vector2(300, (MainGame.Height / 2) - 250);
-            var menu = new MenuItem(Assets.MenuSignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); Manager.FadeInSong(Assets.MenuSong, true, 0.5f); });
+            var menu = new MenuItem(Assets.MenuSignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); });
             menu.Actions.AddAction(new TweenPositionTo(menu, posMenu, 2f, Back.EaseOut), true);
             AddEntity(menu);
 
             var posRestart = new Vector2(MainGame.Width - 600, (MainGame.Height / 2) - 250);
 
-            var restart = new MenuItem(Assets.MenuSignRestart, MainGame.Width + 100, -300, delegate() { Manager.SwitchScreen(new VersusPlayerScreen(Context)); Manager.FadeInSong(Assets.GameSong, true, 0.2f); });
+            var restart = new MenuItem(Assets.MenuSignRestart, MainGame.Width + 100, -300, delegate() { Manager.SwitchScreen(new VersusPlayerScreen(Context)); });
             restart.Actions.AddAction(new TweenPositionTo(restart, posRestart, 2f, Back.EaseOut), true);
             AddEntity(restart);
         }

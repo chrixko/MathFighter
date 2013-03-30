@@ -36,12 +36,15 @@ namespace ClownSchool.Screens {
         public override void Init() {
             base.Init();
 
+            Manager.FadeInSong(Assets.GameSong, true, 0.2f);
+
             AddCurtain();
             OpenCurtain();
 
             AddPlayers();
 
             MainClock = new Clock(20, 20, 90);
+            MainClock.Paused = true;
             
             AddEntity(MainClock);            
 

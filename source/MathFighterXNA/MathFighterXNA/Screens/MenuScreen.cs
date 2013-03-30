@@ -59,7 +59,7 @@ namespace ClownSchool.Screens {
             AddEntity(logo);
 
             MainMenu.AddItem(new MenuItem(Assets.MenuSignMultiPlayer, 0, 0, OnClick_Multiplayer));
-            MainMenu.AddItem(new MenuItem(Assets.MenuSignSinglePlayer, 0, 0, null));
+            MainMenu.AddItem(new MenuItem(Assets.MenuSignSinglePlayer, 0, 0, OnClick_SinglePlayer));
             MainMenu.AddItem(new MenuItem(Assets.MenuSignHighscore, 0, 0, null));
             MainMenu.AddItem(new MenuItem(Assets.MenuSignHelp, 0, 0, null));
 
@@ -78,9 +78,15 @@ namespace ClownSchool.Screens {
         }
 
         void OnClick_Versus() {
-            Manager.AddScreen(new VersusPlayerScreen(Context));
-            Manager.RemoveScreen(this);
-            Manager.FadeInSong(Assets.GameSong, true, 0.2f);
+            Manager.SwitchScreen(new VersusPlayerScreen(Context));      
+        }
+
+        void OnClick_Coop() {
+            Manager.SwitchScreen(new CoopPlayerScreen(Context));
+        }
+
+        void OnClick_SinglePlayer() {
+            Manager.SwitchScreen(new SinglePlayerScreen(Context));
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
@@ -153,7 +159,7 @@ namespace ClownSchool.Screens {
             var multiPlayer = new Menu();
 
             multiPlayer.AddItem(new MenuItem(Assets.MenuSignVersus, 0, 0, OnClick_Versus));
-            multiPlayer.AddItem(new MenuItem(Assets.MenuSignCoop, 0, 0, null));
+            multiPlayer.AddItem(new MenuItem(Assets.MenuSignCoop, 0, 0, OnClick_Coop));
             multiPlayer.AddItem(new MenuItem(Assets.MenuSignMenu, 0, 0, delegate() { RemoveEntity(multiPlayer); LoadMenu(MainMenu); }));
 
             LoadMenu(multiPlayer);           
