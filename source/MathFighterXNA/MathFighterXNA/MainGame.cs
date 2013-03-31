@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using ClownSchool.Screens;
 using ClownSchool.Physics;
 using ClownSchool.Bang.Actions;
+using System.IO;
 
 namespace ClownSchool {
 
@@ -28,6 +29,9 @@ namespace ClownSchool {
 
         public static int KinectOffsetX = 150;
         public static int KinectOffsetY = 0;
+
+        public static string CoopHighscoreDirectory = @"highscores\coop";
+        public static string SingleHighscoreDirectory = @"highscores\single";
 
         public ScreenManager ScreenManager;
 
@@ -58,12 +62,45 @@ namespace ClownSchool {
             var splash = new SplashScreen(kinectContext, Assets.SplashLogo, 4f);
             ScreenManager.AddScreen(splash);
             ScreenManager.Actions.AddAction(new WaitForCondition(delegate() { return splash.TweenerFinished; }), true);
-            ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.AddScreen(new MenuScreen(kinectContext)); }), true);
+            ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new MenuScreen(kinectContext)); }), true);
 
-            debugComponent = new DebugComponent(this);
+            debugComponent = new DebugComponent(this);            
+
+            createHighscoreDirectories();
 
             base.Initialize();
         }
+
+        void createHighscoreDirectories() {
+            if (!Directory.Exists(@"highscores")) {
+                Directory.CreateDirectory(CoopHighscoreDirectory);
+                Directory.CreateDirectory(SingleHighscoreDirectory);
+            }
+        }
+
+        public void SaveScreenshot(string filename) {
+            Color[] screenData = new Color[GraphicsDevice.PresentationParameters.BackBufferWidth * GraphicsDevice.PresentationParameters.BackBufferHeight];
+
+            RenderTarget2D screenShot = new RenderTarget2D(GraphicsDevice, GraphicsDevice.PresentationParameters.BackBufferWidth, GraphicsDevice.PresentationParameters.BackBufferHeight);
+
+            GraphicsDevice.SetRenderTarget(screenShot);
+
+            Draw(new GameTime());
+
+            GraphicsDevice.SetRenderTarget(null);
+
+            int index = 0;
+            string name = string.Concat(filename, "_", index, ".jpg");
+            while (File.Exists(name)) {
+                index++;
+                name = string.Concat(filename, "_", index, ".jpg");
+            }
+
+            using (FileStream stream = new FileStream(name, FileMode.CreateNew)) {
+                screenShot.SaveAsJpeg(stream, screenShot.Width, screenShot.Height);
+                screenShot.Dispose();
+            }
+        } 
 
         protected override void LoadContent() {           
             spriteBatch = new ExtendedSpriteBatch(GraphicsDevice);

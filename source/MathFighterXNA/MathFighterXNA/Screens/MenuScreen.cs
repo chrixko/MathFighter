@@ -74,6 +74,9 @@ namespace ClownSchool.Screens {
         }
 
         void OnClick_Multiplayer() {
+            var cam = new Camera(MainGame.CoopHighscoreDirectory);
+            AddEntity(cam);
+            cam.TakePicture(100);
             LoadMultiPlayerMenu();
         }
 

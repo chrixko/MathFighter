@@ -63,6 +63,7 @@ namespace ClownSchool {
         public static Texture2D MenuButtonExit { get; set; }
 
         public static Texture2D SplashLogo { get; set; }
+        public static Texture2D CameraFlash { get; set; }
         
         public static SpriteFont DebugFont { get; set; }
         public static SpriteFont SmallDebugFont { get; set; }
@@ -77,6 +78,8 @@ namespace ClownSchool {
         public static SoundEffect AnswerWrong { get; set; }
         public static SoundEffect ScissorsSnip { get; set; }
         public static SoundEffect BalloonPlace { get; set; }
+
+        public static SoundEffect CameraClick { get; set; }
 
         public static Song GameSong { get; set; }
         public static Song MenuSong { get; set; }
@@ -138,7 +141,9 @@ namespace ClownSchool {
             MenuButtonGlow = content.Load<Texture2D>("Menu/menu_button_glow");
 
             SplashLogo = content.Load<Texture2D>("splash_logo");
-            
+
+            CameraFlash = content.Load<Texture2D>("camera_flash");
+
             DebugFont = content.Load<SpriteFont>("DebugFont");
             SmallDebugFont = content.Load<SpriteFont>("SmallDebugFont");
 
@@ -152,6 +157,8 @@ namespace ClownSchool {
             AnswerWrong = content.Load<SoundEffect>("sounds/AnswerWrong"); //http://www.flashkit.com/soundfx/Cartoon/Slide_fl-Texavery-8987/index.php
             ScissorsSnip = content.Load<SoundEffect>("sounds/scissors_snip");
             BalloonPlace = content.Load<SoundEffect>("sounds/BalloonPlace");
+
+            CameraClick = content.Load<SoundEffect>("sounds/camera_click");
 
             GameSong = content.Load<Song>("songs/toon");
             MenuSong = content.Load<Song>("songs/menu");

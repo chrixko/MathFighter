@@ -125,6 +125,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="Entity\Balloon.cs" />
     <Compile Include="Entity\Cactus.cs" />
+    <Compile Include="Entity\Camera.cs" />
     <Compile Include="Entity\Clock.cs" />
     <Compile Include="Entity\FontNumber.cs" />
     <Compile Include="Entity\Menu\MenuButton.cs" />
