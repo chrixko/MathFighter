@@ -61,6 +61,8 @@ namespace ClownSchool {
 
         public static Texture2D MenuButtonGlow { get; set; }
         public static Texture2D MenuButtonExit { get; set; }
+
+        public static Texture2D SplashLogo { get; set; }
         
         public static SpriteFont DebugFont { get; set; }
         public static SpriteFont SmallDebugFont { get; set; }
@@ -134,6 +136,8 @@ namespace ClownSchool {
 
             MenuButtonExit = content.Load<Texture2D>("Menu/menu_button_exit");
             MenuButtonGlow = content.Load<Texture2D>("Menu/menu_button_glow");
+
+            SplashLogo = content.Load<Texture2D>("splash_logo");
             
             DebugFont = content.Load<SpriteFont>("DebugFont");
             SmallDebugFont = content.Load<SpriteFont>("SmallDebugFont");

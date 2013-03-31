@@ -161,6 +161,7 @@
     <Compile Include="Screens\MenuScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\ScreenManager.cs" />
+    <Compile Include="Screens\SplashScreen.cs" />
     <Compile Include="Screens\VersusPlayerScreen.cs" />
     <Compile Include="Screens\SinglePlayerScreen.cs" />
     <Compile Include="Screens\Playground.cs" />

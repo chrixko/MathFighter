@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ClownSchool.Screens;
 using ClownSchool.Physics;
+using ClownSchool.Bang.Actions;
 
 namespace ClownSchool {
 
@@ -54,7 +55,10 @@ namespace ClownSchool {
             kinectContext.Initialize();
 
             ScreenManager = new ScreenManager(this);
-            ScreenManager.AddScreen(new MenuScreen(kinectContext));            
+            var splash = new SplashScreen(kinectContext, Assets.SplashLogo, 4f);
+            ScreenManager.AddScreen(splash);
+            ScreenManager.Actions.AddAction(new WaitForCondition(delegate() { return splash.TweenerFinished; }), true);
+            ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.AddScreen(new MenuScreen(kinectContext)); }), true);
 
             debugComponent = new DebugComponent(this);
 
