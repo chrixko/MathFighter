@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ClownSchool.Bang.Actions;
+using ClownSchool.Tweening;
 
 namespace ClownSchool.Entity {
     public class Clock : BaseEntity {
@@ -37,6 +39,22 @@ namespace ClownSchool.Entity {
 
         public void Switch() {
             Paused = !Paused;
+        }
+
+        public void AddTime() {
+            Value += 5f;
+            var plusFive = new SimpleGraphic(Assets.ClockAddFive, X, Y, 92, 67);
+            Screen.AddEntity(plusFive);
+            plusFive.Actions.AddAction(new TweenPositionTo(plusFive, new Vector2(plusFive.X, plusFive.Y + 100), 1f, Bounce.EaseOut), true);
+            plusFive.Actions.AddAction(new CallFunction(delegate() { Screen.RemoveEntity(plusFive); }), false);
+        }
+
+        public void SubtractTime() {
+            Value -= 5f;
+            var minusFive = new SimpleGraphic(Assets.ClockSubtractFive, X, Y, 92, 67);
+            Screen.AddEntity(minusFive);
+            minusFive.Actions.AddAction(new TweenPositionTo(minusFive, new Vector2(minusFive.X, minusFive.Y + 100), 1f, Bounce.EaseOut), true);
+            minusFive.Actions.AddAction(new CallFunction(delegate() { Screen.RemoveEntity(minusFive); }), false);
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {

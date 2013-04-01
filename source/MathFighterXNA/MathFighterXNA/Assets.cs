@@ -15,7 +15,11 @@ namespace ClownSchool {
         public static Texture2D EquationInputSprite { get; set; }
         public static Texture2D ClockFrameSprite { get; set; }
         public static Texture2D ClockFillSprite { get; set; }
-        public static Texture2D FontNumberSpritesheet { get; set; }
+        public static Texture2D FontNumberRed { get; set; }
+        public static Texture2D FontNumberYellow { get; set; }
+        public static Texture2D ClockAddFive { get; set; }
+        public static Texture2D ClockSubtractFive { get; set; }
+        public static Texture2D SignScore { get; set; }
 
         public static Texture2D BalloonBoom { get; set; }
         public static Texture2D RopeSection { get; set; }
@@ -58,6 +62,7 @@ namespace ClownSchool {
         public static Texture2D MenuSignHighscore { get; set; }
         public static Texture2D MenuSignRestart { get; set; }
         public static Texture2D MenuSignMenu { get; set; }
+        public static Texture2D MenuRope { get; set; }
 
         public static Texture2D MenuButtonGlow { get; set; }
         public static Texture2D MenuButtonExit { get; set; }
@@ -92,7 +97,10 @@ namespace ClownSchool {
             EquationInputSprite = content.Load<Texture2D>("equals");
             ClockFrameSprite = content.Load<Texture2D>("timer_out");
             ClockFillSprite = content.Load<Texture2D>("timer_in");
-            FontNumberSpritesheet = content.Load<Texture2D>("font_numbers");
+            FontNumberRed = content.Load<Texture2D>("font_numbers");
+            FontNumberYellow = content.Load<Texture2D>("font_numbers_yellow");
+            ClockAddFive = content.Load<Texture2D>("timer_add_5");
+            ClockSubtractFive = content.Load<Texture2D>("timer_subtract_5");
 
             BalloonBoom = content.Load<Texture2D>("balloon_boom");
             RopeSection = content.Load<Texture2D>("rope_section");
@@ -139,6 +147,8 @@ namespace ClownSchool {
 
             MenuButtonExit = content.Load<Texture2D>("Menu/menu_button_exit");
             MenuButtonGlow = content.Load<Texture2D>("Menu/menu_button_glow");
+            MenuRope = content.Load<Texture2D>("Menu/menu_rope");
+
 
             SplashLogo = content.Load<Texture2D>("splash_logo");
 

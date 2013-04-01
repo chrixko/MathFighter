@@ -22,7 +22,7 @@ namespace ClownSchool.Entity {
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.FontNumberSpritesheet, BoundingBox, new Rectangle(Value * 87, 0, 87, 100), Color.White);
+            spriteBatch.Draw(Assets.FontNumberRed, BoundingBox, new Rectangle(Value * 87, 0, 87, 100), Color.White);
         }
 
         public static List<FontNumber> FromInteger(int number, int posX, int posY, Point size, string format) {

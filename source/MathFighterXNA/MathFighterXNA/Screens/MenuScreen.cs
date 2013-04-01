@@ -124,6 +124,9 @@ namespace ClownSchool.Screens {
                         mi.Position = new Point((int)topLeftPosition.X - 600, (int)topLeftPosition.Y - 600);
                         mi.RenderBalloons = true;
 
+                        if (i + 1 <= menu.Items.Count - 1)
+                            mi.RenderRopes = true;
+
                         TopLeft = mi;
                         TopLeft.Actions.AddAction(new TweenPositionTo(mi, topLeftPosition, 3f, Back.EaseOut), true);
 
@@ -137,6 +140,9 @@ namespace ClownSchool.Screens {
                     case 2:
                         mi.Position = new Point((int)topRightPosition.X + 600, (int)topRightPosition.Y - 600);
                         mi.RenderBalloons = true;
+
+                        if (i + 1 <= menu.Items.Count - 1)
+                            mi.RenderRopes = true;
 
                         TopRight = mi;
                         TopRight.Actions.AddAction(new TweenPositionTo(mi, topRightPosition, 3f, Back.EaseOut), true);

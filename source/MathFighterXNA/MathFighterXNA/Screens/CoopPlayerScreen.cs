@@ -187,9 +187,9 @@ namespace ClownSchool.Screens {
 
             Input.Actions.AddAction(new CallFunction(delegate() {
                 if (!Input.IsAnswerCorrect) {
-                    MainClock.Value -= 5f;
+                    MainClock.SubtractTime();
                 } else {
-                    MainClock.Value += 5f;
+                    MainClock.AddTime();
                     Score += 5;
                 }
                 RemoveEntity(Input);

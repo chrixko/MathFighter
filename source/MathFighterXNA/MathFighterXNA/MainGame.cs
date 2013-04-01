@@ -59,7 +59,7 @@ namespace ClownSchool {
             kinectContext.Initialize();
 
             ScreenManager = new ScreenManager(this);
-            var splash = new SplashScreen(kinectContext, Assets.SplashLogo, 4f);
+            var splash = new SplashScreen(kinectContext, Assets.SplashLogo, 1f);
             ScreenManager.AddScreen(splash);
             ScreenManager.Actions.AddAction(new WaitForCondition(delegate() { return splash.TweenerFinished; }), true);
             ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new MenuScreen(kinectContext)); }), true);

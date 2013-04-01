@@ -14,6 +14,7 @@ namespace ClownSchool.Entity.Menu {
         public Menu Menu { get; set; }
 
         public bool RenderBalloons { get; set; }
+        public bool RenderRopes { get; set; }
 
         private bool selected { get; set; }
 
@@ -30,6 +31,7 @@ namespace ClownSchool.Entity.Menu {
             Size = new Point(200, 107);
 
             RenderBalloons = false;
+            RenderRopes = false;
         }
 
         public override void Init() {
@@ -66,6 +68,11 @@ namespace ClownSchool.Entity.Menu {
             if (RenderBalloons) {
                 spriteBatch.Draw(Assets.MenuBalloons, new Rectangle(X - 55, Y - 190, 150, 195), Color.White);
                 spriteBatch.Draw(Assets.MenuBalloons, new Rectangle(X + 123, Y - 190, 150, 195), Color.White);
+            }
+
+            if (RenderRopes) {
+                spriteBatch.Draw(Assets.MenuRope, new Rectangle(X + 10, Y + 95, 3, 115), Color.White);
+                spriteBatch.Draw(Assets.MenuRope, new Rectangle(X + 188, Y + 95, 3, 115), Color.White);
             }
 
             if (selected) {
