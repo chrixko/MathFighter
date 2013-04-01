@@ -89,7 +89,7 @@ namespace ClownSchool.Entity {
             
             spriteBatch.Draw(Assets.ClockFrameSprite, BoundingBox, Color.White);
 
-            foreach (var num in FontNumber.FromInteger((int)Value, X + 30, Y + 35, new Point(27, 40), "00")) {
+            foreach (var num in FontNumber.FromInteger((int)Value, X + 30, Y + 35, new Point(27, 40), "00", FontNumber.FontNumberColor.Red)) {
                 num.Draw(spriteBatch);
             }
         }

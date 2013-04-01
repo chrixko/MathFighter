@@ -58,16 +58,6 @@ namespace ClownSchool.Screens {
             Entities.Remove(entity);
         }
 
-        public void AddEntities(List<BaseEntity> entities) {
-            foreach (var ent in entities)
-                AddEntity(ent);
-        }
-
-        public void RemoveEntities(List<BaseEntity> entities) {
-            foreach (var ent in entities)
-                RemoveEntity(ent);
-        }
-
         public virtual void Init() {            
             World = new World(new Vector2(0f, 10f));
 

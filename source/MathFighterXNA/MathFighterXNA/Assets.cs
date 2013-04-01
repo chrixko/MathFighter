@@ -19,7 +19,7 @@ namespace ClownSchool {
         public static Texture2D FontNumberYellow { get; set; }
         public static Texture2D ClockAddFive { get; set; }
         public static Texture2D ClockSubtractFive { get; set; }
-        public static Texture2D SignScore { get; set; }
+        public static Texture2D ScoreSign { get; set; }
 
         public static Texture2D BalloonBoom { get; set; }
         public static Texture2D RopeSection { get; set; }
@@ -101,6 +101,7 @@ namespace ClownSchool {
             FontNumberYellow = content.Load<Texture2D>("font_numbers_yellow");
             ClockAddFive = content.Load<Texture2D>("timer_add_5");
             ClockSubtractFive = content.Load<Texture2D>("timer_subtract_5");
+            ScoreSign = content.Load<Texture2D>("score_sign");
 
             BalloonBoom = content.Load<Texture2D>("balloon_boom");
             RopeSection = content.Load<Texture2D>("rope_section");

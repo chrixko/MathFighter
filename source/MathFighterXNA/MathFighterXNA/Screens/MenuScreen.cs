@@ -74,9 +74,6 @@ namespace ClownSchool.Screens {
         }
 
         void OnClick_Multiplayer() {
-            var cam = new Camera(MainGame.CoopHighscoreDirectory);
-            AddEntity(cam);
-            cam.TakePicture(100);
             LoadMultiPlayerMenu();
         }
 
@@ -167,9 +164,9 @@ namespace ClownSchool.Screens {
 
             var multiPlayer = new Menu();
 
-            multiPlayer.AddItem(new MenuItem(Assets.MenuSignVersus, 0, 0, OnClick_Versus));
-            multiPlayer.AddItem(new MenuItem(Assets.MenuSignCoop, 0, 0, OnClick_Coop));
+            multiPlayer.AddItem(new MenuItem(Assets.MenuSignVersus, 0, 0, OnClick_Versus));           
             multiPlayer.AddItem(new MenuItem(Assets.MenuSignMenu, 0, 0, delegate() { RemoveEntity(multiPlayer); LoadMenu(MainMenu); }));
+            multiPlayer.AddItem(new MenuItem(Assets.MenuSignCoop, 0, 0, OnClick_Coop));
 
             LoadMenu(multiPlayer);           
         }

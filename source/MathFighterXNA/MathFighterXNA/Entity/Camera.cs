@@ -18,6 +18,8 @@ namespace ClownSchool.Entity {
             SaveTo = saveTo;
 
             ZDepth = 1000;
+
+            collidable = false;
         }
 
         public override void Init() {
@@ -26,12 +28,13 @@ namespace ClownSchool.Entity {
 
         public void TakePicture(int score) {
             Assets.CameraClick.Play();
-            flash = new Tweener(0f, 1f, 0.2f, Linear.EaseIn);
-            flash.Ended += delegate() {               
-                var filename = Path.Combine(SaveTo, score.ToString());
-                Screen.Manager.Game.SaveScreenshot(filename);
+            var filename = Path.Combine(SaveTo, score.ToString());
+            Screen.Manager.Game.SaveScreenshot(filename);
 
+            flash = new Tweener(0f, 1f, 0.2f, Linear.EaseIn);
+            flash.Ended += delegate() {                                              
                 flash = new Tweener(1f, 0f, 1f, Linear.EaseIn);
+                flash.Ended += delegate() { Screen.RemoveEntity(this); };
             };
 
         }

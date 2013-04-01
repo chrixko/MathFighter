@@ -10,6 +10,12 @@ namespace ClownSchool.Bang {
 
         private bool isBlocking { get; set; }
 
+        public int Count {
+            get {
+                return Actions.Count;
+            }
+        }
+
         bool IAction.IsBlocking() {
             return isBlocking;
         }

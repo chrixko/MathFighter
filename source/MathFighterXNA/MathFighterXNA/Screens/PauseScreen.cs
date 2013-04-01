@@ -60,7 +60,7 @@ namespace ClownSchool.Screens {
 
                     break;
                 case PauseState.Countdown:
-                    var countdown = new FontNumber((int)countDownTimer, (MainGame.Width / 2) - 50, (MainGame.Height / 2) - 50, new Point(100, 100));
+                    var countdown = new FontNumber((int)countDownTimer, (MainGame.Width / 2) - 50, (MainGame.Height / 2) - 50, new Point(100, 100), FontNumber.FontNumberColor.Red);
                     countdown.Draw(spriteBatch);
 
                     break;

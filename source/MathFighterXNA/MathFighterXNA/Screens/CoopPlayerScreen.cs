@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using System.Diagnostics;
 using ClownSchool.Entity.Menu;
+using ClownSchool.Bang;
 
 namespace ClownSchool.Screens {
 
@@ -19,9 +20,8 @@ namespace ClownSchool.Screens {
         public Player PlayerTwo { get; set; }
         public int NeededPlayerCount = 2;
 
-
-        public Clock MainClock { get; set; }        
-        public int Score = 0;
+        public Clock MainClock { get; set; }
+        public ScoreSign Score { get; set; }        
         
         public EquationInput Input { get; set; }
 
@@ -43,10 +43,14 @@ namespace ClownSchool.Screens {
 
             AddPlayers();
 
-            MainClock = new Clock(20, 20, 90);
+            MainClock = new Clock(20, 20, 10);
             MainClock.Paused = true;
             
-            AddEntity(MainClock);            
+            AddEntity(MainClock);
+
+            Score = new ScoreSign(MainGame.Width - 190, 25);
+            Score.Value = 0;
+            AddEntity(Score);
 
             Coroutines.Start(LoadNumbersFromFile());
 
@@ -138,10 +142,6 @@ namespace ClownSchool.Screens {
                 var posX = Numbers[num].X;
                 var posY = Numbers[num].Y;
 
-                //if (CurrentPlayer == PlayerTwo) {
-                //    posX = MainGame.Width - Numbers[num].X - 62;
-                //}
-
                 var tweenTo = new Vector2(posX, posY);
 
                 var that = num;
@@ -190,7 +190,7 @@ namespace ClownSchool.Screens {
                     MainClock.SubtractTime();
                 } else {
                     MainClock.AddTime();
-                    Score += 5;
+                    Score.AddPoints();
                 }
                 RemoveEntity(Input);
                 AddInput();
@@ -238,18 +238,36 @@ namespace ClownSchool.Screens {
         public void EndGame() {
             Ended = true;
 
+            var saveTo = MainGame.CoopHighscoreDirectory;
+            if (this.GetType() == typeof(SinglePlayerScreen))
+                saveTo = MainGame.SingleHighscoreDirectory;
+
+            var camera = new Camera(saveTo);
+            AddEntity(camera);                        
+
             Manager.FadeInSong(Assets.WinSong, false, 0.8f);
 
             Actions.AddAction(new EndEquationInput(Input), true);
 
+            var moveBalloonsActions = new ActionList();
+
             foreach (DragableNumber num in Entities.Where(ent => ent.CollisionType == "number")) {
-                Actions.AddAction(new TweenPositionTo(num, new Vector2(1300, -200), 1f, Linear.EaseIn), false);
+                moveBalloonsActions.AddAction(new TweenPositionTo(num, new Vector2(1300, -200), 1f, Linear.EaseIn), false);
             }
 
+            Actions.AddAction(moveBalloonsActions, true);
 
             AttachWinnerBalloon(PlayerOne);
-            AttachWinnerBalloon(PlayerTwo);                       
+            AttachWinnerBalloon(PlayerTwo);
 
+            Actions.AddAction(new WaitForCondition(delegate() { return moveBalloonsActions.IsComplete(); }), true);
+            Actions.AddAction(new CallFunction(delegate() { camera.TakePicture(Score.Value); }), true);
+            Actions.AddAction(new WaitForCondition(delegate() { return camera.Actions.IsComplete(); }), true);
+
+            Actions.AddAction(new CallFunction(delegate() { addButtons(); }), true);
+        }
+
+        private void addButtons() {
             var posMenu = new Vector2(300, (MainGame.Height / 2) - 250);
             var menu = new MenuItem(Assets.MenuSignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); Manager.FadeInSong(Assets.MenuSong, true, 0.5f); });
             menu.Actions.AddAction(new TweenPositionTo(menu, posMenu, 2f, Back.EaseOut), true);
@@ -286,10 +304,6 @@ namespace ClownSchool.Screens {
 
         public override void Draw(SpriteBatch spriteBatch) {
             base.Draw(spriteBatch);
-
-            foreach (var num in FontNumber.FromInteger(Score, MainGame.Width - 130, 50, new Point(27, 40), "0000")) {
-                num.Draw(spriteBatch);
-            }
         }
     }
 }

@@ -133,6 +133,7 @@
     <Compile Include="Entity\Menu\MenuItem.cs" />
     <Compile Include="Entity\NumberState\IdleState.cs" />
     <Compile Include="Entity\Scissors.cs" />
+    <Compile Include="Entity\ScoreSign.cs" />
     <Compile Include="Entity\SimpleGraphic.cs" />
     <Compile Include="ExtendedSpriteBatch.cs" />
     <Compile Include="Bang\ActionList.cs" />
