@@ -69,6 +69,11 @@ namespace ClownSchool {
 
         public static Texture2D SplashLogo { get; set; }
         public static Texture2D CameraFlash { get; set; }
+
+        public static Texture2D HighscoreBoard { get; set; }
+
+        public static Texture2D SignMenu { get; set; }
+        public static Texture2D SignHighscore { get; set; }
         
         public static SpriteFont DebugFont { get; set; }
         public static SpriteFont SmallDebugFont { get; set; }
@@ -154,6 +159,11 @@ namespace ClownSchool {
             SplashLogo = content.Load<Texture2D>("splash_logo");
 
             CameraFlash = content.Load<Texture2D>("camera_flash");
+
+            HighscoreBoard = content.Load<Texture2D>("Highscore/highscore_board");
+
+            SignMenu = content.Load<Texture2D>("sign_menu");
+            SignHighscore = content.Load<Texture2D>("sign_highscore");
 
             DebugFont = content.Load<SpriteFont>("DebugFont");
             SmallDebugFont = content.Load<SpriteFont>("SmallDebugFont");

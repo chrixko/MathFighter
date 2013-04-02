@@ -43,7 +43,7 @@ namespace ClownSchool.Screens {
 
             AddPlayers();
 
-            MainClock = new Clock(20, 20, 10);
+            MainClock = new Clock(20, 20, 90);
             MainClock.Paused = true;
             
             AddEntity(MainClock);
@@ -269,7 +269,7 @@ namespace ClownSchool.Screens {
 
         private void addButtons() {
             var posMenu = new Vector2(300, (MainGame.Height / 2) - 250);
-            var menu = new MenuItem(Assets.MenuSignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); Manager.FadeInSong(Assets.MenuSong, true, 0.5f); });
+            var menu = new MenuItem(Assets.SignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); Manager.FadeInSong(Assets.MenuSong, true, 0.5f); });
             menu.Actions.AddAction(new TweenPositionTo(menu, posMenu, 2f, Back.EaseOut), true);
             AddEntity(menu);
 
@@ -278,6 +278,16 @@ namespace ClownSchool.Screens {
             var restart = new MenuItem(Assets.MenuSignRestart, MainGame.Width + 100, -300, delegate() { Manager.SwitchScreen(new CoopPlayerScreen(Context)); Manager.FadeInSong(Assets.GameSong, true, 0.2f); });
             restart.Actions.AddAction(new TweenPositionTo(restart, posRestart, 2f, Back.EaseOut), true);
             AddEntity(restart);
+
+            var posHighscore = new Vector2(MainGame.Width - 250, (MainGame.Height / 2) - 200);
+
+            var loadFrom = MainGame.CoopHighscoreDirectory;
+            if (this.GetType() == typeof(SinglePlayerScreen))
+                loadFrom = MainGame.SingleHighscoreDirectory;
+
+            var highscore = new MenuItem(Assets.SignHighscore, MainGame.Width + 100, -300, delegate() { Manager.SwitchScreen(new HighscoreScreen(Context, loadFrom)); Manager.FadeInSong(Assets.MenuSong, true, 0.2f); });
+            highscore.Actions.AddAction(new TweenPositionTo(highscore, posHighscore, 2f, Back.EaseOut), true);
+            AddEntity(highscore);
         }
 
         private void AttachWinnerBalloon(Player player) {

@@ -10,7 +10,7 @@ namespace ClownSchool {
 
     public class MainGame : Microsoft.Xna.Framework.Game {
 
-        GraphicsDeviceManager graphics;
+        public static GraphicsDeviceManager graphics;
         ExtendedSpriteBatch spriteBatch;
         KinectContext kinectContext;
 
@@ -45,7 +45,7 @@ namespace ClownSchool {
                        
             graphics.PreferredBackBufferWidth = Width;
             graphics.PreferredBackBufferHeight = Height;
-            this.graphics.SynchronizeWithVerticalRetrace = false;
+            graphics.SynchronizeWithVerticalRetrace = false;
             IsFixedTimeStep = true;
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
             this.viewPortRectangle = new Rectangle(0, 0, Width, Height);
@@ -63,6 +63,7 @@ namespace ClownSchool {
             ScreenManager.AddScreen(splash);
             ScreenManager.Actions.AddAction(new WaitForCondition(delegate() { return splash.TweenerFinished; }), true);
             ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new MenuScreen(kinectContext)); }), true);
+            //ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new HighscoreScreen(kinectContext, SingleHighscoreDirectory)); }), true);
 
             debugComponent = new DebugComponent(this);            
 

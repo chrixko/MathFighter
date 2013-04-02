@@ -236,7 +236,7 @@ namespace ClownSchool.Screens {
             }
 
             var posMenu = new Vector2(300, (MainGame.Height / 2) - 250);
-            var menu = new MenuItem(Assets.MenuSignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); });
+            var menu = new MenuItem(Assets.SignMenu, -100, -300, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); });
             menu.Actions.AddAction(new TweenPositionTo(menu, posMenu, 2f, Back.EaseOut), true);
             AddEntity(menu);
 
