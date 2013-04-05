@@ -12,7 +12,7 @@ namespace ClownSchool {
 
         public static GraphicsDeviceManager graphics;
         ExtendedSpriteBatch spriteBatch;
-        KinectContext kinectContext;
+        public KinectContext kinectContext;
 
         DebugComponent debugComponent;
 
@@ -50,7 +50,7 @@ namespace ClownSchool {
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
             this.viewPortRectangle = new Rectangle(0, 0, Width, Height);
 
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
         }
 
         protected override void Initialize() {
@@ -59,11 +59,11 @@ namespace ClownSchool {
             kinectContext.Initialize();
 
             ScreenManager = new ScreenManager(this);
-            var splash = new SplashScreen(kinectContext, Assets.SplashLogo, 1f);
+            var splash = new SplashScreen(kinectContext, Assets.SplashLogo, 2f);
             ScreenManager.AddScreen(splash);
             ScreenManager.Actions.AddAction(new WaitForCondition(delegate() { return splash.TweenerFinished; }), true);
             ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new MenuScreen(kinectContext)); }), true);
-            //ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new HighscoreScreen(kinectContext, SingleHighscoreDirectory)); }), true);
+            //ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new CoopTutorialScreen(kinectContext)); }), true);
 
             debugComponent = new DebugComponent(this);            
 

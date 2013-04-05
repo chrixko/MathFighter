@@ -44,9 +44,7 @@ namespace ClownSchool {
                     MaxDeviationRadius = 0.0f
                 };
 
-                if (Configuration.GRABBING_ENABLED) {
-                    interactionStream = new InteractionStream(Sensor, new InteractionClient());
-                }                 
+                interactionStream = new InteractionStream(Sensor, new InteractionClient());                 
 
                 this.Sensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
                 this.Sensor.SkeletonStream.Enable(parameters);
@@ -65,7 +63,7 @@ namespace ClownSchool {
                 Debug.WriteLine("No kinect connected!");
             }
 
-            this.CurrentBitmap = Assets.CirclePartFilled;
+            this.CurrentBitmap = Assets.SplashLogo;
         }
 
         void ProcessDepthFrame() {

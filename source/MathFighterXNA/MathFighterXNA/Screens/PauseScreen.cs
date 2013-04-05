@@ -23,7 +23,7 @@ namespace ClownSchool.Screens {
             Actions.AddAction(new CallFunction(delegate() { State = PauseState.Countdown; }), true);
         }
     
-        private float countDownTimer = 6;
+        private float countDownTimer = 3;
         private float secondTimer = 0;
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);

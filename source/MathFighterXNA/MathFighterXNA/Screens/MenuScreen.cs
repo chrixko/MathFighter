@@ -61,7 +61,7 @@ namespace ClownSchool.Screens {
             MainMenu.AddItem(new MenuItem(Assets.MenuSignMultiPlayer, 0, 0, OnClick_Multiplayer));
             MainMenu.AddItem(new MenuItem(Assets.MenuSignSinglePlayer, 0, 0, OnClick_SinglePlayer));
             MainMenu.AddItem(new MenuItem(Assets.MenuSignHighscore, 0, 0, OnClick_Highscore));
-            MainMenu.AddItem(new MenuItem(Assets.MenuSignHelp, 0, 0, null));
+            MainMenu.AddItem(new MenuItem(Assets.MenuSignHelp, 0, 0, OnClick_Help));
 
             LoadMenu(MainMenu);
 
@@ -87,6 +87,10 @@ namespace ClownSchool.Screens {
 
         void OnClick_SinglePlayer() {
             Manager.SwitchScreen(new SinglePlayerScreen(Context));
+        }
+
+        void OnClick_Help() {
+            Manager.SwitchScreen(new CoopTutorialScreen(Context));
         }
 
         void OnClick_Highscore() {

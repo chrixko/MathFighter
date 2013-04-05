@@ -74,6 +74,18 @@ namespace ClownSchool {
 
         public static Texture2D SignMenu { get; set; }
         public static Texture2D SignHighscore { get; set; }
+
+
+        public static Texture2D TutorialStep1 { get; set; }
+        public static Texture2D TutorialStep2 { get; set; }
+        public static Texture2D TutorialStep3 { get; set; }
+        public static Texture2D TutorialStep4 { get; set; }
+        public static Texture2D TutorialStep5 { get; set; }
+        public static Texture2D TutorialStep6 { get; set; }
+        public static Texture2D TutorialStep7 { get; set; }
+        public static Texture2D TutorialStep8 { get; set; }
+        
+
         
         public static SpriteFont DebugFont { get; set; }
         public static SpriteFont SmallDebugFont { get; set; }
@@ -164,6 +176,18 @@ namespace ClownSchool {
 
             SignMenu = content.Load<Texture2D>("sign_menu");
             SignHighscore = content.Load<Texture2D>("sign_highscore");
+
+
+            TutorialStep1 = content.Load<Texture2D>("Tutorial/toGrabPlace");
+            TutorialStep2 = content.Load<Texture2D>("Tutorial/grabUntilAttached");
+            TutorialStep3 = content.Load<Texture2D>("Tutorial/balloonsToSolve");
+            TutorialStep4 = content.Load<Texture2D>("Tutorial/changeAnswer");
+            TutorialStep5 = content.Load<Texture2D>("Tutorial/placeAndDisappears");
+            TutorialStep6 = content.Load<Texture2D>("Tutorial/timerHitsZero");
+            TutorialStep7 = content.Load<Texture2D>("Tutorial/correctAdds");
+            TutorialStep8 = content.Load<Texture2D>("Tutorial/wrongCosts");
+
+
 
             DebugFont = content.Load<SpriteFont>("DebugFont");
             SmallDebugFont = content.Load<SpriteFont>("SmallDebugFont");

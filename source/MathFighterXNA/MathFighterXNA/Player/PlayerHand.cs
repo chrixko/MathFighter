@@ -13,7 +13,7 @@ namespace ClownSchool {
         public JointType Hand { get; private set; }        
         public Balloon DraggingBalloon { get; set; }
 
-        public bool IsGrabbing { get; private set; }
+        public bool IsGrabbing { get; set; }
 
         public KinectContext Context {
             get {
@@ -75,12 +75,6 @@ namespace ClownSchool {
         public override void Draw(SpriteBatch spriteBatch) {
             if (!Player.IsReady)
                 return;
-
-            if (Configuration.GRABBING_ENABLED) {
-                if (IsGrabbing) {
-                    //spriteBatch.Draw(Assets.CactusSprite, BoundingBox, new Color(100, 100, 100, 50));
-                }
-            }
 
             if (Player.DrawHands) {
                 spriteBatch.Draw(Assets.Glove, new Rectangle(X, Y, 56, 64), null, Color.White, 0, new Vector2(56 / 2, 64 / 2), Hand == JointType.HandLeft ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);

@@ -14,22 +14,21 @@ using ClownSchool.Bang;
 
 namespace ClownSchool.Screens {
 
-    public class CoopPlayerScreen : GameScreen {
+    public class CoopTutorialScreen : GameScreen {
 
         public Player PlayerOne { get; set; }
-        public Player PlayerTwo { get; set; }
-        public int NeededPlayerCount = 2;
+        private TutorialHand hand { get; set; }    
 
         public Clock MainClock { get; set; }
         public ScoreSign Score { get; set; }        
         
         public EquationInput Input { get; set; }
 
+        private SimpleGraphic message { get; set; }
+
         private Dictionary<DragableNumber, Vector2> Numbers { get; set; }
 
-        private bool Ended = false;        
-
-        public CoopPlayerScreen(KinectContext context)
+        public CoopTutorialScreen(KinectContext context)
             : base(context) {
         }
 
@@ -41,7 +40,15 @@ namespace ClownSchool.Screens {
             AddCurtain();
             OpenCurtain();
 
-            AddPlayers();
+            PlayerOne = new Player(Context, SkeletonPlayerAssignment.FirstSkeleton);
+            
+            hand = new TutorialHand(PlayerOne, Microsoft.Kinect.JointType.HandRight);
+
+            PlayerOne.RightHand = hand;
+
+            AddEntity(hand);
+
+            hand.Position = new Point(500, 300);
 
             MainClock = new Clock(20, 20, 90);
             MainClock.Paused = true;
@@ -62,12 +69,90 @@ namespace ClownSchool.Screens {
             }            
         }
 
-        public virtual void AddPlayers() {
-            PlayerOne = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
-            PlayerTwo = new Player(Context, SkeletonPlayerAssignment.RightSkeleton);
+        DragableNumber getNumber(int number) {
+            foreach (var num in Numbers.Keys) {
+                if (num.Number == number) {
+                    return num;
+                }
+            }
 
-            AddEntity(PlayerOne);
-            AddEntity(PlayerTwo);
+            return null;
+        }
+
+        SimpleGraphic getMessage(Texture2D texture) {
+            var msg = new SimpleGraphic(texture, (MainGame.Width / 2) - (texture.Width / 6), MainGame.Height, texture.Width / 3, texture.Height / 3);
+
+            return msg;
+        }
+
+        void grabBalloonTo(TutorialHand hand, DragableNumber num, NumberSlot to) {
+            moveHandAction(new Point((int)num.X, (int)num.Y));
+            Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
+            moveHandAction(to.BoundingBox.Center);
+        }
+
+        void tutorialAction() {           
+            {
+                showMsgAction(Assets.TutorialStep1);
+
+                var three = getNumber(3);
+                moveHandAction(new Point((int)three.X, (int)three.Y));
+                showMsgAction(Assets.TutorialStep2);
+                Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
+                showMsgAction(Assets.TutorialStep3);
+                moveHandAction(Input.FirstProductSlot.BoundingBox.Center);
+
+                var zero = getNumber(0);
+                moveHandAction(new Point((int)zero.X, (int)zero.Y));
+                Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
+                moveHandAction(Input.SecondProductSlot.BoundingBox.Center);
+            }
+
+
+            Actions.AddAction(new WaitForCondition(delegate() { return Input.FirstProductSlot.Balloon == null; }), true);
+
+            {
+                showMsgAction(Assets.TutorialStep4);
+                var four = getNumber(4);
+                moveHandAction(new Point((int)four.X, (int)four.Y));
+                Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
+                moveHandAction(Input.FirstProductSlot.BoundingBox.Center);
+
+                showMsgAction(Assets.TutorialStep5);
+                var three = getNumber(3);
+                moveHandAction(new Point((int)three.X, (int)three.Y));
+                Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
+                moveHandAction(Input.FirstProductSlot.BoundingBox.Center);
+
+                var zero = getNumber(0);
+                moveHandAction(new Point((int)zero.X, (int)zero.Y));
+                Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
+                moveHandAction(Input.SecondProductSlot.BoundingBox.Center);
+            }
+
+                        
+            showMsgAction(Assets.TutorialStep7);
+            showMsgAction(Assets.TutorialStep8);
+            showMsgAction(Assets.TutorialStep6);
+
+            Actions.AddAction(new WaitForSeconds(2f), true);
+            Actions.AddAction(new CallFunction(delegate() { Manager.SwitchScreen(new MenuScreen(Context)); }), true);
+        }
+
+        void showMsgAction(Texture2D message) {
+            var msg = getMessage(message);
+
+            var messagePresent = new Vector2(msg.X, msg.Y - Assets.MenuSignHighscore.Height / 2);
+
+            AddEntity(msg);
+
+            Actions.AddAction(new TweenPositionTo(msg, messagePresent, 1f, Linear.EaseIn), true);
+            Actions.AddAction(new WaitForSeconds(2f), true);
+            Actions.AddAction(new TweenPositionTo(msg, new Vector2(msg.X, msg.Y), 1f, Linear.EaseIn), true);
+        }
+
+        void moveHandAction(Point to) {
+            Actions.AddAction(new TweenPositionTo(hand, new Vector2(to.X + 15, to.Y + 30), 1f, Linear.EaseIn), true);
         }
 
         private IEnumerator LoadNumbersFromFile() {
@@ -118,7 +203,9 @@ namespace ClownSchool.Screens {
                         }
                     }
                 }
-            }   
+            }
+
+            tutorialAction();
         }
 
         private static IEnumerator Pause(float time) {
@@ -198,17 +285,17 @@ namespace ClownSchool.Screens {
 
             AddEntity(Input);
 
-            AddRandomBalloons(Input);
+            AddBalloons(Input);
 
             Input.FirstEquationSlot.Player = Input.SecondEquationSlot.Player = null;
             Input.FirstProductSlot.Player = PlayerOne;
-            Input.SecondProductSlot.Player = PlayerTwo;
+            Input.SecondProductSlot.Player = PlayerOne;
         }
 
-        private void AddRandomBalloons(EquationInput input) {
+        private void AddBalloons(EquationInput input) {
             var rand = new Random();
-            var ball1 = new Balloon(input.X, input.Y, rand.Next(0, 11));
-            var ball2 = new Balloon(input.X, input.Y, rand.Next(0, 11));
+            var ball1 = new Balloon(input.X, input.Y, 5);
+            var ball2 = new Balloon(input.X, input.Y, 6);
 
             AddEntity(ball1);
             AddEntity(ball2);
@@ -223,20 +310,10 @@ namespace ClownSchool.Screens {
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            //if (!PlayerOne.IsReady || !PlayerTwo.IsReady) {
-            //    AddPauseScreen();
-            //}
-
-            if (!Ended) {
-                if (MainClock.Value <= 0f) {
-                    EndGame();
-                }
-            }
 
         }
 
         public void EndGame() {
-            Ended = true;
 
             var saveTo = MainGame.CoopHighscoreDirectory;
             if (this.GetType() == typeof(SinglePlayerScreen))
@@ -256,9 +333,6 @@ namespace ClownSchool.Screens {
             }
 
             Actions.AddAction(moveBalloonsActions, true);
-
-            AttachWinnerBalloon(PlayerOne);
-            AttachWinnerBalloon(PlayerTwo);
 
             Actions.AddAction(new WaitForCondition(delegate() { return moveBalloonsActions.IsComplete(); }), true);
             Actions.AddAction(new CallFunction(delegate() { camera.TakePicture(Score.Value); }), true);
@@ -299,17 +373,6 @@ namespace ClownSchool.Screens {
 
                 balloon.AttachTo(hand);
             }
-        }
-
-        public void AddPauseScreen() {
-            var pauseScreen = new PauseScreen(Context);
-            var sil1 = new SimpleGraphic(Assets.PlayerSilhouette, 250, 75, 480, 588);
-            var sil2 = new SimpleGraphic(Assets.PlayerSilhouette, 650, 75, 480, 588);
-            pauseScreen.AddEntity(sil1);
-            pauseScreen.AddEntity(sil2);
-            pauseScreen.WaitForPlayerCount(NeededPlayerCount);
-
-            Manager.AddScreen(pauseScreen);
         }
 
         public override void Draw(SpriteBatch spriteBatch) {

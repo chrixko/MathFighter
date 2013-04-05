@@ -10,7 +10,7 @@ namespace ClownSchool {
         public KinectContext Context { get; private set; }
 
         public PlayerHand LeftHand { get; private set; }
-        public PlayerHand RightHand { get; private set; }
+        public PlayerHand RightHand { get; set; }
 
         public bool DrawHands { get; set; }
 

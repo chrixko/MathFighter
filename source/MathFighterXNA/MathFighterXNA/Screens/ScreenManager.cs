@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using ClownSchool.Bang;
 using Microsoft.Xna.Framework.Media;
 using ClownSchool.Bang.Actions;
+using Microsoft.Xna.Framework.Input;
 
 namespace ClownSchool.Screens {
     public class ScreenManager {
@@ -42,13 +43,43 @@ namespace ClownSchool.Screens {
         }
 
         public void SwitchScreen(GameScreen screen) {
-            Screens.Remove(Screens.Last());
+            Screens.Clear();
             AddScreen(screen);
         }
 
         public void Update(GameTime gameTime) {
             Actions.Update(gameTime);
             Screens.Last().Update(gameTime);
+
+            var keyState = Keyboard.GetState();
+
+            if (keyState.IsKeyDown(Keys.M)) {
+                SwitchScreen(new MenuScreen(Game.kinectContext));
+            }
+
+            if (keyState.IsKeyDown(Keys.C)) {
+                SwitchScreen(new CoopPlayerScreen(Game.kinectContext));
+            }
+
+            if (keyState.IsKeyDown(Keys.S)) {
+                SwitchScreen(new SinglePlayerScreen(Game.kinectContext));
+            }
+
+            if (keyState.IsKeyDown(Keys.V)) {
+                SwitchScreen(new VersusPlayerScreen(Game.kinectContext));
+            }
+
+            if (keyState.IsKeyDown(Keys.T)) {
+                SwitchScreen(new CoopTutorialScreen(Game.kinectContext));
+            }
+
+            if (keyState.IsKeyDown(Keys.P)) {
+                if (MediaPlayer.State == MediaState.Playing) {
+                    MediaPlayer.Pause();
+                } else {
+                    MediaPlayer.Resume();
+                }
+            }                                 
         }
 
         public void Draw(ExtendedSpriteBatch spriteBatch) {

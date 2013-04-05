@@ -13,11 +13,14 @@ using ClownSchool.Entity.Menu;
 
 namespace ClownSchool.Screens {
 
-    public class VersusPlayerScreen : GameScreen {
+    public class VersusTutorialScreen : GameScreen {
 
         public Player PlayerOne { get; set; }
         public Player PlayerTwo { get; set; }
         public Player CurrentPlayer { get; set; }
+
+        public TutorialHand playerOneHand { get; set; }
+        public TutorialHand playerTwoHand { get; set; }
 
         public Clock PlayerOneClock { get; set; }
         public Clock PlayerTwoClock { get; set; }        
@@ -26,9 +29,10 @@ namespace ClownSchool.Screens {
 
         private Dictionary<DragableNumber, Vector2> Numbers { get; set; }
 
-        private bool Ended = false;
+        private SimpleGraphic message { get; set; }
 
-        public VersusPlayerScreen(KinectContext context) : base(context) {
+        public VersusTutorialScreen(KinectContext context)
+            : base(context) {
         }
 
         public override void Init() {
@@ -42,11 +46,17 @@ namespace ClownSchool.Screens {
 
             CurrentPlayer = PlayerOne;
 
-            AddEntity(PlayerOne);
-            AddEntity(PlayerTwo);
+            playerOneHand = new TutorialHand(PlayerOne, Microsoft.Kinect.JointType.HandRight);
+            playerTwoHand = new TutorialHand(PlayerTwo, Microsoft.Kinect.JointType.HandRight);
 
-            PlayerOneClock = new Clock(20, 20, 40);
-            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 40);
+            playerOneHand.Position = new Point(500, 300);
+            playerTwoHand.Position = new Point(900, 300);
+
+            AddEntity(playerOneHand);
+            AddEntity(playerTwoHand);
+
+            PlayerOneClock = new Clock(20, 20, 90);
+            PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 90);
 
             PlayerTwoClock.Paused = true;
 
@@ -96,13 +106,73 @@ namespace ClownSchool.Screens {
                         AddEntity(num);
                     }
                 }
-            }   
+            }
+
+            tutorialAction();
         }
 
         private static IEnumerator Pause(float time) {
             var watch = Stopwatch.StartNew();
             while (watch.Elapsed.TotalSeconds < time)
                 yield return 0;
+        }
+
+        DragableNumber getNumber(int number) {
+            foreach (var num in Numbers.Keys) {
+                if (num.Number == number) {
+                    return num;
+                }
+            }
+
+            return null;
+        }
+
+        SimpleGraphic getMessage(Texture2D texture) {
+            var msg = new SimpleGraphic(texture, (MainGame.Width / 2) - (texture.Width / 2), MainGame.Height, texture.Width / 2, texture.Height / 2);
+
+            return msg;
+        }
+
+        void grabBalloonTo(TutorialHand hand, DragableNumber num, NumberSlot to) {
+            moveHandAction(hand, new Point((int)num.X, (int)num.Y));
+            Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
+            moveHandAction(hand, to.BoundingBox.Center);
+        }
+
+        void tutorialAction() {
+            {
+                showMsgAction(Assets.SignMenu);
+
+                grabBalloonTo(playerOneHand, getNumber(5), Input.FirstEquationSlot);
+                grabBalloonTo(playerOneHand, getNumber(6), Input.SecondEquationSlot);
+            }
+
+
+            Actions.AddAction(new WaitForCondition(delegate() { return Input.FirstProductSlot.Balloon == null; }), true);
+
+            {
+                grabBalloonTo(playerTwoHand, getNumber(3), Input.FirstProductSlot);
+                grabBalloonTo(playerTwoHand, getNumber(0), Input.SecondProductSlot);
+            }
+
+            Actions.AddAction(new WaitForSeconds(2f), true);
+            Actions.AddAction(new CallFunction(delegate() { Manager.SwitchScreen(new MenuScreen(Context)); }), true);
+        }
+
+        void showMsgAction(Texture2D message) {
+            var msg = getMessage(message);
+
+            var messagePresent = new Vector2(msg.X, msg.Y - Assets.MenuSignHighscore.Height / 2);
+
+            AddEntity(msg);
+
+            Actions.AddAction(new TweenPositionTo(msg, messagePresent, 1f, Linear.EaseIn), true);
+            Actions.AddAction(new WaitForSeconds(2f), true);
+            Actions.AddAction(new TweenPositionTo(msg, new Vector2(msg.X, msg.Y), 1f, Linear.EaseIn), true);
+        }
+
+        void moveHandAction(PlayerHand hand, Point to) {
+            Actions.AddAction(new TweenPositionTo(hand, new Vector2(to.X, to.Y + 30), 2f, Linear.EaseIn), true);
         }
 
         public void PauseClocks() {
@@ -201,23 +271,10 @@ namespace ClownSchool.Screens {
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            if (!PlayerOne.IsReady || !PlayerTwo.IsReady) {
-                AddPauseScreen();
-            }
-
-            if (!Ended) {
-                if (PlayerOneClock.Value == 0) {
-                    EndGame(PlayerTwo);
-                } else if (PlayerTwoClock.Value == 0) {
-                    EndGame(PlayerOne);
-                }
-            }
 
         }
 
         public void EndGame(Player winner) {
-            Ended = true;
-
             Manager.FadeInSong(Assets.WinSong, false, 0.8f);
 
             Actions.AddAction(new EndEquationInput(Input), true);
@@ -253,8 +310,8 @@ namespace ClownSchool.Screens {
             var sil2 = new SimpleGraphic(Assets.PlayerSilhouette, 650, 75, 480, 588);
             pauseScreen.AddEntity(sil1);
             pauseScreen.AddEntity(sil2);
-            pauseScreen.WaitForPlayerCount(2);
-            
+            pauseScreen.WaitForPlayerCount(1);
+
             Manager.AddScreen(pauseScreen);
 
         }
