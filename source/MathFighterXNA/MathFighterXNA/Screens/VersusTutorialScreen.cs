@@ -128,34 +128,74 @@ namespace ClownSchool.Screens {
         }
 
         SimpleGraphic getMessage(Texture2D texture) {
-            var msg = new SimpleGraphic(texture, (MainGame.Width / 2) - (texture.Width / 2), MainGame.Height, texture.Width / 2, texture.Height / 2);
+            var msg = new SimpleGraphic(texture, (MainGame.Width / 2) - (texture.Width / 6), MainGame.Height, texture.Width / 3, texture.Height / 3);
 
             return msg;
         }
 
-        void grabBalloonTo(TutorialHand hand, DragableNumber num, NumberSlot to) {
-            moveHandAction(hand, new Point((int)num.X, (int)num.Y));
+        void grabBalloonTo(TutorialHand hand, DragableNumber num, NumberSlot to) {           
+            moveHandAction(hand, num);
             Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
-            moveHandAction(hand, to.BoundingBox.Center);
+            moveHandAction(hand, to);
+            Actions.AddAction(new CallFunction(delegate() { hand.IsGrabbing = false; }), true);            
         }
 
         void tutorialAction() {
-            {
-                showMsgAction(Assets.SignMenu);
+                tutorialStep1();
+        }
 
-                grabBalloonTo(playerOneHand, getNumber(5), Input.FirstEquationSlot);
-                grabBalloonTo(playerOneHand, getNumber(6), Input.SecondEquationSlot);
-            }
-
-
-            Actions.AddAction(new WaitForCondition(delegate() { return Input.FirstProductSlot.Balloon == null; }), true);
+        void tutorialStep1() {
+            showMsgAction(Assets.TutorialStep1);
 
             {
-                grabBalloonTo(playerTwoHand, getNumber(3), Input.FirstProductSlot);
-                grabBalloonTo(playerTwoHand, getNumber(0), Input.SecondProductSlot);
+                moveHandAction(playerOneHand, getNumber(5));
+                showMsgAction(Assets.TutorialStep2);
+                Actions.AddAction(new CallFunction(delegate() { playerOneHand.Grab(); }), true);
+                showMsgAction(Assets.TutorialStep9);
+                moveHandAction(playerOneHand, Input.FirstEquationSlot);
+                Actions.AddAction(new CallFunction(delegate() { playerOneHand.IsGrabbing = false; }), true);   
             }
+            
+            grabBalloonTo(playerOneHand, getNumber(6), Input.SecondEquationSlot);
 
-            Actions.AddAction(new WaitForSeconds(2f), true);
+            Actions.AddAction(new WaitForSeconds(3f), true);
+
+            Actions.AddAction(new CallFunction(delegate() { tutorialStep2(); }), true);
+        }
+
+        void tutorialStep2() {
+            showMsgAction(Assets.TutorialStep3);
+            grabBalloonTo(playerTwoHand, getNumber(3), Input.FirstProductSlot);
+            grabBalloonTo(playerTwoHand, getNumber(0), Input.SecondProductSlot);
+
+            Actions.AddAction(new WaitForSeconds(3f), true);
+
+            Actions.AddAction(new CallFunction(delegate() { tutorialStep3(); }), true);
+        }
+
+        void tutorialStep3() {
+            grabBalloonTo(playerTwoHand, getNumber(6), Input.FirstEquationSlot);
+            grabBalloonTo(playerTwoHand, getNumber(6), Input.SecondEquationSlot);
+
+            Actions.AddAction(new WaitForSeconds(3f), true);
+
+            Actions.AddAction(new CallFunction(delegate() { tutorialStep4(); }), true);
+        }
+
+        void tutorialStep4() {
+            grabBalloonTo(playerOneHand, getNumber(4), Input.FirstProductSlot);
+
+            showMsgAction(Assets.TutorialStep4);
+            showMsgAction(Assets.TutorialStep5);
+
+            grabBalloonTo(playerOneHand, getNumber(3), Input.FirstProductSlot);
+            grabBalloonTo(playerOneHand, getNumber(6), Input.SecondProductSlot);
+
+            showMsgAction(Assets.TutorialStep8);
+            showMsgAction(Assets.TutorialStep10);                        
+
+            Actions.AddAction(new WaitForSeconds(3f), true);
+
             Actions.AddAction(new CallFunction(delegate() { Manager.SwitchScreen(new MenuScreen(Context)); }), true);
         }
 
@@ -167,12 +207,16 @@ namespace ClownSchool.Screens {
             AddEntity(msg);
 
             Actions.AddAction(new TweenPositionTo(msg, messagePresent, 1f, Linear.EaseIn), true);
-            Actions.AddAction(new WaitForSeconds(2f), true);
+            Actions.AddAction(new WaitForSeconds(4f), true);
             Actions.AddAction(new TweenPositionTo(msg, new Vector2(msg.X, msg.Y), 1f, Linear.EaseIn), true);
         }
 
+        void moveHandAction(PlayerHand hand, BaseEntity to) {
+            Actions.AddAction(new TweenPositionToEntity(hand, to, new Point(15, 30), 1f, Linear.EaseIn), true);
+        }
+
         void moveHandAction(PlayerHand hand, Point to) {
-            Actions.AddAction(new TweenPositionTo(hand, new Vector2(to.X, to.Y + 30), 2f, Linear.EaseIn), true);
+            Actions.AddAction(new TweenPositionTo(hand, new Vector2(to.X + 15, to.Y + 30), 1f, Linear.EaseIn), true);
         }
 
         public void PauseClocks() {

@@ -50,7 +50,7 @@ namespace ClownSchool {
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
             this.viewPortRectangle = new Rectangle(0, 0, Width, Height);
 
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
         }
 
         protected override void Initialize() {
@@ -63,7 +63,7 @@ namespace ClownSchool {
             ScreenManager.AddScreen(splash);
             ScreenManager.Actions.AddAction(new WaitForCondition(delegate() { return splash.TweenerFinished; }), true);
             ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new MenuScreen(kinectContext)); }), true);
-            //ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new CoopTutorialScreen(kinectContext)); }), true);
+            //ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new VersusTutorialScreen(kinectContext)); }), true);
 
             debugComponent = new DebugComponent(this);            
 

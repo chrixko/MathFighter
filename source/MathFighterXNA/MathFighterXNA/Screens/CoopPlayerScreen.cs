@@ -91,7 +91,7 @@ namespace ClownSchool.Screens {
                         var value = values[rand.Next(0, values.Count)];
                         values.Remove(value);
 
-                        var num = new DragableNumber(PlayerOne, posX, posY, value);
+                        var num = new DragableNumber(null, posX, posY, value);
                         Numbers.Add(num, new Vector2(posX, posY));
 
                         num.ZDepth = -1;
@@ -107,7 +107,7 @@ namespace ClownSchool.Screens {
                             int posX2 = MainGame.Width - posX - 62;
                             int posY2 = posY;
 
-                            var num2 = new DragableNumber(PlayerOne, posX2, posY2, value2);
+                            var num2 = new DragableNumber(null, posX2, posY2, value2);
                             Numbers.Add(num2, new Vector2(posX2, posY2));
 
                             num2.ZDepth = -1;
@@ -148,9 +148,7 @@ namespace ClownSchool.Screens {
 
                 num.State = num.IdleState;
                 num.Actions.AddAction(new TweenPositionTo(num, tweenTo, 1.5f, Back.EaseInOut), true);
-                num.Actions.AddAction(new CallFunction(delegate() { that.State = new ClownSchool.Entity.NumberState.DefaultState(that); }), true);
-
-                num.Owner = PlayerOne;
+                num.Actions.AddAction(new CallFunction(delegate() { that.State = new ClownSchool.Entity.NumberState.DefaultState(that); }), true);                
             }
         }
 
@@ -201,8 +199,8 @@ namespace ClownSchool.Screens {
             AddRandomBalloons(Input);
 
             Input.FirstEquationSlot.Player = Input.SecondEquationSlot.Player = null;
-            Input.FirstProductSlot.Player = PlayerOne;
-            Input.SecondProductSlot.Player = PlayerTwo;
+            Input.FirstProductSlot.Player = null;
+            Input.SecondProductSlot.Player = null;
         }
 
         private void AddRandomBalloons(EquationInput input) {
@@ -236,6 +234,8 @@ namespace ClownSchool.Screens {
         }
 
         public void EndGame() {
+            RemoveEntity(Input);
+
             Ended = true;
 
             var saveTo = MainGame.CoopHighscoreDirectory;

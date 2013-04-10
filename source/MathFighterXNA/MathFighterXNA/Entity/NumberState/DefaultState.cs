@@ -32,7 +32,7 @@ namespace ClownSchool.Entity.NumberState {
             //TODO: Maybe dirty, should use OnHandCollide somehow, because I query the colliding hand two times, once in number and then here
             var hand = (PlayerHand)Owner.GetFirstCollidingEntity("hand");
 
-            if (hand != null && hand.Player == Owner.Owner && hand.DraggingBalloon == null) {
+            if (hand != null && (hand.Player == Owner.Owner || Owner.Owner == null) && hand.DraggingBalloon == null) {
                 if (Configuration.GRABBING_ENABLED) {
                     if (hand.IsGrabbing) {
                         var balloon = new Balloon(hand.X, hand.Y, Owner.Number);

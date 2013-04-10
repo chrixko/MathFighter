@@ -86,9 +86,9 @@ namespace ClownSchool.Screens {
         }
 
         void grabBalloonTo(TutorialHand hand, DragableNumber num, NumberSlot to) {
-            moveHandAction(new Point((int)num.X, (int)num.Y));
+            moveHandAction(num);
             Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
-            moveHandAction(to.BoundingBox.Center);
+            moveHandAction(to);
         }
 
         void tutorialAction() {           
@@ -96,14 +96,14 @@ namespace ClownSchool.Screens {
                 showMsgAction(Assets.TutorialStep1);
 
                 var three = getNumber(3);
-                moveHandAction(new Point((int)three.X, (int)three.Y));
+                moveHandAction(three);
                 showMsgAction(Assets.TutorialStep2);
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 showMsgAction(Assets.TutorialStep3);
                 moveHandAction(Input.FirstProductSlot.BoundingBox.Center);
 
                 var zero = getNumber(0);
-                moveHandAction(new Point((int)zero.X, (int)zero.Y));
+                moveHandAction(zero);
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 moveHandAction(Input.SecondProductSlot.BoundingBox.Center);
             }
@@ -114,18 +114,18 @@ namespace ClownSchool.Screens {
             {
                 showMsgAction(Assets.TutorialStep4);
                 var four = getNumber(4);
-                moveHandAction(new Point((int)four.X, (int)four.Y));
+                moveHandAction(four);
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 moveHandAction(Input.FirstProductSlot.BoundingBox.Center);
 
                 showMsgAction(Assets.TutorialStep5);
                 var three = getNumber(3);
-                moveHandAction(new Point((int)three.X, (int)three.Y));
+                moveHandAction(three);
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 moveHandAction(Input.FirstProductSlot.BoundingBox.Center);
 
                 var zero = getNumber(0);
-                moveHandAction(new Point((int)zero.X, (int)zero.Y));
+                moveHandAction(zero);
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 moveHandAction(Input.SecondProductSlot.BoundingBox.Center);
             }
@@ -147,12 +147,16 @@ namespace ClownSchool.Screens {
             AddEntity(msg);
 
             Actions.AddAction(new TweenPositionTo(msg, messagePresent, 1f, Linear.EaseIn), true);
-            Actions.AddAction(new WaitForSeconds(2f), true);
+            Actions.AddAction(new WaitForSeconds(4f), true);
             Actions.AddAction(new TweenPositionTo(msg, new Vector2(msg.X, msg.Y), 1f, Linear.EaseIn), true);
         }
 
+        void moveHandAction(BaseEntity to) {
+            Actions.AddAction(new TweenPositionToEntity(hand, to, new Point(15, 30), 1f, Linear.EaseIn), true);
+        }
+
         void moveHandAction(Point to) {
-            Actions.AddAction(new TweenPositionTo(hand, new Vector2(to.X + 15, to.Y + 30), 1f, Linear.EaseIn), true);
+            Actions.AddAction(new TweenPositionTo(hand, new Vector2(to.X + 15, to.Y + 30) , 1f, Linear.EaseIn), true);
         }
 
         private IEnumerator LoadNumbersFromFile() {

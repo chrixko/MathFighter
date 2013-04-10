@@ -60,8 +60,7 @@ namespace ClownSchool.Bang {
             }            
         }
 
-        void IAction.Complete() {
-            throw new NotImplementedException("Not supported yet :)");
+        void IAction.Complete() {            
         }
     }
 }

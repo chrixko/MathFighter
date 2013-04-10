@@ -48,7 +48,7 @@ namespace ClownSchool {
                 State.OnHandCollide(hand);               
             }
 
-            selected = hand != null && hand.Player == Owner;
+            selected = hand != null && (hand.Player == Owner || Owner == null);
 
             State.Update(gameTime);
         }
