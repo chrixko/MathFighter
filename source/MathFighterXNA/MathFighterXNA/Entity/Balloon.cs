@@ -23,7 +23,7 @@ namespace ClownSchool.Entity {
         private static PolygonShape balloonShape = new PolygonShape(PolygonTools.CreateEllipse(balloonRadius.X, balloonRadius.Y, 8), 10);
         private static PolygonShape jointShape = new PolygonShape(PolygonTools.CreateRectangle(jointSize.X, jointSize.Y), 25);
 
-        private Body balloonBody;
+        public Body BalloonBody;
         private Joint HalfJoint { get; set; }
         private float Force { get; set; }
         private List<Body> joints = new List<Body>();
@@ -50,7 +50,7 @@ namespace ClownSchool.Entity {
             var ballAnchor = Vector2.Zero;
             //ball
             {
-                Body body = BodyFactory.CreateBody(Screen.World);
+                Body body = BodyFactory.CreateBody(Screen.World);  
                 body.BodyType = BodyType.Dynamic;
                 body.Position = ConvertUnits.ToSimUnits(X, Y);
 
@@ -63,9 +63,9 @@ namespace ClownSchool.Entity {
 
                 ballAnchor = ConvertUnits.ToSimUnits(new Vector2(X - 2, Y + 27)); //TODO: relative to size
 
-                balloonBody = body;
+                BalloonBody = body;
 
-                Force = -balloonBody.Mass * Screen.World.Gravity.Y * 15;
+                Force = -BalloonBody.Mass * Screen.World.Gravity.Y * 15;
             }
 
             for (int i = 0; i < JointCount; i++) {
@@ -82,7 +82,7 @@ namespace ClownSchool.Entity {
                 if (i == 0) {
                     body.Position = new Vector2(ballAnchor.X, ballAnchor.Y);
 
-                    RevoluteJoint rj = JointFactory.CreateRevoluteJoint(balloonBody, body, body.GetLocalPoint(ballAnchor));
+                    RevoluteJoint rj = JointFactory.CreateRevoluteJoint(BalloonBody, body, body.GetLocalPoint(ballAnchor));
                     rj.CollideConnected = false;
 
                     Screen.World.AddJoint(rj);
@@ -131,7 +131,7 @@ namespace ClownSchool.Entity {
 
             var grabJoint = joints[joints.Count - 1];
 
-            balloonBody.ApplyForce(new Vector2(0, Force), balloonBody.WorldCenter);            
+            BalloonBody.ApplyForce(new Vector2(0, Force), BalloonBody.WorldCenter);            
 
             if (fixedJoint != null) {
                 X = AttachedEntity.BoundingBox.Center.X;
@@ -151,7 +151,7 @@ namespace ClownSchool.Entity {
                 popAnimation.Update(gameTime);
             }
 
-            if (ConvertUnits.ToDisplayUnits(balloonBody.Position.Y) < -500) {
+            if (ConvertUnits.ToDisplayUnits(BalloonBody.Position.Y) < -500) {
                 Screen.RemoveEntity(this);
             }
         }
@@ -162,13 +162,13 @@ namespace ClownSchool.Entity {
                 spriteBatch.Draw(Assets.RopeSection, new Rectangle((int)jointPos.X, (int)jointPos.Y, 3, 16), null, Color.White, joint.Rotation, new Vector2(0, 0), SpriteEffects.None, 0);
             }
 
-            if (Screen.World.BodyList.Contains(balloonBody)) {
-                var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
-                spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)balloonSize.X, (int)balloonSize.Y), new Rectangle(62 * (Number), 0, 62, 89), Color.White, balloonBody.Rotation, new Vector2(balloonSize.X / 2, balloonSize.Y / 2), SpriteEffects.None, 0);
+            if (Screen.World.BodyList.Contains(BalloonBody)) {
+                var pos = ConvertUnits.ToDisplayUnits(BalloonBody.Position);
+                spriteBatch.Draw(Assets.BalloonSpritesheet, new Rectangle((int)pos.X, (int)pos.Y, (int)balloonSize.X, (int)balloonSize.Y), new Rectangle(62 * (Number), 0, 62, 89), Color.White, BalloonBody.Rotation, new Vector2(balloonSize.X / 2, balloonSize.Y / 2), SpriteEffects.None, 0);
             }
 
             if (popped && !popAnimation.Finished) {
-                var pos = ConvertUnits.ToDisplayUnits(balloonBody.Position);
+                var pos = ConvertUnits.ToDisplayUnits(BalloonBody.Position);
                 
                 spriteBatch.Draw(popAnimation.SpriteSheet, new Rectangle((int)pos.X, (int)pos.Y, popAnimation.FrameWidth, popAnimation.FrameHeight), popAnimation.FrameRectangle, Color.White, 0, new Vector2(popAnimation.FrameWidth / 2, popAnimation.FrameHeight / 2), SpriteEffects.None, 0);
             }
@@ -181,7 +181,7 @@ namespace ClownSchool.Entity {
             Assets.BalloonPop.Play();
             popAnimation.Play(false);
             popped = true;
-            Screen.World.RemoveBody(balloonBody);
+            Screen.World.RemoveBody(BalloonBody);
         }
 
         public void Cut() {
@@ -198,8 +198,8 @@ namespace ClownSchool.Entity {
         }
 
         public override void Delete() {
-            if (Screen.World.BodyList.Contains(balloonBody))
-                Screen.World.RemoveBody(balloonBody);
+            if (Screen.World.BodyList.Contains(BalloonBody))
+                Screen.World.RemoveBody(BalloonBody);
             
             foreach (Body joint in joints) {
                 Screen.World.RemoveBody(joint);

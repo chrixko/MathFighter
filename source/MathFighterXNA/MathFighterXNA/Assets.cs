@@ -68,6 +68,8 @@ namespace ClownSchool {
         public static Texture2D MenuButtonGlow { get; set; }
         public static Texture2D MenuButtonExit { get; set; }
 
+        public static Texture2D ButtonPause { get; set; }
+
         public static Texture2D SplashLogo { get; set; }
         public static Texture2D CameraFlash { get; set; }
 
@@ -75,7 +77,7 @@ namespace ClownSchool {
 
         public static Texture2D SignMenu { get; set; }
         public static Texture2D SignHighscore { get; set; }
-
+        public static Texture2D SignResume { get; set; }
 
         public static Texture2D TutorialStep1 { get; set; }
         public static Texture2D TutorialStep2 { get; set; }
@@ -169,6 +171,7 @@ namespace ClownSchool {
             MenuButtonGlow = content.Load<Texture2D>("Menu/menu_button_glow");
             MenuRope = content.Load<Texture2D>("Menu/menu_rope");
 
+            ButtonPause = content.Load <Texture2D>("button_pause");
 
             SplashLogo = content.Load<Texture2D>("splash_logo");
 
@@ -178,7 +181,7 @@ namespace ClownSchool {
 
             SignMenu = content.Load<Texture2D>("sign_menu");
             SignHighscore = content.Load<Texture2D>("sign_highscore");
-
+            SignResume = content.Load<Texture2D>("sign_resume");
 
             TutorialStep1 = content.Load<Texture2D>("Tutorial/toGrabPlace");
             TutorialStep2 = content.Load<Texture2D>("Tutorial/grabUntilAttached");

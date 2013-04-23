@@ -101,11 +101,13 @@ namespace ClownSchool.Screens {
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 showMsgAction(Assets.TutorialStep3);
                 moveHandAction(Input.FirstProductSlot.BoundingBox.Center);
+                Actions.AddAction(new CallFunction(delegate() { hand.IsGrabbing = false; }), true);
 
                 var zero = getNumber(0);
                 moveHandAction(zero);
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 moveHandAction(Input.SecondProductSlot.BoundingBox.Center);
+                Actions.AddAction(new CallFunction(delegate() { hand.IsGrabbing = false; }), true);
             }
 
 
@@ -117,17 +119,20 @@ namespace ClownSchool.Screens {
                 moveHandAction(four);
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 moveHandAction(Input.FirstProductSlot.BoundingBox.Center);
+                Actions.AddAction(new CallFunction(delegate() { hand.IsGrabbing = false; }), true);
 
                 showMsgAction(Assets.TutorialStep5);
                 var three = getNumber(3);
                 moveHandAction(three);
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 moveHandAction(Input.FirstProductSlot.BoundingBox.Center);
+                Actions.AddAction(new CallFunction(delegate() { hand.IsGrabbing = false; }), true);
 
                 var zero = getNumber(0);
                 moveHandAction(zero);
                 Actions.AddAction(new CallFunction(delegate() { hand.Grab(); }), true);
                 moveHandAction(Input.SecondProductSlot.BoundingBox.Center);
+                Actions.AddAction(new CallFunction(delegate() { hand.IsGrabbing = false; }), true);
             }
 
                         

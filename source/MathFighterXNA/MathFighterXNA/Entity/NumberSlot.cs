@@ -3,6 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
 using ClownSchool.Bang.Actions;
+using FarseerPhysics.Dynamics;
 
 namespace ClownSchool.Entity {
 
@@ -67,6 +68,8 @@ namespace ClownSchool.Entity {
 
                 balloon.AttachTo(this);
                 Balloon = balloon;
+
+                Balloon.BalloonBody.CollidesWith = Category.None;
 
                 hand.DraggingBalloon = null;
 

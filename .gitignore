@@ -4,6 +4,7 @@ obj
 *.user
 *.cachefile
 *.suo
+*.pfx
 
 # mstest test results
 TestResults

@@ -50,7 +50,7 @@ namespace ClownSchool {
             ConvertUnits.SetDisplayUnitToSimUnitRatio(24f);
             this.viewPortRectangle = new Rectangle(0, 0, Width, Height);
 
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
         }
 
         protected override void Initialize() {
@@ -62,8 +62,7 @@ namespace ClownSchool {
             var splash = new SplashScreen(kinectContext, Assets.SplashLogo, 2f);
             ScreenManager.AddScreen(splash);
             ScreenManager.Actions.AddAction(new WaitForCondition(delegate() { return splash.TweenerFinished; }), true);
-            ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new MenuScreen(kinectContext)); }), true);
-            //ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new VersusTutorialScreen(kinectContext)); }), true);
+            ScreenManager.Actions.AddAction(new CallFunction(delegate() { ScreenManager.SwitchScreen(new MenuScreen(kinectContext)); }), true);            
 
             debugComponent = new DebugComponent(this);            
 
@@ -144,6 +143,10 @@ namespace ClownSchool {
 
             if (DebugView) {
                 debugComponent.Draw(spriteBatch, gameTime);
+            }
+
+            if (kinectContext.Sensor == null) {
+                spriteBatch.DrawString(Assets.DebugFont, "NO KINECT SENSOR FOUND! PLEASE CONNECT A WINDOWS KINECT AND RESTART THE GAME!", new Vector2(50, 50), Color.LimeGreen);
             }
             
             spriteBatch.End();

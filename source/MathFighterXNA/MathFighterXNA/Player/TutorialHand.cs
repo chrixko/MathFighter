@@ -24,6 +24,9 @@ namespace ClownSchool {
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Assets.Glove, new Rectangle(X, Y, 56, 64), null, Color.White, 0, new Vector2(56 / 2, 64 / 2), Hand == JointType.HandLeft ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);        }
+            var glove = IsGrabbing ? Assets.GloveFist : Assets.Glove;
+
+            spriteBatch.Draw(IsGrabbing ? Assets.GloveFist : Assets.Glove, new Rectangle(X, Y, 56, 64), null, Color.White, 0, new Vector2(glove.Width / 2, glove.Height / 2), Hand == JointType.HandLeft ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);      
+        }
     }
 }

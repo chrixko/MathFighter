@@ -55,6 +55,9 @@ namespace ClownSchool.Screens {
             AddEntity(playerOneHand);
             AddEntity(playerTwoHand);
 
+            PlayerOne.RightHand = playerOneHand;
+            PlayerTwo.RightHand = playerTwoHand;
+
             PlayerOneClock = new Clock(20, 20, 90);
             PlayerTwoClock = new Clock(MainGame.Width - 130, 20, 90);
 

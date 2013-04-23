@@ -26,7 +26,9 @@ namespace ClownSchool.Screens {
 
         private Dictionary<DragableNumber, Vector2> Numbers { get; set; }
 
-        private bool Ended = false;
+        private bool ended = false;
+
+        private bool paused = false;
 
         public VersusPlayerScreen(KinectContext context) : base(context) {
         }
@@ -56,6 +58,11 @@ namespace ClownSchool.Screens {
             Coroutines.Start(LoadNumbersFromFile());
 
             AddInput();
+
+            var posPause = new Vector2(MainGame.Width - 230, (MainGame.Height) - 300);
+
+            var pause = new MenuButton(Assets.ButtonPause, (int)posPause.X, (int)posPause.Y, delegate() { paused = true; });
+            AddEntity(pause);
 
             if (!Configuration.GRABBING_ENABLED) {
                 AddEntity(new Scissors(120, MainGame.Height - 350, Scissors.ScissorPosition.Left));
@@ -205,7 +212,7 @@ namespace ClownSchool.Screens {
                 AddPauseScreen();
             }
 
-            if (!Ended) {
+            if (!ended) {
                 if (PlayerOneClock.Value == 0) {
                     EndGame(PlayerTwo);
                 } else if (PlayerTwoClock.Value == 0) {
@@ -213,12 +220,21 @@ namespace ClownSchool.Screens {
                 }
             }
 
+            if (paused) {
+                var ps = new PauseScreen(Context);
+                ps.Pause();
+
+                Manager.AddScreen(ps);
+
+                paused = false;
+            }
+
         }
 
         public void EndGame(Player winner) {
-            RemoveEntity(Input);
+            //RemoveEntity(Input);
 
-            Ended = true;
+            ended = true;
 
             Manager.FadeInSong(Assets.WinSong, false, 0.8f);
 

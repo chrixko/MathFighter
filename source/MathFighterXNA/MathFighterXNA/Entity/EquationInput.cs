@@ -3,6 +3,7 @@ using ClownSchool.Screens;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using ClownSchool.Tweening;
+using FarseerPhysics.Dynamics;
 
 namespace ClownSchool.Entity {
 

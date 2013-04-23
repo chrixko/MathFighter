@@ -7,18 +7,50 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using ClownSchool.Bang.Actions;
 using ClownSchool.Entity;
+using ClownSchool.Entity.Menu;
 
 namespace ClownSchool.Screens {
     public class PauseScreen : GameScreen {
 
         public PauseState State;
 
+        public Player Player;
+
         public PauseScreen(KinectContext context): base(context) {
             State = PauseState.Default;
         }
 
+        public void Pause() {
+            State = PauseState.Default;
+
+            Player = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
+            Player.DrawHands = true;
+
+            AddEntity(Player);
+
+            var posMenu = new Point(300, (MainGame.Height / 2) - 250);
+            var posResume = new Point(MainGame.Width - 600, (MainGame.Height / 2) - 250);
+
+            var mi = new MenuItem(Assets.SignMenu, posMenu.X, posMenu.Y, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); });
+            AddEntity(mi);
+
+            mi = new MenuItem(Assets.SignResume, posResume.X, posMenu.Y, delegate() { Manager.RemoveScreen(this); });
+            AddEntity(mi);
+            
+        }
+
         public void WaitForPlayerCount(int count) {
             State = PauseState.WaitingForPlayers;
+
+            Player = new Player(Context, SkeletonPlayerAssignment.LeftSkeleton);
+            Player.DrawHands = true;
+
+            AddEntity(Player);
+
+
+            var mi = new MenuItem(Assets.SignMenu, MainGame.Width - 300, (MainGame.Height / 2) - 100, delegate() { Manager.SwitchScreen(new MenuScreen(Context)); });
+            AddEntity(mi);
+
             Actions.AddAction(new WaitForPlayerCount(count, Context), true);
             Actions.AddAction(new CallFunction(delegate() { State = PauseState.Countdown; }), true);
         }
@@ -48,9 +80,7 @@ namespace ClownSchool.Screens {
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch) {
-            base.Draw(spriteBatch);
-
+        public override void Draw(SpriteBatch spriteBatch) {           
             spriteBatch.Draw(Assets.PauseBackground, new Rectangle(0, 0, MainGame.Width, MainGame.Height), new Color(255, 255, 255, 200));
 
             switch (State) {
@@ -67,6 +97,8 @@ namespace ClownSchool.Screens {
                 default:
                     break;
             }
+
+            base.Draw(spriteBatch);
         }
 
         public enum PauseReason {

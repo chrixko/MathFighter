@@ -11,6 +11,7 @@ using System.Linq;
 using System.Diagnostics;
 using ClownSchool.Entity.Menu;
 using ClownSchool.Bang;
+using FarseerPhysics.Dynamics;
 
 namespace ClownSchool.Screens {
 
@@ -27,7 +28,9 @@ namespace ClownSchool.Screens {
 
         private Dictionary<DragableNumber, Vector2> Numbers { get; set; }
 
-        private bool Ended = false;        
+        private bool Ended = false;
+
+        private bool paused = false;
 
         public CoopPlayerScreen(KinectContext context)
             : base(context) {
@@ -55,6 +58,11 @@ namespace ClownSchool.Screens {
             Coroutines.Start(LoadNumbersFromFile());
 
             AddInput();
+
+            var posPause = new Vector2(MainGame.Width - 230, (MainGame.Height) - 300);
+
+            var pause = new MenuButton(Assets.ButtonPause, (int)posPause.X, (int)posPause.Y, delegate() { paused = true; });
+            AddEntity(pause);
 
             if (!Configuration.GRABBING_ENABLED) {
                 AddEntity(new Scissors(120, MainGame.Height - 350, Scissors.ScissorPosition.Left));
@@ -213,17 +221,19 @@ namespace ClownSchool.Screens {
 
             ball1.AttachTo(Input.FirstEquationSlot);
             Input.FirstEquationSlot.Balloon = ball1;
+            ball1.BalloonBody.CollidesWith = Category.None;
 
             ball2.AttachTo(Input.SecondEquationSlot);
             Input.SecondEquationSlot.Balloon = ball2;
+            ball2.BalloonBody.CollidesWith = Category.None;
         }
 
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            //if (!PlayerOne.IsReady || !PlayerTwo.IsReady) {
-            //    AddPauseScreen();
-            //}
+            if (!PlayerOne.IsReady || !PlayerTwo.IsReady) {
+                AddPauseScreen();
+            }
 
             if (!Ended) {
                 if (MainClock.Value <= 0f) {
@@ -231,10 +241,18 @@ namespace ClownSchool.Screens {
                 }
             }
 
+            if (paused) {
+                var ps = new PauseScreen(Context);
+                ps.Pause();
+                
+                Manager.AddScreen(ps);
+
+                paused = false;
+            }
         }
 
         public void EndGame() {
-            RemoveEntity(Input);
+            //RemoveEntity(Input);
 
             Ended = true;
 

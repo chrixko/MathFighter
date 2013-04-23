@@ -90,7 +90,7 @@ namespace ClownSchool.Screens {
         }
 
         void OnClick_Help() {
-            Manager.SwitchScreen(new CoopTutorialScreen(Context));
+            LoadTutorialMenu();
         }
 
         void OnClick_Highscore() {
@@ -103,6 +103,14 @@ namespace ClownSchool.Screens {
 
         void OnClick_Highscore_Single() {
             Manager.SwitchScreen(new HighscoreScreen(Context, MainGame.SingleHighscoreDirectory));
+        }
+
+        void OnClick_Tutorial_CoopSingle() {
+            Manager.SwitchScreen(new CoopTutorialScreen(Context));
+        }
+
+        void OnClick_Tutorial_Versus() {
+            Manager.SwitchScreen(new VersusTutorialScreen(Context));
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime) {
@@ -197,6 +205,19 @@ namespace ClownSchool.Screens {
             highscore.AddItem(new MenuItem(Assets.MenuSignSinglePlayer, 0, 0, OnClick_Highscore_Single));
 
             LoadMenu(highscore);
+        }
+
+        public void LoadTutorialMenu() {
+            RemoveEntity(MainMenu);
+
+            var tutorial = new Menu();
+
+            tutorial.AddItem(new MenuItem(Assets.MenuSignCoop, 0, 0, OnClick_Tutorial_CoopSingle));
+            tutorial.AddItem(new MenuItem(Assets.MenuSignMenu, 0, 0, delegate() { RemoveEntity(tutorial); LoadMenu(MainMenu); }));
+            tutorial.AddItem(new MenuItem(Assets.MenuSignSinglePlayer, 0, 0, OnClick_Tutorial_CoopSingle));
+            tutorial.AddItem(new MenuItem(Assets.MenuSignVersus, 0, 0, OnClick_Tutorial_Versus));
+
+            LoadMenu(tutorial);
         }
     }
 }
